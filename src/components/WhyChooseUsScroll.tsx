@@ -18,53 +18,53 @@ interface CardData {
   videoUrl: string;
 }
 
-// 6 gym-themed high-quality Pexels video loops
+// 6 high-reliability, persistent Mixkit gym loops that never expire
 const cards: CardData[] = [
   {
     num: "01",
     tag: "STATE-OF-THE-ART",
     title: "Latest Equipment",
     description: "State-of-the-art fitness equipment for optimal performance and structural safety in every movement.",
-    videoUrl: "https://videos.pexels.com/video-files/3125374/3125374-sd_640_360_25p.mp4"
+    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-dumbbells-lying-on-the-gym-floor-41619-large.mp4"
   },
   {
     num: "02",
     tag: "EXPERT COACHES",
     title: "Certified Trainers",
     description: "Expert guidance from certified fitness professionals with years of coaching and biomechanics mastery.",
-    videoUrl: "https://videos.pexels.com/video-files/4763821/4763821-sd_640_360_24p.mp4"
+    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-man-training-with-battle-ropes-in-gym-41623-large.mp4"
   },
   {
     num: "03",
     tag: "CUSTOM FIT",
     title: "Personalized Plans",
     description: "Custom workout programs tailored to your goals, biometrics, and physical capabilities.",
-    videoUrl: "https://videos.pexels.com/video-files/6981411/6981411-sd_640_360_25p.mp4"
+    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-weightlifter-preparing-for-training-41621-large.mp4"
   },
   {
     num: "04",
     tag: "HYGIENIC",
     title: "Clean & Safe",
     description: "Hygienic environment with regular sanitization, ventilation, and strict cleanliness codes.",
-    videoUrl: "https://videos.pexels.com/video-files/4488339/4488339-sd_640_360_25p.mp4"
+    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-gym-member-wiping-sweat-from-face-41624-large.mp4"
   },
   {
     num: "05",
     tag: "FAT LOSS",
     title: "Weight Loss Programs",
     description: "Scientifically designed fat loss transformations focused on maintaining active muscle volume.",
-    videoUrl: "https://videos.pexels.com/video-files/3248354/3248354-sd_640_360_25p.mp4"
+    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-running-on-treadmill-in-the-gym-41620-large.mp4"
   },
   {
     num: "06",
     tag: "PERFORMANCE",
     title: "Strength & Conditioning",
     description: "Build structural muscle, develop explosive athletic performance, and improve physical capacity.",
-    videoUrl: "https://videos.pexels.com/video-files/3125388/3125388-sd_640_360_25p.mp4"
+    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-woman-doing-box-jumps-at-the-gym-41622-large.mp4"
   }
 ];
 
-// Helper component to handle programmatic HTML5 play/pause and browser autoplay policies
+// Helper component to handle programmatic HTML5 play/pause, source loading, and browser autoplay policies
 function VideoPlayer({ src, isActive }: { src: string; isActive: boolean }) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -77,6 +77,9 @@ function VideoPlayer({ src, isActive }: { src: string; isActive: boolean }) {
     video.defaultMuted = true;
 
     if (isActive) {
+      // Force source reloading in browsers for dynamic source tags
+      video.load();
+      
       const playPromise = video.play();
       if (playPromise !== undefined) {
         playPromise.catch((err) => {
@@ -91,14 +94,15 @@ function VideoPlayer({ src, isActive }: { src: string; isActive: boolean }) {
   return (
     <video
       ref={videoRef}
-      src={src}
       loop
       playsInline
       preload="auto"
       className={`absolute inset-0 w-full h-full object-cover filter grayscale contrast-125 transition-opacity duration-500 ${
-        isActive ? "opacity-35 z-10" : "opacity-0 z-0"
+        isActive ? "opacity-100 z-10" : "opacity-0 z-0"
       }`}
-    />
+    >
+      <source src={src} type="video/mp4" />
+    </video>
   );
 }
 
@@ -258,8 +262,8 @@ export function WhyChooseUsScroll() {
                       />
                     );
                   })}
-                  {/* Scrim Overlay sitting on top of video, below the text (rgba(26,26,24,0.45)) */}
-                  <div className="absolute inset-0 bg-[#1A1A18]/45 z-10" />
+                  {/* Scrim Overlay sitting on top of video, below the text (rgba(26,26,24,0.55) i.e. 55% opacity) */}
+                  <div className="absolute inset-0 bg-[#1A1A18]/55 z-15" />
                 </div>
 
                 {/* Subtle Grid Overlay */}
