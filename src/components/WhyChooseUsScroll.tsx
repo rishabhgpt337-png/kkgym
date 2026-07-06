@@ -220,7 +220,7 @@ export function WhyChooseUsScroll() {
   const scrollHeightClass = isMobile ? "h-[480vh]" : "h-[600vh]";
 
   return (
-    <div ref={triggerRef} className={`w-full relative bg-gym-black border-b border-gym-white/10 ${scrollHeightClass}`}>
+    <div id="why-us" ref={triggerRef} className={`scroll-mt-28 w-full relative bg-gym-black border-b border-gym-white/10 ${scrollHeightClass}`}>
       <div ref={pinRef} className="h-screen w-full relative flex items-center justify-center overflow-hidden">
         
         {/* Content Layout */}

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import AnimatedRays from "@/components/ui/animated-rays";
 import TwistingRibbon from "@/components/ui/twisting-ribbon";
@@ -8,6 +8,7 @@ import ProgramCard from "@/components/ProgramCard";
 import WhyChooseUsScroll from "@/components/WhyChooseUsScroll";
 import SpotlightNavbar from "@/components/ui/spotlight-navbar";
 import { LampContainer } from "@/components/ui/lamp";
+import { cn } from "@/lib/utils";
 
 // Custom SVG Icons to bypass lucide barrel-optimization SWC bugs
 const InstagramLogo = ({ size = 24, ...props }: React.SVGProps<SVGSVGElement> & { size?: number }) => (
@@ -62,6 +63,15 @@ const X = ({ size = 24, ...props }: React.SVGProps<SVGSVGElement> & { size?: num
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Gym theme color props for the TwistingRibbon
   const gymRibbonColors = {
@@ -83,8 +93,13 @@ export default function Home() {
     <div className="min-h-screen bg-gym-black font-sans text-gym-white flex flex-col relative select-none">
       
       {/* 1. NAV */}
-      <header className="sticky top-0 z-40 w-full border-b border-gym-gold/15 bg-gym-black/90 backdrop-blur-md transition-all duration-300">
-        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <header className={cn(
+        "sticky top-0 z-40 w-full transition-all duration-500",
+        scrolled
+          ? "border-b border-gym-gold/15 bg-gym-black/90 backdrop-blur-md py-4 h-20 shadow-[0_4px_30px_rgba(0,0,0,0.3)]"
+          : "border-b border-transparent bg-transparent py-6 h-24"
+      )}>
+        <div className="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
           <a href="#" className="font-bebas text-3xl tracking-widest text-gym-white hover:text-gym-gold transition-colors">
             KOURAGE FITNESS<span className="text-gym-gold">.</span>
           </a>
@@ -214,7 +229,7 @@ export default function Home() {
       </section>
 
       {/* 3. ABOUT */}
-      <section id="about" className="py-24 md:py-32 border-b border-gym-white/10 relative bg-gym-black">
+      <section id="about" className="scroll-mt-28 py-24 md:py-32 border-b border-gym-white/10 relative bg-gym-black">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
           
           {/* Left Block */}
@@ -434,7 +449,7 @@ export default function Home() {
       </section>
 
       {/* 8. CONTACT / LOCATION */}
-      <section id="contact" className="py-24 md:py-32 bg-gym-black border-b border-gym-white/10 relative">
+      <section id="contact" className="scroll-mt-28 py-24 md:py-32 bg-gym-black border-b border-gym-white/10 relative">
         <div className="absolute inset-0 grid-bg-overlay opacity-20 pointer-events-none" />
         <div className="max-w-4xl mx-auto px-6 flex flex-col items-center text-center relative z-10">
           
