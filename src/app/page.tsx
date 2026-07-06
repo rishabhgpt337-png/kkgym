@@ -7,7 +7,6 @@ import TwistingRibbon from "@/components/ui/twisting-ribbon";
 import ProgramCard from "@/components/ProgramCard";
 import WhyChooseUsScroll from "@/components/WhyChooseUsScroll";
 import SpotlightNavbar from "@/components/ui/spotlight-navbar";
-import { LampContainer } from "@/components/ui/lamp";
 import { cn } from "@/lib/utils";
 
 // Custom SVG Icons to bypass lucide barrel-optimization SWC bugs
@@ -113,7 +112,7 @@ export default function Home() {
             KOURAGE FITNESS<span className="text-gym-gold">.</span>
           </a>
 
-          {/* Desktop Nav (Spotlight Navbar component) */}
+          {/* Desktop Nav (Spotlight Navbar component restored) */}
           <SpotlightNavbar
             className="hidden md:flex"
             items={[
@@ -173,68 +172,52 @@ export default function Home() {
         )}
       </header>
 
-      {/* 2. HERO (Aceternity Lamp Hero) */}
-      <section className="relative w-full overflow-hidden border-b-2 border-gym-white/10">
-        <LampContainer className="py-20 md:py-32">
-          {/* Overlay grid details */}
-          <div className="absolute inset-0 z-0 grid-bg-overlay opacity-20 pointer-events-none" />
+      {/* 2. HERO */}
+      <section className="relative w-full min-h-[90dvh] md:min-h-[100dvh] flex items-center overflow-hidden border-b-2 border-gym-white/10 bg-gym-black">
+        {/* AnimatedRays background layer behind hero */}
+        <div className="absolute inset-0 z-0">
+          <AnimatedRays className="w-full h-full" />
+        </div>
+        
+        {/* Overlay grid details */}
+        <div className="absolute inset-0 z-0 grid-bg-overlay opacity-30 pointer-events-none" />
 
-          <div className="max-w-4xl mx-auto px-6 relative z-10 w-full flex flex-col items-center text-center">
-            <motion.span
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="font-mono text-xs md:text-sm uppercase tracking-[0.3em] text-gym-gold mb-6 font-semibold"
-            >
-              BEST GYM IN MULUND
-            </motion.span>
-            
-            <motion.h1
-              initial={{ opacity: 0.5, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                delay: 0.2,
-                duration: 0.8,
-                ease: "easeInOut",
-              }}
-              className="font-bebas text-6xl sm:text-8xl md:text-9xl text-gym-white tracking-wide uppercase leading-[0.9] max-w-4xl select-none"
-            >
-              Transform Your Body. <br />
-              <span className="text-gym-gold relative">Elevate Your Mind.</span>
-            </motion.h1>
+        <div className="max-w-7xl mx-auto px-6 relative z-10 w-full py-20 md:py-32 flex flex-col items-start">
+          <motion.span
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="font-mono text-xs md:text-sm uppercase tracking-[0.3em] text-gym-gold mb-6 font-semibold"
+          >
+            BEST GYM IN MULUND
+          </motion.span>
+          
+          <h1 className="font-bebas text-7xl sm:text-8xl md:text-9xl text-gym-white tracking-wide uppercase leading-[0.9] max-w-4xl select-none">
+            Transform Your Body. <br />
+            <span className="text-gym-gold relative">Elevate Your Mind.</span>
+          </h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              className="font-inter text-base sm:text-lg md:text-xl text-gym-white/70 max-w-2xl mt-8 leading-relaxed"
-            >
-              Mulund&apos;s most premium fitness experience with expert trainers and world-class equipment.
-            </motion.p>
+          <p className="font-inter text-base sm:text-lg md:text-xl text-gym-white/70 max-w-xl mt-8 leading-relaxed">
+            Mulund&apos;s most premium fitness experience with expert trainers and world-class equipment.
+          </p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-              className="flex flex-col sm:flex-row gap-4 mt-12 w-full sm:w-auto justify-center"
+          <div className="flex flex-col sm:flex-row gap-4 mt-12 w-full sm:w-auto">
+            <a
+              href="https://wa.me/918169455350"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-gym-gold border-2 border-gym-gold text-gym-black font-bebas text-lg uppercase tracking-widest px-10 py-4 hover:bg-transparent hover:text-gym-gold transition-colors duration-300 text-center w-full sm:w-auto"
             >
-              <a
-                href="https://wa.me/918169455350"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-gym-gold border-2 border-gym-gold text-gym-black font-bebas text-lg uppercase tracking-widest px-10 py-4 hover:bg-transparent hover:text-gym-gold hover:shadow-[0_0_20px_rgba(239,159,39,0.3)] transition-all duration-300 text-center w-full sm:w-auto"
-              >
-                Enquire Now &rarr;
-              </a>
-              <a
-                href="tel:+918169455350"
-                className="border-2 border-gym-white/20 text-gym-white font-bebas text-lg uppercase tracking-widest px-10 py-4 hover:border-gym-gold hover:text-gym-gold hover:shadow-[0_0_20px_rgba(239,159,39,0.15)] transition-all duration-300 text-center w-full sm:w-auto"
-              >
-                Call Now
-              </a>
-            </motion.div>
+              Enquire Now &rarr;
+            </a>
+            <a
+              href="tel:+918169455350"
+              className="border-2 border-gym-white/20 text-gym-white font-bebas text-lg uppercase tracking-widest px-10 py-4 hover:border-gym-gold hover:text-gym-gold transition-colors duration-300 text-center w-full sm:w-auto"
+            >
+              Call Now
+            </a>
           </div>
-        </LampContainer>
+        </div>
       </section>
 
       {/* 3. ABOUT */}
