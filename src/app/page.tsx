@@ -423,65 +423,47 @@ export default function Home() {
 
       {/* 8. CONTACT / LOCATION */}
       <section id="contact" className="py-24 md:py-32 bg-gym-black border-b border-gym-white/10 relative">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+        <div className="absolute inset-0 grid-bg-overlay opacity-20 pointer-events-none" />
+        <div className="max-w-4xl mx-auto px-6 flex flex-col items-center text-center relative z-10">
           
-          {/* Location details */}
-          <div className="lg:col-span-5 flex flex-col items-start">
-            <span className="font-mono text-xs uppercase tracking-widest text-gym-gold mb-4">
-              MULUND WEST HQ
-            </span>
-            <h2 className="font-bebas text-5xl md:text-6xl text-gym-white uppercase tracking-wider leading-none">
-              VISIT THE FACILITY
-            </h2>
-            
-            <div className="space-y-8 mt-10">
-              <div className="flex gap-4">
-                <MapPin size={24} className="text-gym-gold shrink-0 mt-1" />
-                <div>
-                  <h4 className="font-mono text-xs uppercase text-gym-white/40 tracking-wider">Address</h4>
-                  <p className="font-inter text-sm md:text-base text-gym-white/80 mt-1">
-                    2nd Floor, B Wing, Bhagyashree Apartment,<br />
-                    Dr Ambedkar Road, Mulund West, Mumbai 400080
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex gap-4">
-                <Clock size={24} className="text-gym-gold shrink-0 mt-1" />
-                <div>
-                  <h4 className="font-mono text-xs uppercase text-gym-white/40 tracking-wider">Operating Hours</h4>
-                  <p className="font-inter text-sm md:text-base text-gym-white/80 mt-1">
-                    Opens 5:30 AM Daily • Monday to Sunday
-                  </p>
-                </div>
-              </div>
+          <span className="font-mono text-xs uppercase tracking-widest text-gym-gold mb-4">
+            MULUND WEST HQ
+          </span>
+          <h2 className="font-bebas text-5xl md:text-7xl text-gym-white uppercase tracking-wider leading-none">
+            VISIT THE FACILITY
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-12 w-full max-w-3xl">
+            {/* Address Block */}
+            <div className="flex flex-col items-center text-center">
+              <MapPin size={28} className="text-gym-gold mb-3" />
+              <h4 className="font-mono text-xs uppercase text-gym-white/40 tracking-wider">Address</h4>
+              <p className="font-inter text-sm md:text-base text-gym-white/80 mt-2 leading-relaxed">
+                2nd Floor, B Wing, Bhagyashree Apartment,<br />
+                Dr Ambedkar Road, Mulund West, Mumbai 400080
+              </p>
             </div>
 
-            <a
-              href="https://maps.google.com/?q=Kourage+Fitness+Mulund+West+Mumbai"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 border-2 border-gym-white/20 text-gym-white font-bebas text-sm uppercase tracking-widest px-6 py-3 mt-10 hover:border-gym-gold hover:text-gym-gold transition-colors duration-300"
-            >
-              Open in Google Maps
-              <ArrowUpRight size={16} />
-            </a>
+            {/* Operating Hours Block */}
+            <div className="flex flex-col items-center text-center">
+              <Clock size={28} className="text-gym-gold mb-3" />
+              <h4 className="font-mono text-xs uppercase text-gym-white/40 tracking-wider">Operating Hours</h4>
+              <p className="font-inter text-sm md:text-base text-gym-white/80 mt-2 leading-relaxed">
+                Opens 5:30 AM Daily<br />
+                Monday to Sunday
+              </p>
+            </div>
           </div>
 
-          {/* Styled high-contrast embedded map - full-bleed, no borders or rounded corners */}
-          <div className="lg:col-span-7 w-full h-[400px] relative">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3768.2045543666245!2d72.9510113154378!3d19.18625905353597!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b8e19cffffff%3A0xe54d4f826359bc75!2sKourage%20Fitness!5e0!3m2!1sen!2sin!4v1687834526930!5m2!1sen!2sin"
-              width="100%"
-              height="100%"
-              style={{ border: 0, filter: "grayscale(1) invert(0.9) contrast(1.2) brightness(0.9)" }}
-              allowFullScreen={true}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Google Maps Location of Kourage Fitness Mulund West"
-              aria-label="Google Maps frame showing gym address in Mulund"
-            ></iframe>
-          </div>
+          <a
+            href="https://maps.google.com/?q=Kourage+Fitness+Mulund+West+Mumbai"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-2 border-2 border-gym-white/20 text-gym-white font-bebas text-sm uppercase tracking-widest px-8 py-4 mt-12 hover:border-gym-gold hover:text-gym-gold transition-colors duration-300 w-full sm:w-auto"
+          >
+            Open in Google Maps
+            <ArrowUpRight size={16} />
+          </a>
 
         </div>
       </section>
