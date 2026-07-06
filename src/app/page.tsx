@@ -468,8 +468,8 @@ export default function Home() {
             </a>
           </div>
 
-          {/* Styled high-contrast embedded map */}
-          <div className="lg:col-span-7 w-full h-[400px] border-2 border-gym-white/10 relative overflow-hidden group">
+          {/* Styled high-contrast embedded map - full-bleed, no borders or rounded corners */}
+          <div className="lg:col-span-7 w-full h-[400px] relative">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3768.2045543666245!2d72.9510113154378!3d19.18625905353597!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b8e19cffffff%3A0xe54d4f826359bc75!2sKourage%20Fitness!5e0!3m2!1sen!2sin!4v1687834526930!5m2!1sen!2sin"
               width="100%"
