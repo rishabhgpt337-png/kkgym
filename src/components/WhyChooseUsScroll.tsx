@@ -96,7 +96,7 @@ function VideoPlayer({ src, isActive }: { src: string; isActive: boolean }) {
       playsInline
       preload="auto"
       className={`absolute inset-0 w-full h-full object-cover filter grayscale contrast-125 transition-opacity duration-500 ${
-        isActive ? "opacity-100 z-10" : "opacity-0 z-0"
+        isActive ? "opacity-35 z-10" : "opacity-0 z-0"
       }`}
     />
   );
@@ -137,7 +137,7 @@ export function WhyChooseUsScroll() {
     const pin = pinRef.current;
     if (!trigger || !pin) return;
 
-    // Normalizes scroll events to prevent touch momentum issues on iOS devices
+    // Normalizes scroll events to prevent touch momentum jank on iOS devices
     ScrollTrigger.normalizeScroll(true);
 
     const ctx = gsap.context(() => {
@@ -191,7 +191,7 @@ export function WhyChooseUsScroll() {
                   <h3 className="font-bebas text-2xl md:text-3xl text-gym-white uppercase tracking-wider mb-2 group-hover:text-gym-gold transition-colors">
                     {card.title}
                   </h3>
-                  <p className="font-inter text-sm text-gym-white/77 leading-relaxed mb-4">
+                  <p className="font-inter text-sm text-gym-white/70 leading-relaxed mb-4">
                     {card.description}
                   </p>
                   <a
@@ -219,26 +219,6 @@ export function WhyChooseUsScroll() {
     <div ref={triggerRef} className={`w-full relative bg-gym-black border-b border-gym-white/10 ${scrollHeightClass}`}>
       <div ref={pinRef} className="h-screen w-full relative flex items-center justify-center overflow-hidden">
         
-        {/* Background Videos with 500ms crossfade transitions */}
-        <div className="absolute inset-0 z-0 bg-gym-black">
-          {cards.map((card, i) => {
-            // Lazy load strategy: only render video if within activeRange index +/- 1
-            const isLoaded = Math.abs(i - activeIndex) <= 1;
-            if (!isLoaded) return null;
-
-            return (
-              <VideoPlayer
-                key={card.num}
-                src={card.videoUrl}
-                isActive={i === activeIndex}
-              />
-            );
-          })}
-        </div>
-
-        {/* Brand contrast overlay scrim: rgba(26,26,24,0.75) i.e. our #1A1A18 at 75% opacity */}
-        <div className="absolute inset-0 bg-[#1A1A18]/75 z-10 pointer-events-none" />
-
         {/* Content Layout */}
         <div className="max-w-7xl mx-auto px-6 w-full h-full relative z-20 flex flex-col justify-between py-12 md:py-24">
           
@@ -253,49 +233,77 @@ export function WhyChooseUsScroll() {
           </div>
 
           {/* Centered Active Card Container */}
-          <div className="flex-grow flex items-center justify-center md:justify-start w-full my-8">
-            <div className="w-full md:max-w-xl md:pl-10">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeIndex}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -30 }}
-                  transition={{ duration: 0.4, ease: "easeOut" }}
-                  className="border-2 border-gym-gold bg-gym-black/85 p-8 md:p-12 w-full relative"
-                  style={{
-                    transformStyle: "preserve-3d",
-                    perspective: 1000,
-                  }}
-                >
-                  {/* Subtle Grid Overlay */}
-                  <div className="absolute inset-0 grid-bg-overlay opacity-30 pointer-events-none" />
+          <div className="flex-grow flex items-center justify-center w-full my-8">
+            {/* The active card holds the video player as its background element */}
+            <div className="w-full max-w-[92%] sm:max-w-3xl mx-auto">
+              <div 
+                className="border-2 border-gym-gold bg-gym-black/90 p-6 sm:p-12 md:p-16 min-h-[55vh] md:min-h-[60vh] relative overflow-hidden flex flex-col justify-center items-center text-center group"
+                style={{
+                  transformStyle: "preserve-3d",
+                  perspective: 1000,
+                }}
+              >
+                {/* Background videos rendering absolutely inside the active card boundary */}
+                <div className="absolute inset-0 z-0 pointer-events-none">
+                  {cards.map((card, i) => {
+                    // Lazy load strategy: only render video if within activeRange index +/- 1
+                    const isLoaded = Math.abs(i - activeIndex) <= 1;
+                    if (!isLoaded) return null;
 
-                  {/* Numerals completely removed from card content */}
-                  <div className="relative z-10 flex justify-end items-start mb-8">
-                    <span className="border border-gym-gold px-3 py-1 font-mono text-[10px] uppercase text-gym-gold tracking-widest">
-                      {cards[activeIndex].tag}
-                    </span>
-                  </div>
+                    return (
+                      <VideoPlayer
+                        key={card.num}
+                        src={card.videoUrl}
+                        isActive={i === activeIndex}
+                      />
+                    );
+                  })}
+                  {/* Scrim Overlay sitting on top of video, below the text (rgba(26,26,24,0.45)) */}
+                  <div className="absolute inset-0 bg-[#1A1A18]/45 z-10" />
+                </div>
 
-                  <h3 className="relative z-10 font-bebas text-4xl md:text-5xl text-gym-white uppercase tracking-wider mb-4 leading-none">
-                    {cards[activeIndex].title}
-                  </h3>
-                  
-                  <p className="relative z-10 font-inter text-sm md:text-base leading-relaxed text-gym-white/80">
-                    {cards[activeIndex].description}
-                  </p>
+                {/* Subtle Grid Overlay */}
+                <div className="absolute inset-0 grid-bg-overlay opacity-30 z-10 pointer-events-none" />
 
-                  <a
-                    href="https://wa.me/918169455350"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="relative z-10 mt-10 inline-flex items-center gap-2 text-gym-gold font-mono text-xs uppercase tracking-widest font-semibold hover:translate-x-2 transition-transform duration-300"
-                  >
-                    ENQUIRE DISCIPLINE &rarr;
-                  </a>
-                </motion.div>
-              </AnimatePresence>
+                {/* Card Text Content (z-20 centered over the video scrim) */}
+                <div className="relative z-20 w-full max-w-xl mx-auto flex flex-col items-center justify-center text-center">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={activeIndex}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ duration: 0.4, ease: "easeOut" }}
+                      className="flex flex-col items-center justify-center text-center"
+                    >
+                      {/* Badge */}
+                      <span className="border border-gym-gold px-3 py-1 font-mono text-[9px] sm:text-[10px] uppercase text-gym-gold tracking-widest mb-6 select-none">
+                        {cards[activeIndex].tag}
+                      </span>
+
+                      {/* Title */}
+                      <h3 className="font-bebas text-3xl sm:text-4xl lg:text-5xl text-gym-white uppercase tracking-wider mb-4 leading-none">
+                        {cards[activeIndex].title}
+                      </h3>
+                      
+                      {/* Description */}
+                      <p className="font-inter text-xs sm:text-sm md:text-base leading-relaxed text-gym-white/90 max-w-md mx-auto">
+                        {cards[activeIndex].description}
+                      </p>
+
+                      {/* CTA */}
+                      <a
+                        href="https://wa.me/918169455350"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-8 inline-flex items-center gap-2 text-gym-gold font-mono text-xs uppercase tracking-widest font-semibold hover:translate-x-2 transition-transform duration-300"
+                      >
+                        ENQUIRE DISCIPLINE &rarr;
+                      </a>
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+              </div>
             </div>
           </div>
 
