@@ -220,8 +220,8 @@ export function WhyChooseUsScroll() {
   const scrollHeightClass = isMobile ? "h-[480vh]" : "h-[600vh]";
 
   return (
-    <div id="why-us" ref={triggerRef} className={`scroll-mt-28 w-full relative bg-gym-black border-b border-gym-white/10 ${scrollHeightClass}`}>
-      <div ref={pinRef} className="h-screen w-full relative flex items-center justify-center overflow-hidden">
+    <div id="why-us" ref={triggerRef} className={`scroll-mt-24 md:scroll-mt-28 w-full relative bg-gym-black border-b border-gym-white/10 ${scrollHeightClass}`}>
+      <div ref={pinRef} className="h-[100dvh] w-full relative flex items-center justify-center overflow-hidden">
         
         {/* Content Layout */}
         <div className="max-w-7xl mx-auto px-6 w-full h-full relative z-20 flex flex-col justify-between py-12 md:py-24">

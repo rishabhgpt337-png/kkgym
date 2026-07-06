@@ -81,12 +81,21 @@ export default function Home() {
     foldC: "#F2EFE9",  // Off-white
   };
 
-  const scrollToSection = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
+  const scrollToSection = (id: string, isMobileClick = false) => {
+    if (isMobileClick) {
+      setMobileMenuOpen(false);
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }, 150);
+    } else {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
     }
-    setMobileMenuOpen(false);
   };
 
   return (
@@ -94,7 +103,7 @@ export default function Home() {
       
       {/* 1. NAV */}
       <header className={cn(
-        "sticky top-0 z-40 w-full transition-all duration-500",
+        "fixed top-0 left-0 w-full z-40 transition-all duration-500",
         scrolled
           ? "border-b border-gym-gold/15 bg-gym-black/90 backdrop-blur-md py-4 h-20 shadow-[0_4px_30px_rgba(0,0,0,0.3)]"
           : "border-b border-transparent bg-transparent py-6 h-24"
@@ -139,14 +148,14 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="absolute top-20 left-0 w-full bg-gym-black border-b border-gym-gold/15 px-6 py-10 flex flex-col gap-6 md:hidden z-30 shadow-[0_10px_20px_rgba(239,159,39,0.03)]"
+            className="absolute top-full left-0 w-full bg-gym-black border-b border-gym-gold/15 px-6 py-10 flex flex-col gap-6 md:hidden z-30 shadow-[0_10px_20px_rgba(239,159,39,0.03)]"
           >
             {["About", "Why Us", "Contact"].map((item) => {
               const id = item.toLowerCase().replace(" ", "-");
               return (
                 <button
                   key={item}
-                  onClick={() => scrollToSection(id)}
+                  onClick={() => scrollToSection(id, true)}
                   className="font-bebas text-3xl uppercase tracking-wider text-left text-gym-white hover:text-gym-gold transition-colors"
                 >
                   {item}
@@ -229,7 +238,7 @@ export default function Home() {
       </section>
 
       {/* 3. ABOUT */}
-      <section id="about" className="scroll-mt-28 py-24 md:py-32 border-b border-gym-white/10 relative bg-gym-black">
+      <section id="about" className="scroll-mt-24 md:scroll-mt-28 py-24 md:py-32 border-b border-gym-white/10 relative bg-gym-black">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
           
           {/* Left Block */}
@@ -449,7 +458,7 @@ export default function Home() {
       </section>
 
       {/* 8. CONTACT / LOCATION */}
-      <section id="contact" className="scroll-mt-28 py-24 md:py-32 bg-gym-black border-b border-gym-white/10 relative">
+      <section id="contact" className="scroll-mt-24 md:scroll-mt-28 py-24 md:py-32 bg-gym-black border-b border-gym-white/10 relative">
         <div className="absolute inset-0 grid-bg-overlay opacity-20 pointer-events-none" />
         <div className="max-w-4xl mx-auto px-6 flex flex-col items-center text-center relative z-10">
           
