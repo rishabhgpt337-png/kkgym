@@ -295,30 +295,34 @@ export default function Home() {
             {/* Set 1 */}
             <span className="text-gym-black">FUEL YOUR FIRE</span>
             <span className="text-gym-black/40">•</span>
-            <span className="text-gym-black">01 Your only limit is you.</span>
-            <span className="text-gym-black/40">•</span>
-            <span className="text-gym-black">02 Push harder than yesterday.</span>
-            <span className="text-gym-black/40">•</span>
-            <span className="text-gym-black">03 Discipline beats motivation.</span>
-            <span className="text-gym-black/40">•</span>
-            <span className="text-gym-black">04 Sweat today. Shine tomorrow.</span>
-            <span className="text-gym-black/40">•</span>
-            <span className="text-gym-black">05 The body achieves what the mind believes.</span>
-            <span className="text-gym-black/40">•</span>
+            {[
+              "Your only limit is you.",
+              "Push harder than yesterday.",
+              "Discipline beats motivation.",
+              "Sweat today. Shine tomorrow.",
+              "The body achieves what the mind believes."
+            ].map((quote, idx) => (
+              <React.Fragment key={`set1-${idx}`}>
+                <span className="text-gym-black">{quote}</span>
+                <span className="text-gym-black/40">•</span>
+              </React.Fragment>
+            ))}
             
             {/* Set 2 (Duplicated for infinite scroll looping) */}
             <span className="text-gym-black">FUEL YOUR FIRE</span>
             <span className="text-gym-black/40">•</span>
-            <span className="text-gym-black">01 Your only limit is you.</span>
-            <span className="text-gym-black/40">•</span>
-            <span className="text-gym-black">02 Push harder than yesterday.</span>
-            <span className="text-gym-black/40">•</span>
-            <span className="text-gym-black">03 Discipline beats motivation.</span>
-            <span className="text-gym-black/40">•</span>
-            <span className="text-gym-black">04 Sweat today. Shine tomorrow.</span>
-            <span className="text-gym-black/40">•</span>
-            <span className="text-gym-black">05 The body achieves what the mind believes.</span>
-            <span className="text-gym-black/40">•</span>
+            {[
+              "Your only limit is you.",
+              "Push harder than yesterday.",
+              "Discipline beats motivation.",
+              "Sweat today. Shine tomorrow.",
+              "The body achieves what the mind believes."
+            ].map((quote, idx) => (
+              <React.Fragment key={`set2-${idx}`}>
+                <span className="text-gym-black">{quote}</span>
+                <span className="text-gym-black/40">•</span>
+              </React.Fragment>
+            ))}
           </div>
         </div>
       </section>
