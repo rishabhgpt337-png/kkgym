@@ -77,13 +77,13 @@ export function InstagramFeed() {
 
             {/* Hover Caption Overlay */}
             <div className="absolute inset-0 z-20 flex flex-col justify-end p-6 bg-gradient-to-t from-gym-black via-gym-black/40 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out">
-              <span className="font-mono text-[10px] text-gym-gold uppercase tracking-widest mb-1">
+              <span className="font-sans text-[10px] text-gym-gold uppercase tracking-widest mb-1">
                 @kouragefitness_official
               </span>
               <p className="font-inter text-xs text-gym-white/90 leading-relaxed mb-4">
                 {post.caption}
               </p>
-              <div className="flex items-center gap-2 text-[10px] text-gym-white/40 font-mono">
+              <div className="flex items-center gap-2 text-[10px] text-gym-white/40 font-sans">
                 <span>&hearts; {post.likes} Likes</span>
                 <span>•</span>
                 <span>View Post</span>

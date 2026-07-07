@@ -58,7 +58,7 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
             {/* Close button */}
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 text-gym-white/40 hover:text-gym-gold text-2xl transition-colors font-mono"
+              className="absolute top-4 right-4 text-gym-white/40 hover:text-gym-gold text-2xl transition-colors font-sans"
             >
               &times;
             </button>
@@ -76,7 +76,7 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
             {/* Form */}
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="flex flex-col gap-2">
-                <label htmlFor="name" className="font-mono text-xs uppercase tracking-widest text-gym-white/60">
+                <label htmlFor="name" className="font-sans text-xs uppercase tracking-widest text-gym-white/60">
                   Full Name
                 </label>
                 <input
@@ -91,7 +91,7 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
               </div>
 
               <div className="flex flex-col gap-2">
-                <label htmlFor="phone" className="font-mono text-xs uppercase tracking-widest text-gym-white/60">
+                <label htmlFor="phone" className="font-sans text-xs uppercase tracking-widest text-gym-white/60">
                   Phone Number
                 </label>
                 <input
@@ -107,7 +107,7 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
               </div>
 
               <div className="flex flex-col gap-2">
-                <label htmlFor="goal" className="font-mono text-xs uppercase tracking-widest text-gym-white/60">
+                <label htmlFor="goal" className="font-sans text-xs uppercase tracking-widest text-gym-white/60">
                   Training Goal
                 </label>
                 <select

@@ -69,7 +69,7 @@ export function ProgramCard({ number, title, description, tag }: ProgramCardProp
             <span className="font-bebas text-4xl text-gym-white/20 group-hover:text-gym-gold/40 transition-colors duration-300">
               {number}
             </span>
-            <span className="border border-gym-gold px-3 py-1 font-mono text-[10px] uppercase text-gym-gold tracking-widest">
+            <span className="border border-gym-gold px-3 py-1 font-sans text-[10px] uppercase text-gym-gold tracking-widest">
               {tag}
             </span>
           </div>
@@ -83,7 +83,7 @@ export function ProgramCard({ number, title, description, tag }: ProgramCardProp
           <p className="font-inter text-sm md:text-base leading-relaxed text-gym-white/70">
             {description}
           </p>
-          <div className="mt-8 flex items-center gap-2 text-gym-gold font-mono text-xs uppercase tracking-widest font-semibold group-hover:translate-x-2 transition-transform duration-300">
+          <div className="mt-8 flex items-center gap-2 text-gym-gold font-sans text-xs uppercase tracking-widest font-semibold group-hover:translate-x-2 transition-transform duration-300">
             Enquire Discipline &rarr;
           </div>
         </div>

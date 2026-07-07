@@ -173,7 +173,7 @@ export function WhyChooseUsScroll() {
       <section id="why-us" className="py-24 md:py-32 bg-bg-primary border-b border-border-subtle">
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-16">
-            <span className="font-mono text-xs uppercase tracking-widest text-gym-gold">
+            <span className="font-sans text-xs uppercase tracking-widest text-gym-gold">
               WHY CHOOSE US
             </span>
             <h2 className="font-bebas text-5xl md:text-6xl text-gym-white uppercase tracking-wider mt-2">
@@ -187,7 +187,7 @@ export function WhyChooseUsScroll() {
                 className="border-2 border-border-subtle hover:border-gym-gold bg-bg-surface p-8 flex flex-col justify-between h-72 select-none group"
               >
                 <div className="flex justify-end items-start mb-6">
-                  <span className="border border-gym-gold px-2.5 py-0.5 font-mono text-[9px] uppercase text-gym-gold tracking-widest">
+                  <span className="border border-gym-gold px-2.5 py-0.5 font-sans text-[9px] uppercase text-gym-gold tracking-widest">
                     {card.tag}
                   </span>
                 </div>
@@ -220,7 +220,7 @@ export function WhyChooseUsScroll() {
           
           {/* Header (Top-Left Fixed Panel) */}
           <div className="w-full">
-            <span className="font-mono text-xs uppercase tracking-widest text-gym-gold">
+            <span className="font-sans text-xs uppercase tracking-widest text-gym-gold">
               WHY CHOOSE US
             </span>
             <h2 className="font-bebas text-5xl md:text-7xl text-gym-white uppercase tracking-wider mt-2 leading-none">
@@ -273,7 +273,7 @@ export function WhyChooseUsScroll() {
                       className="flex flex-col items-center justify-center text-center"
                     >
                       {/* Badge */}
-                      <span className="border border-gym-gold px-3 py-1 font-mono text-[9px] sm:text-[10px] uppercase text-gym-gold tracking-widest mb-6 select-none">
+                      <span className="border border-gym-gold px-3 py-1 font-sans text-[9px] sm:text-[10px] uppercase text-gym-gold tracking-widest mb-6 select-none">
                         {cards[activeIndex].tag}
                       </span>
 
@@ -292,7 +292,7 @@ export function WhyChooseUsScroll() {
                         href="https://wa.me/918169455350"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="mt-8 inline-flex items-center gap-2 text-gym-gold font-mono text-xs uppercase tracking-widest font-semibold hover:translate-x-2 transition-transform duration-300"
+                        className="mt-8 inline-flex items-center gap-2 text-gym-gold font-sans text-xs uppercase tracking-widest font-semibold hover:translate-x-2 transition-transform duration-300"
                       >
                         ENQUIRE DISCIPLINE &rarr;
                       </a>
@@ -305,7 +305,7 @@ export function WhyChooseUsScroll() {
 
           {/* Progress Tracker (Side/Bottom Indicator Bar) */}
           <div className="w-full flex justify-between items-center md:items-end">
-            <span className="hidden md:inline font-mono text-xs text-gym-white/40 uppercase tracking-widest">
+            <span className="hidden md:inline font-sans text-xs text-gym-white/40 uppercase tracking-widest">
               Scroll to explore indicators
             </span>
 

@@ -189,7 +189,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="font-mono text-xs md:text-sm uppercase tracking-[0.3em] text-gym-gold mb-6 font-semibold"
+            className="font-sans text-xs md:text-sm uppercase tracking-[0.3em] text-gym-gold mb-6 font-semibold"
           >
             BEST GYM IN MULUND
           </motion.span>
@@ -228,7 +228,7 @@ export default function Home() {
           
           {/* Left Block */}
           <div className="lg:col-span-5 flex flex-col items-start">
-            <span className="font-mono text-xs uppercase tracking-widest text-gym-gold mb-4">
+            <span className="font-sans text-xs uppercase tracking-widest text-gym-gold mb-4">
               WHO WE ARE
             </span>
             <h2 className="font-bebas text-5xl md:text-6xl text-gym-white tracking-wider leading-none uppercase max-w-xl">
@@ -246,7 +246,7 @@ export default function Home() {
                 alt="Kourage Fitness setups"
                 className="w-full h-full object-cover filter grayscale contrast-125 group-hover:scale-102 transition-transform duration-500"
               />
-              <div className="absolute bottom-4 left-4 z-20 bg-bg-primary border border-gym-gold px-4 py-2 font-mono text-[10px] uppercase text-gym-gold tracking-widest">
+              <div className="absolute bottom-4 left-4 z-20 bg-bg-primary border border-gym-gold px-4 py-2 font-sans text-[10px] uppercase text-gym-gold tracking-widest">
                 Kourage Mulund West
               </div>
             </div>
@@ -416,7 +416,7 @@ export default function Home() {
 
             {/* Right Column: Copy and CTA */}
             <div className="p-8 md:p-12 flex flex-col justify-center items-start z-10 relative">
-              <span className="font-mono text-xs uppercase tracking-widest text-gym-gold mb-3">
+              <span className="font-sans text-xs uppercase tracking-widest text-gym-gold mb-3">
                 FOLLOW US
               </span>
               <h3 className="font-bebas text-4xl md:text-5xl text-gym-white uppercase tracking-wider mb-4">
@@ -426,7 +426,7 @@ export default function Home() {
                 Follow us on Instagram for daily workout tips, transformation stories, and behind-the-scenes action at Kourage Fitness.
               </p>
               
-              <div className="font-mono text-sm text-gym-gold uppercase tracking-widest mb-8 font-bold">
+              <div className="font-sans text-sm text-gym-gold uppercase tracking-widest mb-8 font-bold">
                 @kouragefitness_official
               </div>
 
@@ -450,7 +450,7 @@ export default function Home() {
         <div className="absolute inset-0 grid-bg-overlay opacity-20 pointer-events-none" />
         <div className="max-w-4xl mx-auto px-6 flex flex-col items-center text-center relative z-10">
           
-          <span className="font-mono text-xs uppercase tracking-widest text-gym-gold mb-4">
+          <span className="font-sans text-xs uppercase tracking-widest text-gym-gold mb-4">
             MULUND WEST HQ
           </span>
           <h2 className="font-bebas text-5xl md:text-7xl text-gym-white uppercase tracking-wider leading-none">
@@ -461,7 +461,7 @@ export default function Home() {
             {/* Address Block */}
             <div className="flex flex-col items-center text-center">
               <MapPin size={28} className="text-gym-gold mb-3" />
-              <h4 className="font-mono text-xs uppercase text-gym-white/40 tracking-wider">Address</h4>
+              <h4 className="font-sans text-xs uppercase text-gym-white/40 tracking-wider">Address</h4>
               <p className="font-inter text-sm md:text-base text-gym-white/80 mt-2 leading-relaxed">
                 2nd Floor, B Wing, Bhagyashree Apartment,<br />
                 Dr Ambedkar Road, Mulund West, Mumbai 400080
@@ -471,7 +471,7 @@ export default function Home() {
             {/* Operating Hours Block */}
             <div className="flex flex-col items-center text-center">
               <Clock size={28} className="text-gym-gold mb-3" />
-              <h4 className="font-mono text-xs uppercase text-gym-white/40 tracking-wider">Operating Hours</h4>
+              <h4 className="font-sans text-xs uppercase text-gym-white/40 tracking-wider">Operating Hours</h4>
               <p className="font-inter text-sm md:text-base text-gym-white/80 mt-2 leading-relaxed">
                 Opens 5:30 AM Daily<br />
                 Monday to Sunday
@@ -505,13 +505,13 @@ export default function Home() {
             </p>
             <div className="flex items-center gap-2 mt-2">
               <span className="text-gym-gold text-lg">★★★★★</span>
-              <span className="font-mono text-xs text-gym-white/40">4.9 (40 Reviews)</span>
+              <span className="font-sans text-xs text-gym-white/40">4.9 (40 Reviews)</span>
             </div>
           </div>
 
           <div>
-            <h4 className="font-mono text-xs uppercase tracking-widest text-gym-white/80 mb-4">Contact Channels</h4>
-            <ul className="space-y-3 font-mono text-xs">
+            <h4 className="font-sans text-xs uppercase tracking-widest text-gym-white/80 mb-4">Contact Channels</h4>
+            <ul className="space-y-3 font-sans text-xs">
               <li>
                 <a href="tel:+918169455350" className="hover:text-gym-gold transition-colors flex items-center gap-2">
                   <Phone size={14} className="text-gym-gold" />
@@ -534,7 +534,7 @@ export default function Home() {
           </div>
 
           <div>
-            <h4 className="font-mono text-xs uppercase tracking-widest text-gym-white/80 mb-4">Address & Operating Hours</h4>
+            <h4 className="font-sans text-xs uppercase tracking-widest text-gym-white/80 mb-4">Address & Operating Hours</h4>
             <p className="font-inter text-xs text-gym-white/40 leading-relaxed">
               2nd Floor, B Wing, Bhagyashree Apartment,<br />
               Dr Ambedkar Road, Mulund West, Mumbai 400080<br />
@@ -544,7 +544,7 @@ export default function Home() {
 
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 border-t border-border-subtle mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-mono">
+        <div className="max-w-7xl mx-auto px-6 border-t border-border-subtle mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-sans">
           <p>© 2026 Kourage Fitness. All rights reserved.</p>
           <p className="text-gym-white/20">Excellence in every detail.</p>
         </div>

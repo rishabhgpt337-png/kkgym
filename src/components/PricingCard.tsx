@@ -41,7 +41,7 @@ export function PricingCard({
     >
       {/* Featured Header */}
       {featured && (
-        <div className="absolute top-0 right-10 -translate-y-1/2 bg-gym-gold text-bg-primary font-mono text-[9px] font-bold uppercase tracking-widest px-3 py-1">
+        <div className="absolute top-0 right-10 -translate-y-1/2 bg-gym-gold text-bg-primary font-sans text-[9px] font-bold uppercase tracking-widest px-3 py-1">
           Most Disciplined
         </div>
       )}
@@ -51,7 +51,7 @@ export function PricingCard({
 
       {/* Content */}
       <div className="relative z-10">
-        <span className={`font-mono text-xs uppercase tracking-widest ${featured ? "text-gym-gold" : "text-gym-white/40"}`}>
+        <span className={`font-sans text-xs uppercase tracking-widest ${featured ? "text-gym-gold" : "text-gym-white/40"}`}>
           {title}
         </span>
         
@@ -59,7 +59,7 @@ export function PricingCard({
           <span className="font-bebas text-6xl md:text-7xl text-gym-white tracking-wider">
             {price}
           </span>
-          <span className="font-mono text-xs text-gym-white/40 uppercase">
+          <span className="font-sans text-xs text-gym-white/40 uppercase">
             / {period}
           </span>
         </div>
@@ -69,7 +69,7 @@ export function PricingCard({
         <ul className="space-y-4">
           {features.map((feature, i) => (
             <li key={i} className="flex items-start gap-3">
-              <span className={`font-mono text-sm ${featured ? "text-gym-gold" : "text-gym-white/70"}`}>
+              <span className={`font-sans text-sm ${featured ? "text-gym-gold" : "text-gym-white/70"}`}>
                 &#10003;
               </span>
               <span className="font-inter text-sm md:text-base text-gym-white/70">

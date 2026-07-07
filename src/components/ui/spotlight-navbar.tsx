@@ -131,7 +131,7 @@ export function SpotlightNavbar({
                                     handleItemClick(item, idx);
                                 }}
                                 className={cn(
-                                    "px-5 py-2 text-xs font-semibold uppercase tracking-widest font-mono transition-all duration-300 rounded-full",
+                                    "px-5 py-2 text-xs font-semibold uppercase tracking-widest font-sans transition-all duration-300 rounded-full",
                                     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gym-gold/40",
                                     // Active vs Inactive Text
                                     activeIndex === idx
