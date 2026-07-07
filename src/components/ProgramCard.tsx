@@ -55,7 +55,7 @@ export function ProgramCard({ number, title, description, tag }: ProgramCardProp
           scale: rotateX !== 0 || rotateY !== 0 ? 1.02 : 1,
         }}
         transition={{ type: "spring", stiffness: 300, damping: 20, mass: 0.5 }}
-        className="relative h-full flex flex-col justify-between border-2 border-gym-white/10 bg-gym-black/40 p-8 md:p-10 select-none cursor-pointer group hover:border-gym-gold transition-colors duration-300"
+        className="relative h-full flex flex-col justify-between border-2 border-border-subtle bg-bg-surface p-8 md:p-10 select-none cursor-pointer group hover:border-gym-gold transition-colors duration-300"
         style={{
           transformStyle: "preserve-3d",
         }}

@@ -62,7 +62,7 @@ export function InstagramFeed() {
             rel="noopener noreferrer"
             whileHover={{ scale: 0.98 }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            className="relative aspect-square border border-gym-white/10 group overflow-hidden block cursor-pointer"
+            className="relative aspect-square border border-border-subtle group overflow-hidden block cursor-pointer"
           >
             {/* Dark Overlay */}
             <div className="absolute inset-0 bg-gym-black/40 group-hover:bg-gym-black/10 transition-colors duration-300 z-10" />

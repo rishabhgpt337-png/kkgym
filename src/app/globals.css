@@ -6,16 +6,22 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --color-gym-black: #1A1A18;
+  --color-gym-black: #2A0D12;
   --color-gym-gold: #EF9F27;
   --color-gym-white: #F2EFE9;
+
+  --color-bg-primary: #2A0D12;
+  --color-bg-surface: #3D141B;
+  --color-border-subtle: #5C1F27;
+  --color-accent-gold: #EF9F27;
+  --color-cream: #F2EFE9;
 
   --font-bebas: "Bebas Neue", sans-serif;
   --font-inter: "Inter", sans-serif;
 }
 
 body {
-  background-color: #1A1A18;
+  background-color: #2A0D12;
   color: #F2EFE9;
   font-family: var(--font-inter);
   overflow-x: hidden;
@@ -67,7 +73,7 @@ body {
 /* Selection colors */
 ::selection {
   background-color: #EF9F27;
-  color: #1A1A18;
+  color: #2A0D12;
 }
 
 /* Custom scroll bar */
@@ -75,7 +81,7 @@ body {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #1A1A18;
+  background: #2A0D12;
 }
 ::-webkit-scrollbar-thumb {
   background: #EF9F27;

@@ -75,7 +75,7 @@ export default function Home() {
   // Gym theme color props for the TwistingRibbon
   const gymRibbonColors = {
     face: "#EF9F27",   // Gold accent
-    foldA: "#1A1A18",  // Near-black
+    foldA: "#2A0D12",  // Deep maroon
     foldB: "#EF9F27",  // Gold
     foldC: "#F2EFE9",  // Off-white
   };
@@ -147,7 +147,7 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="absolute top-full left-0 w-full bg-gym-black border-b border-gym-gold/15 px-6 py-10 flex flex-col gap-6 md:hidden z-30 shadow-[0_10px_20px_rgba(239,159,39,0.03)]"
+            className="absolute top-full left-0 w-full bg-bg-primary border-b border-gym-gold/15 px-6 py-10 flex flex-col gap-6 md:hidden z-30 shadow-[0_10px_20px_rgba(239,159,39,0.03)]"
           >
             {["About", "Why Us", "Contact"].map((item) => {
               const id = item.toLowerCase().replace(" ", "-");
@@ -161,7 +161,7 @@ export default function Home() {
                 </button>
               );
             })}
-            <hr className="border-gym-white/10 my-2" />
+            <hr className="border-border-subtle my-2" />
             <a
               href="tel:+918169455350"
               className="bg-gym-gold text-gym-black font-bebas text-lg uppercase tracking-widest w-full py-4 text-center block"
@@ -221,7 +221,7 @@ export default function Home() {
       </section>
 
       {/* 3. ABOUT */}
-      <section id="about" className="scroll-mt-24 md:scroll-mt-28 py-24 md:py-32 border-b border-gym-white/10 relative bg-gym-black">
+      <section id="about" className="scroll-mt-24 md:scroll-mt-28 py-24 md:py-32 border-b border-border-subtle relative bg-bg-primary">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
           
           {/* Left Block */}
@@ -244,7 +244,7 @@ export default function Home() {
                 alt="Kourage Fitness setups"
                 className="w-full h-full object-cover filter grayscale contrast-125 group-hover:scale-102 transition-transform duration-500"
               />
-              <div className="absolute bottom-4 left-4 z-20 bg-gym-black border border-gym-gold px-4 py-2 font-mono text-[10px] uppercase text-gym-gold tracking-widest">
+              <div className="absolute bottom-4 left-4 z-20 bg-bg-primary border border-gym-gold px-4 py-2 font-mono text-[10px] uppercase text-gym-gold tracking-widest">
                 Kourage Mulund West
               </div>
             </div>
@@ -274,7 +274,7 @@ export default function Home() {
                 text: "Custom programs designed for you",
               },
             ].map((feature) => (
-              <div key={feature.num} className="border-2 border-gym-white/10 bg-gym-black/50 p-8 flex flex-col justify-between h-64 hover:border-gym-gold transition-colors duration-300">
+              <div key={feature.num} className="border-2 border-border-subtle bg-bg-surface p-8 flex flex-col justify-between h-64 hover:border-gym-gold transition-colors duration-300">
                 <span className="font-bebas text-4xl text-gym-gold/40">{feature.num}.</span>
                 <div className="mt-auto">
                   <h3 className="font-bebas text-2xl md:text-3xl text-gym-white uppercase tracking-wider mb-2">
@@ -292,7 +292,7 @@ export default function Home() {
       </section>
 
       {/* TWISTING RIBBON DIVIDER #1 (Transition About -> Why Us) */}
-      <div className="w-full h-32 md:h-40 bg-gym-black relative z-20 flex items-center justify-center">
+      <div className="w-full h-32 md:h-40 bg-bg-primary relative z-20 flex items-center justify-center">
         <TwistingRibbon
           className="w-full h-full"
           waveAmplitude={0.9}
@@ -307,13 +307,13 @@ export default function Home() {
       <WhyChooseUsScroll />
 
       {/* 5. MOTIVATION STRIP */}
-      <section className="bg-gym-gold text-gym-black py-8 border-y-2 border-gym-black overflow-hidden relative z-20 flex items-center select-none">
+      <section className="bg-gym-gold text-bg-primary py-8 border-y-2 border-bg-primary overflow-hidden relative z-20 flex items-center select-none">
         <div className="w-full flex items-center whitespace-nowrap overflow-hidden">
           {/* Scrolling Ticker Container */}
           <div className="animate-marquee flex gap-12 font-bebas text-3xl md:text-4xl font-bold uppercase tracking-wider">
             {/* Set 1 */}
-            <span className="text-gym-black">FUEL YOUR FIRE</span>
-            <span className="text-gym-black/40">•</span>
+            <span className="text-bg-primary">FUEL YOUR FIRE</span>
+            <span className="text-bg-primary/45">•</span>
             {[
               "Your only limit is you.",
               "Push harder than yesterday.",
@@ -322,14 +322,14 @@ export default function Home() {
               "The body achieves what the mind believes."
             ].map((quote, idx) => (
               <React.Fragment key={`set1-${idx}`}>
-                <span className="text-gym-black">{quote}</span>
-                <span className="text-gym-black/40">•</span>
+                <span className="text-bg-primary">{quote}</span>
+                <span className="text-bg-primary/45">•</span>
               </React.Fragment>
             ))}
             
             {/* Set 2 (Duplicated for infinite scroll looping) */}
-            <span className="text-gym-black">FUEL YOUR FIRE</span>
-            <span className="text-gym-black/40">•</span>
+            <span className="text-bg-primary">FUEL YOUR FIRE</span>
+            <span className="text-bg-primary/45">•</span>
             {[
               "Your only limit is you.",
               "Push harder than yesterday.",
@@ -338,8 +338,8 @@ export default function Home() {
               "The body achieves what the mind believes."
             ].map((quote, idx) => (
               <React.Fragment key={`set2-${idx}`}>
-                <span className="text-gym-black">{quote}</span>
-                <span className="text-gym-black/40">•</span>
+                <span className="text-bg-primary">{quote}</span>
+                <span className="text-bg-primary/45">•</span>
               </React.Fragment>
             ))}
           </div>
@@ -347,7 +347,7 @@ export default function Home() {
       </section>
 
       {/* 6. CTA BAND */}
-      <section className="bg-gym-black text-gym-white border-b border-gym-white/10 py-24 md:py-32 relative select-none">
+      <section className="bg-bg-primary text-gym-white border-b border-border-subtle py-24 md:py-32 relative select-none">
         <div className="absolute inset-0 grid-bg-overlay opacity-20" />
         <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
           <h2 className="font-bebas text-5xl md:text-7xl tracking-wider leading-none uppercase text-gym-gold">
@@ -376,7 +376,7 @@ export default function Home() {
       </section>
 
       {/* TWISTING RIBBON DIVIDER #2 (Transition CTA -> Instagram) */}
-      <div className="w-full h-32 md:h-40 bg-gym-black relative z-20 flex items-center justify-center">
+      <div className="w-full h-32 md:h-40 bg-bg-primary relative z-20 flex items-center justify-center">
         <TwistingRibbon
           className="w-full h-full"
           waveAmplitude={0.9}
@@ -388,23 +388,23 @@ export default function Home() {
       </div>
 
       {/* 7. INSTAGRAM — single large card, no grid/feed */}
-      <section className="py-24 md:py-32 bg-gym-black border-b border-gym-white/10 relative">
+      <section className="py-24 md:py-32 bg-bg-primary border-b border-border-subtle relative">
         <div className="max-w-4xl mx-auto px-6">
           
-          <div className="border-2 border-gym-gold bg-gym-black/80 relative overflow-hidden flex flex-col md:flex-row items-stretch select-none">
+          <div className="border-2 border-gym-gold bg-bg-surface relative overflow-hidden flex flex-col md:flex-row items-stretch select-none">
             {/* Grid Overlay */}
             <div className="absolute inset-0 grid-bg-overlay opacity-25 pointer-events-none" />
 
             {/* Left Column: Visual graphic */}
             <div className="relative w-full md:w-2/5 min-h-[250px] md:min-h-auto overflow-hidden group shrink-0 border-b-2 md:border-b-0 md:border-r-2 border-gym-gold">
-              <div className="absolute inset-0 bg-gym-black/35 group-hover:bg-transparent transition-colors duration-300 z-10" />
+              <div className="absolute inset-0 bg-bg-primary/35 group-hover:bg-transparent transition-colors duration-300 z-10" />
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/ig_post_1.png"
                 alt="Instagram workout display"
                 className="absolute inset-0 w-full h-full object-cover filter grayscale contrast-125 group-hover:scale-102 transition-transform duration-500"
               />
-              <div className="absolute top-4 left-4 z-20 bg-gym-black border border-gym-gold p-2">
+              <div className="absolute top-4 left-4 z-20 bg-bg-primary border border-gym-gold p-2">
                 <InstagramLogo size={24} className="text-gym-gold animate-pulse" />
               </div>
             </div>
@@ -441,7 +441,7 @@ export default function Home() {
       </section>
 
       {/* 8. CONTACT / LOCATION */}
-      <section id="contact" className="scroll-mt-24 md:scroll-mt-28 py-24 md:py-32 bg-gym-black border-b border-gym-white/10 relative">
+      <section id="contact" className="scroll-mt-24 md:scroll-mt-28 py-24 md:py-32 bg-bg-primary border-b border-border-subtle relative">
         <div className="absolute inset-0 grid-bg-overlay opacity-20 pointer-events-none" />
         <div className="max-w-4xl mx-auto px-6 flex flex-col items-center text-center relative z-10">
           
@@ -478,7 +478,7 @@ export default function Home() {
             href="https://maps.google.com/?q=Kourage+Fitness+Mulund+West+Mumbai"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 border-2 border-gym-white/20 text-gym-white font-bebas text-sm uppercase tracking-widest px-8 py-4 mt-12 hover:border-gym-gold hover:text-gym-gold transition-colors duration-300 w-full sm:w-auto"
+            className="flex items-center justify-center gap-2 border-2 border-border-subtle text-gym-white font-bebas text-sm uppercase tracking-widest px-8 py-4 mt-12 hover:border-gym-gold hover:text-gym-gold transition-colors duration-300 w-full sm:w-auto"
           >
             Open in Google Maps
             <ArrowUpRight size={16} />
@@ -488,7 +488,7 @@ export default function Home() {
       </section>
 
       {/* 9. FOOTER */}
-      <footer className="bg-gym-black border-t border-gym-white/10 py-16 text-gym-white/50 text-sm">
+      <footer className="bg-bg-primary border-t border-border-subtle py-16 text-gym-white/50 text-sm">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12">
           
           <div className="flex flex-col items-start gap-4">
@@ -539,7 +539,7 @@ export default function Home() {
 
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 border-t border-gym-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-mono">
+        <div className="max-w-7xl mx-auto px-6 border-t border-border-subtle mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-mono">
           <p>© 2026 Kourage Fitness. All rights reserved.</p>
           <p className="text-gym-white/20">Excellence in every detail.</p>
         </div>

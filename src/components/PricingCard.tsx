@@ -31,8 +31,8 @@ export function PricingCard({
         boxShadow: "0 25px 50px -12px rgba(239, 159, 39, 0.2)",
       }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      className={`relative w-full flex flex-col justify-between border-2 bg-gym-black/80 p-8 md:p-10 select-none cursor-pointer ${
-        featured ? "border-gym-gold shadow-[0_15px_30px_rgba(239,159,39,0.1)]" : "border-gym-white/10"
+      className={`relative w-full flex flex-col justify-between border-2 bg-bg-surface p-8 md:p-10 select-none cursor-pointer ${
+        featured ? "border-gym-gold shadow-[0_15px_30px_rgba(239,159,39,0.1)]" : "border-border-subtle"
       }`}
       style={{
         transformStyle: "preserve-3d",
@@ -41,7 +41,7 @@ export function PricingCard({
     >
       {/* Featured Header */}
       {featured && (
-        <div className="absolute top-0 right-10 -translate-y-1/2 bg-gym-gold text-gym-black font-mono text-[9px] font-bold uppercase tracking-widest px-3 py-1">
+        <div className="absolute top-0 right-10 -translate-y-1/2 bg-gym-gold text-bg-primary font-mono text-[9px] font-bold uppercase tracking-widest px-3 py-1">
           Most Disciplined
         </div>
       )}
@@ -64,7 +64,7 @@ export function PricingCard({
           </span>
         </div>
 
-        <hr className={`my-8 border-t ${featured ? "border-gym-gold/20" : "border-gym-white/10"}`} />
+        <hr className={`my-8 border-t ${featured ? "border-gym-gold/20" : "border-border-subtle"}`} />
 
         <ul className="space-y-4">
           {features.map((feature, i) => (
@@ -85,8 +85,8 @@ export function PricingCard({
           onClick={onCtaClick}
           className={`w-full py-4 text-center font-bebas text-lg uppercase tracking-widest transition-colors duration-300 border-2 ${
             featured
-              ? "bg-gym-gold border-gym-gold text-gym-black hover:bg-transparent hover:text-gym-gold"
-              : "bg-transparent border-gym-white/20 text-gym-white hover:border-gym-gold hover:text-gym-gold"
+              ? "bg-gym-gold border-gym-gold text-bg-primary hover:bg-transparent hover:text-gym-gold"
+              : "bg-transparent border-border-subtle text-gym-white hover:border-gym-gold hover:text-gym-gold"
           }`}
         >
           {ctaText}

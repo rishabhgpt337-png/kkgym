@@ -170,7 +170,7 @@ export function WhyChooseUsScroll() {
   // FALLBACK: Static Grid Layout if user prefers reduced motion (No Numerals)
   if (prefersReducedMotion) {
     return (
-      <section id="why-us" className="py-24 md:py-32 bg-gym-black border-b border-gym-white/10">
+      <section id="why-us" className="py-24 md:py-32 bg-bg-primary border-b border-border-subtle">
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-16">
             <span className="font-mono text-xs uppercase tracking-widest text-gym-gold">
@@ -184,7 +184,7 @@ export function WhyChooseUsScroll() {
             {cards.map((card) => (
               <div
                 key={card.num}
-                className="border-2 border-gym-white/10 hover:border-gym-gold bg-gym-black p-8 flex flex-col justify-between h-72 select-none group"
+                className="border-2 border-border-subtle hover:border-gym-gold bg-bg-surface p-8 flex flex-col justify-between h-72 select-none group"
               >
                 <div className="flex justify-end items-start mb-6">
                   <span className="border border-gym-gold px-2.5 py-0.5 font-mono text-[9px] uppercase text-gym-gold tracking-widest">
@@ -195,17 +195,9 @@ export function WhyChooseUsScroll() {
                   <h3 className="font-bebas text-2xl md:text-3xl text-gym-white uppercase tracking-wider mb-2 group-hover:text-gym-gold transition-colors">
                     {card.title}
                   </h3>
-                  <p className="font-inter text-sm text-gym-white/70 leading-relaxed mb-4">
+                  <p className="font-inter text-sm text-gym-white/70 leading-relaxed">
                     {card.description}
                   </p>
-                  <a
-                    href="https://wa.me/918169455350"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-gym-gold font-mono text-[10px] uppercase tracking-widest font-semibold"
-                  >
-                    ENQUIRE DISCIPLINE &rarr;
-                  </a>
                 </div>
               </div>
             ))}
@@ -220,7 +212,7 @@ export function WhyChooseUsScroll() {
   const scrollHeightClass = isMobile ? "h-[480vh]" : "h-[600vh]";
 
   return (
-    <div id="why-us" ref={triggerRef} className={`scroll-mt-24 md:scroll-mt-28 w-full relative bg-gym-black border-b border-gym-white/10 ${scrollHeightClass}`}>
+    <div id="why-us" ref={triggerRef} className={`scroll-mt-24 md:scroll-mt-28 w-full relative bg-bg-primary border-b border-border-subtle ${scrollHeightClass}`}>
       <div ref={pinRef} className="h-[100dvh] w-full relative flex items-center justify-center overflow-hidden">
         
         {/* Content Layout */}
@@ -241,7 +233,7 @@ export function WhyChooseUsScroll() {
             {/* The active card holds the video player as its background element */}
             <div className="w-full max-w-[92%] sm:max-w-3xl mx-auto">
               <div 
-                className="border-2 border-gym-gold bg-gym-black/90 p-6 sm:p-12 md:p-16 min-h-[55vh] md:min-h-[60vh] relative overflow-hidden flex flex-col justify-center items-center text-center group"
+                className="border-2 border-gym-gold bg-bg-surface/90 p-6 sm:p-12 md:p-16 min-h-[55vh] md:min-h-[60vh] relative overflow-hidden flex flex-col justify-center items-center text-center group"
                 style={{
                   transformStyle: "preserve-3d",
                   perspective: 1000,
@@ -262,8 +254,8 @@ export function WhyChooseUsScroll() {
                       />
                     );
                   })}
-                  {/* Scrim Overlay sitting on top of video, below the text (rgba(26,26,24,0.55) i.e. 55% opacity) */}
-                  <div className="absolute inset-0 bg-[#1A1A18]/55 z-15" />
+                  {/* Scrim Overlay sitting on top of video, below the text (rgba(42,13,18,0.55) i.e. 55% opacity) */}
+                  <div className="absolute inset-0 bg-[#2A0D12]/55 z-15" />
                 </div>
 
                 {/* Subtle Grid Overlay */}

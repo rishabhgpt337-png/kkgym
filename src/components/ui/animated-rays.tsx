@@ -24,16 +24,16 @@ export function AnimatedRays({
 
     const stripes = `repeating-linear-gradient(
         100deg,
-        var(--stripe-color, #1A1A18) 0%,
-        var(--stripe-color, #1A1A18) 7%,
+        var(--stripe-color, #2A0D12) 0%,
+        var(--stripe-color, #2A0D12) 7%,
         transparent 10%,
         transparent 12%,
-        var(--stripe-color, #1A1A18) 16%
+        var(--stripe-color, #2A0D12) 16%
     )`;
     const rainbow = `repeating-linear-gradient(
         100deg,
         #EF9F27 10%,
-        #1A1A18 15%,
+        #2A0D12 15%,
         #EF9F27 20%,
         #FFF3D4 25%,
         #EF9F27 30%

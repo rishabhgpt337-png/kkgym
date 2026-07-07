@@ -76,17 +76,17 @@ export function TwistingRibbon({
     // ── Color palette ─────────────────────────────────────────────────────
     // Light Mode Colors (defaults)
     const L_COLOR_FACE = lightColors?.face ? hexToRgb(lightColors.face) : [239, 159, 39]; // Default Gold #EF9F27
-    const L_COLOR_FOLD_A = lightColors?.foldA ? hexToRgb(lightColors.foldA) : [26, 26, 24]; // Default Black #1A1A18
+    const L_COLOR_FOLD_A = lightColors?.foldA ? hexToRgb(lightColors.foldA) : [42, 13, 18]; // Default Maroon #2A0D12
     const L_COLOR_FOLD_B = lightColors?.foldB ? hexToRgb(lightColors.foldB) : [239, 159, 39]; // Default Gold #EF9F27
     const L_COLOR_FOLD_C = lightColors?.foldC ? hexToRgb(lightColors.foldC) : [242, 239, 233]; // Default Off-white #F2EFE9
-    const L_SHADOW_COLOR = [26, 26, 24];
+    const L_SHADOW_COLOR = [42, 13, 18];
     const L_SHADOW_ALPHA = 14 / 255;
-    const L_EDGE_COLOR = [26, 26, 24];
+    const L_EDGE_COLOR = [42, 13, 18];
     const L_EDGE_ALPHA = 22 / 255;
 
     // Dark Mode Colors
     const D_COLOR_FACE = darkColors?.face ? hexToRgb(darkColors.face) : [239, 159, 39];
-    const D_COLOR_FOLD_A = darkColors?.foldA ? hexToRgb(darkColors.foldA) : [26, 26, 24];
+    const D_COLOR_FOLD_A = darkColors?.foldA ? hexToRgb(darkColors.foldA) : [42, 13, 18];
     const D_COLOR_FOLD_B = darkColors?.foldB ? hexToRgb(darkColors.foldB) : [239, 159, 39];
     const D_COLOR_FOLD_C = darkColors?.foldC ? hexToRgb(darkColors.foldC) : [242, 239, 233];
     const D_SHADOW_COLOR = [0, 0, 0];
