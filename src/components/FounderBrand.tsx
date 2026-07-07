@@ -2,268 +2,111 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Award, Globe, Medal, Trophy, X } from "lucide-react";
+import { Award, Globe, Medal, Trophy, Star, X } from "lucide-react";
 
-interface MedalData {
-  id: string;
-  category: "india" | "state" | "city" | "intl" | "special";
-  type: "gold" | "silver" | "bronze" | "special";
+interface AchievementDetail {
   year: string;
-  title: string;
-  placement: string;
-  size: "sm" | "md" | "lg";
-  heightOffset: string; // e.g. "h-32", "h-36"
-  swayDuration: string; // e.g. "4.5s"
-  swayDelay: string;    // e.g. "-1.2s"
+  result: string;
 }
 
-const medalsList: MedalData[] = [
-  // 🌍 International
+interface CategoryMedal {
+  id: string;
+  category: "intl" | "india" | "state" | "city" | "khel-ratna";
+  type: "gold" | "silver" | "bronze" | "special";
+  title: string;
+  size: "sm" | "md" | "lg";
+  ribbonHeight: string;
+  swayDuration: string;
+  swayDelay: string;
+  achievements: AchievementDetail[];
+}
+
+const categoryMedals: CategoryMedal[] = [
+  // 🌍 International Medal
   {
-    id: "intl-1",
+    id: "intl-medal",
     category: "intl",
     type: "gold",
-    year: "2018",
-    title: "IFBB Diamond Cup",
-    placement: "Gold Medal",
+    title: "International Placements",
     size: "md",
-    heightOffset: "h-32",
-    swayDuration: "4.8s",
-    swayDelay: "-0.4s",
-  },
-  {
-    id: "intl-2",
-    category: "intl",
-    type: "bronze",
-    year: "2019",
-    title: "IFBB Diamond Cup",
-    placement: "Bronze Medal",
-    size: "md",
-    heightOffset: "h-40",
-    swayDuration: "5.5s",
-    swayDelay: "-1.8s",
-  },
-  {
-    id: "intl-3",
-    category: "intl",
-    type: "bronze",
-    year: "2022",
-    title: "Mr. Universe",
-    placement: "Bronze Medal",
-    size: "md",
-    heightOffset: "h-36",
-    swayDuration: "6.1s",
-    swayDelay: "-2.3s",
-  },
-
-  // 🏆 Mr. India
-  {
-    id: "india-1",
-    category: "india",
-    type: "gold",
-    year: "2017",
-    title: "Mr. India",
-    placement: "Gold Medal",
-    size: "md",
-    heightOffset: "h-36",
-    swayDuration: "5.2s",
-    swayDelay: "-0.9s",
-  },
-  {
-    id: "india-2",
-    category: "india",
-    type: "bronze",
-    year: "2018",
-    title: "Mr. India",
-    placement: "Bronze Medal",
-    size: "md",
-    heightOffset: "h-32",
-    swayDuration: "4.6s",
-    swayDelay: "-3.1s",
-  },
-  {
-    id: "india-3",
-    category: "india",
-    type: "bronze",
-    year: "2024",
-    title: "Mr. India",
-    placement: "Bronze Medal",
-    size: "md",
-    heightOffset: "h-40",
-    swayDuration: "5.8s",
-    swayDelay: "-1.5s",
-  },
-
-  // 🏆 Mr. Maharashtra
-  {
-    id: "state-1",
-    category: "state",
-    type: "gold",
-    year: "2017",
-    title: "Mr. Maharashtra",
-    placement: "Gold Medal",
-    size: "sm",
-    heightOffset: "h-32",
-    swayDuration: "4.2s",
-    swayDelay: "-0.5s",
-  },
-  {
-    id: "state-2",
-    category: "state",
-    type: "gold",
-    year: "2019",
-    title: "Mr. Maharashtra",
-    placement: "Gold Medal",
-    size: "sm",
-    heightOffset: "h-38",
-    swayDuration: "5.0s",
-    swayDelay: "-2.2s",
-  },
-  {
-    id: "state-3",
-    category: "state",
-    type: "gold",
-    year: "2024",
-    title: "Mr. Maharashtra",
-    placement: "Gold Medal",
-    size: "sm",
-    heightOffset: "h-34",
-    swayDuration: "5.7s",
-    swayDelay: "-1.3s",
-  },
-  {
-    id: "state-4",
-    category: "state",
-    type: "silver",
-    year: "2015",
-    title: "Mr. Maharashtra",
-    placement: "Silver Medal",
-    size: "sm",
-    heightOffset: "h-40",
-    swayDuration: "6.3s",
-    swayDelay: "-3.5s",
-  },
-  {
-    id: "state-5",
-    category: "state",
-    type: "silver",
-    year: "2025",
-    title: "Mr. Maharashtra",
-    placement: "Masters Silver",
-    size: "sm",
-    heightOffset: "h-36",
-    swayDuration: "4.9s",
-    swayDelay: "-0.8s",
-  },
-  {
-    id: "state-6",
-    category: "state",
-    type: "bronze",
-    year: "2016",
-    title: "Mr. Maharashtra",
-    placement: "Bronze Medal",
-    size: "sm",
-    heightOffset: "h-32",
-    swayDuration: "5.3s",
-    swayDelay: "-2.7s",
-  },
-
-  // 🏆 Mr. Mumbai
-  {
-    id: "city-1",
-    category: "city",
-    type: "gold",
-    year: "2009",
-    title: "Navodit Mumbai",
-    placement: "Gold Medal",
-    size: "sm",
-    heightOffset: "h-34",
-    swayDuration: "4.4s",
-    swayDelay: "-1.2s",
-  },
-  {
-    id: "city-2",
-    category: "city",
-    type: "gold",
-    year: "2015",
-    title: "Mr. Mumbai",
-    placement: "Gold Medal",
-    size: "sm",
-    heightOffset: "h-38",
-    swayDuration: "5.1s",
-    swayDelay: "-2.5s",
-  },
-  {
-    id: "city-3",
-    category: "city",
-    type: "gold",
-    year: "2016",
-    title: "Mr. Mumbai",
-    placement: "Gold Medal",
-    size: "sm",
-    heightOffset: "h-32",
-    swayDuration: "6.0s",
-    swayDelay: "-3.2s",
-  },
-  {
-    id: "city-4",
-    category: "city",
-    type: "gold",
-    year: "2017",
-    title: "Mr. Mumbai",
-    placement: "Gold Medal",
-    size: "sm",
-    heightOffset: "h-40",
-    swayDuration: "4.7s",
-    swayDelay: "-0.7s",
-  },
-  {
-    id: "city-5",
-    category: "city",
-    type: "gold",
-    year: "2018",
-    title: "Mr. Mumbai",
-    placement: "Gold Medal",
-    size: "sm",
-    heightOffset: "h-36",
+    ribbonHeight: "h-28",
     swayDuration: "5.4s",
-    swayDelay: "-1.6s",
+    swayDelay: "-0.6s",
+    achievements: [
+      { year: "2018", result: "IFBB Diamond Cup — Gold Medal" },
+      { year: "2019", result: "IFBB Diamond Cup — Bronze Medal" },
+      { year: "2022", result: "Mr. Universe — Bronze Medal" },
+    ],
   },
+  // 🏆 Mr. India Medal
   {
-    id: "city-6",
+    id: "india-medal",
+    category: "india",
+    type: "gold",
+    title: "Mr. India Placements",
+    size: "md",
+    ribbonHeight: "h-32",
+    swayDuration: "4.8s",
+    swayDelay: "-1.7s",
+    achievements: [
+      { year: "2017", result: "Gold Medal" },
+      { year: "2018", result: "Bronze Medal" },
+      { year: "2024", result: "Bronze Medal" },
+    ],
+  },
+  // 🏆 Mr. Maharashtra Medal
+  {
+    id: "state-medal",
+    category: "state",
+    type: "gold",
+    title: "Mr. Maharashtra Placements",
+    size: "md",
+    ribbonHeight: "h-26",
+    swayDuration: "5.8s",
+    swayDelay: "-2.3s",
+    achievements: [
+      { year: "2015", result: "Silver Medal" },
+      { year: "2016", result: "Bronze Medal" },
+      { year: "2017", result: "Gold Medal" },
+      { year: "2019", result: "Gold Medal" },
+      { year: "2024", result: "Gold Medal" },
+      { year: "2025", result: "Masters Silver" },
+    ],
+  },
+  // 🏆 Mr. Mumbai Medal
+  {
+    id: "city-medal",
     category: "city",
     type: "gold",
-    year: "2019",
-    title: "Mr. Mumbai",
-    placement: "Gold Medal",
-    size: "sm",
-    heightOffset: "h-32",
-    swayDuration: "5.9s",
-    swayDelay: "-2.4s",
+    title: "Mr. Mumbai Placements",
+    size: "md",
+    ribbonHeight: "h-30",
+    swayDuration: "4.5s",
+    swayDelay: "-0.9s",
+    achievements: [
+      { year: "2009", result: "Navodit Gold Medal" },
+      { year: "2015", result: "Gold Medal" },
+      { year: "2016", result: "Gold Medal" },
+      { year: "2017", result: "Gold Medal" },
+      { year: "2018", result: "Gold Medal" },
+      { year: "2019", result: "Gold Medal" },
+      { year: "2021", result: "Gold Medal" },
+      { year: "2025", result: "Masters Gold" },
+    ],
   },
+  // 🎖️ Maharashtra Khel Ratna Medal
   {
-    id: "city-7",
-    category: "city",
-    type: "gold",
-    year: "2021",
-    title: "Mr. Mumbai",
-    placement: "Gold Medal",
-    size: "sm",
-    heightOffset: "h-38",
-    swayDuration: "4.3s",
-    swayDelay: "-1.9s",
-  },
-  {
-    id: "city-8",
-    category: "city",
-    type: "gold",
-    year: "2025",
-    title: "Mr. Mumbai",
-    placement: "Masters Gold",
-    size: "sm",
-    heightOffset: "h-34",
-    swayDuration: "5.1s",
-    swayDelay: "-0.2s",
+    id: "khel-ratna",
+    category: "khel-ratna",
+    type: "special",
+    title: "Khel Ratna Honor",
+    size: "lg",
+    ribbonHeight: "h-28",
+    swayDuration: "6.2s",
+    swayDelay: "-1.2s",
+    achievements: [
+      { year: "2021", result: "Maharashtra Khel Ratna Award — State Athletic Honor" },
+    ],
   },
 ];
 
@@ -288,339 +131,200 @@ export function FounderBrand() {
     }
   };
 
-  const getMedalCategoryName = (cat: string) => {
-    switch (cat) {
-      case "intl": return "International";
-      case "india": return "Mr. India";
-      case "state": return "Mr. Maharashtra";
-      case "city": return "Mr. Mumbai";
-      default: return "";
-    }
-  };
-
-  const getMedalIcon = (type: string) => {
-    switch (type) {
-      case "gold":
-        return <Trophy className="text-[#D4A537] w-6 h-6 shrink-0" />;
-      case "silver":
-        return <Award className="text-[#C8CDD2] w-6 h-6 shrink-0" />;
-      case "bronze":
-        return <Medal className="text-[#B87333] w-6 h-6 shrink-0" />;
-      default:
-        return <StarIcon className="text-gym-gold w-8 h-8 shrink-0" />;
-    }
-  };
-
-  // Helper icons
-  const StarIcon = (props: React.SVGProps<SVGSVGElement>) => (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" {...props}>
-      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-    </svg>
-  );
-
   return (
-    <section 
-      id="founder" 
-      className="scroll-mt-24 md:scroll-mt-28 relative overflow-hidden select-none"
-      onClick={() => setActiveMedalId(null)}
-    >
-      {/* 1. STAGE HERO BACKGROUND LAYER */}
-      <div 
-        className="absolute inset-0 z-0 bg-no-repeat bg-cover bg-center filter brightness-[35%] contrast-110"
-        style={{
-          backgroundImage: "linear-gradient(to bottom, rgba(26, 18, 16, 0.95) 0%, rgba(26, 18, 16, 0.8) 50%, rgba(26, 18, 16, 0.98) 100%), url('/jagesh_stage.jpg')",
-          backgroundPosition: "center 30%",
-        }}
-      />
-      <div className="absolute inset-0 z-0 bg-[#1A1210]/60 pointer-events-none" />
-
-      {/* STARK GRID DETAIL */}
-      <div className="absolute inset-0 z-0 grid-bg-overlay opacity-15 pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-6 py-24 md:py-32 relative z-10">
+    <div onClick={() => setActiveMedalId(null)}>
+      {/* ──────── 1. FOUNDER INTRO MOMENT (SCROLL-TRIGGERED 2-BEAT) ──────── */}
+      <section className="relative min-h-[90vh] flex flex-col justify-center items-center overflow-hidden bg-[#1A1210] select-none">
         
-        {/* SECTION HEADER */}
-        <div className="text-center md:text-left mb-16 border-b border-[#5C1F27]/30 pb-10">
-          <span className="font-sans text-xs uppercase tracking-[0.2em] text-[#EF9F27] font-semibold">
-            Founder & Head Coach
-          </span>
-          <h2 className="font-bebas text-5xl md:text-8xl text-[#F2EFE9] uppercase tracking-wider mt-2">
-            Jagesh Pitaji Dait
-          </h2>
-          <p className="font-sans text-xs text-[#EF9F27] uppercase tracking-[0.25em] mt-2 font-bold">
-            3-Time Mr. India Medalist • 8-Time Mr. Mumbai Champion • 6-Time Mr. Maharashtra Medalist
-          </p>
-        </div>
-
-        {/* PROFILE CONTENT GRID */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start mb-24">
-          
-          {/* Left Column: Visual Portfolio */}
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
+        {/* BEAT 1 BACKGROUND: Group Podium Stage Photo */}
+        <div 
+          className="absolute inset-0 z-0 bg-cover bg-center transition-opacity duration-1000"
+          style={{
+            backgroundImage: "linear-gradient(to bottom, rgba(26, 18, 16, 0.85) 0%, rgba(26, 18, 16, 0.7) 50%, rgba(26, 18, 16, 0.95) 100%), url('/jagesh_stage.jpg')",
+            backgroundPosition: "center 30%",
+          }}
+        />
+        
+        {/* Intro Tagline & Name Fades */}
+        <div className="relative z-10 text-center max-w-4xl px-6">
+          <motion.span 
+            initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="lg:col-span-5 grid grid-cols-2 gap-4"
+            className="font-sans text-xs uppercase tracking-[0.25em] text-[#EF9F27] font-bold"
           >
-            <div className="relative aspect-[3/4] border-2 border-gym-gold bg-[#3D141B] overflow-hidden group shadow-lg">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/jagesh_flag.jpg"
-                alt="Jagesh Dait representing India"
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-102"
-              />
-              <div className="absolute bottom-3 left-3 z-20 bg-[#1A1210] border border-gym-gold px-3 py-1 font-sans text-[9px] uppercase text-[#EF9F27] tracking-widest font-semibold">
-                International Tier
-              </div>
-            </div>
+            Founder & Head Coach
+          </motion.span>
 
-            <div className="relative aspect-[3/4] border-2 border-gym-gold bg-[#3D141B] overflow-hidden group shadow-lg mt-8 lg:mt-12">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/jagesh_stage.jpg"
-                alt="Jagesh Dait on stage"
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-102"
-              />
-              <div className="absolute bottom-3 left-3 z-20 bg-[#1A1210] border border-gym-gold px-3 py-1 font-sans text-[9px] uppercase text-[#EF9F27] tracking-widest font-semibold">
-                Championship Stage
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Right Column: Bio & Narrative */}
-          <motion.div 
+          <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
-            className="lg:col-span-7 flex flex-col justify-center text-left"
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.25 }}
+            className="font-bebas text-6xl md:text-9xl text-[#F2EFE9] tracking-wider mt-3 uppercase"
           >
-            <h3 className="font-bebas text-3xl md:text-4xl text-[#F2EFE9] uppercase tracking-wider mb-6">
-              The Face of Kourage
-            </h3>
-            
-            <p className="font-inter text-base text-[#F2EFE9]/80 leading-relaxed mb-8">
-              With over 15 years of competitive bodybuilding at the highest national and international tiers, Jagesh Pitaji Dait is the driving force behind Kourage Fitness. His vision was to establish an elite training facility in Mulund West that provides structured coaching protocols, customized athletic nutrition, and standard layouts for dedicated lifters.
-            </p>
+            Jagesh Pitaji Dait
+          </motion.h2>
 
-            <div className="border-l-4 border-gym-gold pl-6 py-2 my-2 bg-[#3D141B]/40 mb-8 pr-4">
-              <p className="font-inter text-sm italic text-[#F2EFE9]/90 leading-relaxed">
-                &ldquo;Bodybuilding is not just physical transformation; it is the ultimate test of mental structure. Every medal on the wall represents a victory over self-doubt, fatigue, and compromise. That is the standard we teach at Kourage.&rdquo;
-              </p>
-              <span className="block font-sans text-[10px] text-[#EF9F27] uppercase tracking-wider mt-2 font-bold">— Jagesh Pitaji Dait</span>
-            </div>
-          </motion.div>
-
+          <motion.p 
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
+            className="font-sans text-sm md:text-base text-[#F2EFE9]/85 tracking-[0.18em] mt-6 font-semibold uppercase max-w-2xl mx-auto border-t border-[#5C1F27]/40 pt-4"
+          >
+            This is the face of Kourage. Champion Athlete, Elite Trainer, Builder of Legacies.
+          </motion.p>
         </div>
+      </section>
 
-        {/* ──────── 2. TROPHY WALL INTERACTIVE MEDAL BLOCK ──────── */}
-        <div className="relative border border-[#5C1F27]/30 bg-[#1A1210] p-8 md:p-12 shadow-2xl overflow-hidden rounded">
+      {/* ──────── 2. CONTINUED SCROLL: STORY & BIOGRAPHY (SOLO PHOTO TRANSITION) ──────── */}
+      <section className="relative py-24 bg-[#1A1210] border-t border-[#5C1F27]/30 select-none">
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            
+            {/* Solo Photo Fades in on scroll */}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.96 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.9, ease: "easeOut" }}
+              className="lg:col-span-5 flex justify-center"
+            >
+              <div className="relative aspect-[3/4] w-full max-w-[380px] border-2 border-gym-gold bg-[#3D141B] overflow-hidden group shadow-2xl">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/jagesh_flag.jpg"
+                  alt="Jagesh Dait competitive journey"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-103"
+                />
+                <div className="absolute bottom-4 left-4 z-20 bg-[#1A1210] border border-gym-gold px-4 py-1.5 font-sans text-[10px] uppercase text-[#EF9F27] tracking-widest font-bold">
+                  International Athlete
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Biography Copy */}
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
+              className="lg:col-span-7 flex flex-col justify-center text-left"
+            >
+              <span className="font-sans text-xs uppercase tracking-widest text-[#EF9F27] font-bold">
+                The Competitive Arc
+              </span>
+              <h3 className="font-bebas text-4xl md:text-5xl text-[#F2EFE9] uppercase tracking-wider mt-2 mb-6">
+                Championship Journey
+              </h3>
+              
+              <p className="font-inter text-base text-[#F2EFE9]/80 leading-relaxed mb-6">
+                With over 15 years of competitive bodybuilding, Jagesh Pitaji Dait has established a reputation for structured elite training. As the head coach of Kourage Fitness, Jagesh translates international championship protocols into result-driven routines for dedicated lifters.
+              </p>
+
+              <p className="font-inter text-sm md:text-base text-gym-white/70 leading-relaxed mb-8">
+                His training philosophy is based on meticulous discipline, custom nutrition modeling, and advanced lifting biomechanics. By eliminating standard gym templates, he focuses strictly on structural transformations.
+              </p>
+
+              <div className="border-l-4 border-gym-gold pl-6 py-2 bg-[#3D141B]/40 pr-4">
+                <p className="font-inter text-sm italic text-[#F2EFE9]/95 leading-relaxed">
+                  &ldquo;Every placement on the stage is a byproduct of execution. At Kourage, we do not ask for motivation — we build structural discipline.&rdquo;
+                </p>
+                <span className="block font-sans text-[10px] text-[#EF9F27] uppercase tracking-wider mt-2 font-bold">— Jagesh Pitaji Dait</span>
+              </div>
+            </motion.div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ──────── 3. INTERACTIVE TROPHY WALL SECTION ──────── */}
+      <section 
+        id="founder" 
+        className="scroll-mt-24 md:scroll-mt-28 py-24 md:py-32 bg-[#1A1210] border-t border-[#5C1F27]/30 relative overflow-hidden select-none"
+      >
+        {/* ATMOSPHERIC BACKGROUND LAYER: Heavily darkened & blurred SOLO photo */}
+        <div 
+          className="absolute inset-0 z-0 bg-no-repeat bg-cover bg-center filter blur-3xl brightness-[15%] opacity-35"
+          style={{
+            backgroundImage: "url('/jagesh_flag.jpg')",
+          }}
+        />
+
+        {/* BACKGROUND BLUR LAYER: ONLY triggers behind the medals when one is selected */}
+        <div 
+          className={`absolute inset-0 z-10 transition-all duration-500 bg-black/45 ${
+            activeMedalId ? "backdrop-blur-md" : "backdrop-blur-none pointer-events-none"
+          }`} 
+        />
+
+        <div className="max-w-7xl mx-auto px-6 relative z-20">
           
-          {/* MEDAL WALL TEXTURED BLURRED BACKDROP FOR REAL DEPTH */}
-          <div 
-            className="absolute inset-0 z-0 opacity-15 filter blur-2xl saturate-50 contrast-125 pointer-events-none scale-110"
-            style={{
-              backgroundImage: "radial-gradient(circle at center, rgba(107, 27, 35, 0.25) 0%, rgba(26, 18, 16, 0.98) 100%), url('/jagesh_flag.jpg')",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-          />
-          <div className="absolute inset-0 z-0 bg-[#1a1210]/40 pointer-events-none" />
-
-          {/* ACTIVE MEDAL INTERACT OVERLAY LAYER */}
-          {activeMedalId && (
-            <div className="absolute inset-0 z-30 bg-black/55 backdrop-blur-md transition-all duration-300 pointer-events-auto" />
-          )}
-
-          <div className="relative z-10 text-center mb-16">
-            <span className="font-sans text-xs uppercase tracking-widest text-[#EF9F27] font-semibold">
+          <div className="text-center mb-16">
+            <span className="font-sans text-xs uppercase tracking-widest text-[#EF9F27] font-bold">
               Interactive Trophy Wall
             </span>
-            <h3 className="font-bebas text-3xl md:text-5xl text-[#F2EFE9] uppercase tracking-wider mt-2">
+            <h3 className="font-bebas text-4xl md:text-6xl text-[#F2EFE9] uppercase tracking-wider mt-2">
               Career Placements
             </h3>
-            <p className="font-sans text-[10px] text-gym-white/40 uppercase tracking-widest mt-1">
-              Tap any hanging medal to inspect placement details
+            <p className="font-sans text-[10px] text-gym-white/40 uppercase tracking-widest mt-2">
+              Tap any hanging medal to inspect details in the display placard
             </p>
           </div>
 
-          {/* MEDALS RACK DISPLAY LAYOUT */}
-          {/* DESKTOP ROW VIEWPORT */}
-          <div className="hidden lg:grid grid-cols-4 gap-8 relative z-20 min-h-[480px] px-4 items-start">
+          {/* HANGING MEDALS RACK DISPLAY LAYOUT */}
+          {/* DESKTOP FLEX VIEWPORT: 3 on primary row, 4th and Khel Ratna centered on second row */}
+          <div className="hidden lg:flex flex-wrap justify-center gap-16 max-w-5xl mx-auto min-h-[460px] px-4 py-8 relative">
             
-            {/* International Cluster */}
-            <div className="flex flex-col items-center">
-              <h4 className="font-sans text-[10px] uppercase text-gym-white/40 tracking-[0.2em] font-bold border-b border-[#5C1F27]/30 pb-2 mb-6 w-full text-center">
-                International
-              </h4>
-              <div className="flex gap-8 justify-center w-full min-h-[350px]">
-                {medalsList.filter(m => m.category === "intl").map((medal) => (
-                  <MedalItem 
-                    key={medal.id} 
-                    medal={medal} 
-                    activeMedalId={activeMedalId} 
-                    onMedalClick={handleMedalClick}
-                    prefersReducedMotion={prefersReducedMotion}
-                  />
-                ))}
-              </div>
+            {/* Row 1 Medals */}
+            <div className="w-full flex justify-center gap-16 mb-8">
+              {categoryMedals.slice(0, 3).map((medal) => (
+                <MedalItem 
+                  key={medal.id}
+                  medal={medal}
+                  activeMedalId={activeMedalId}
+                  onMedalClick={handleMedalClick}
+                  prefersReducedMotion={prefersReducedMotion}
+                />
+              ))}
             </div>
 
-            {/* Mr. India Cluster */}
-            <div className="flex flex-col items-center">
-              <h4 className="font-sans text-[10px] uppercase text-gym-white/40 tracking-[0.2em] font-bold border-b border-[#5C1F27]/30 pb-2 mb-6 w-full text-center">
-                Mr. India
-              </h4>
-              <div className="flex gap-8 justify-center w-full min-h-[350px]">
-                {medalsList.filter(m => m.category === "india").map((medal) => (
-                  <MedalItem 
-                    key={medal.id} 
-                    medal={medal} 
-                    activeMedalId={activeMedalId} 
-                    onMedalClick={handleMedalClick}
-                    prefersReducedMotion={prefersReducedMotion}
-                  />
-                ))}
-              </div>
-            </div>
-
-            {/* Mr. Maharashtra Cluster */}
-            <div className="flex flex-col items-center">
-              <h4 className="font-sans text-[10px] uppercase text-gym-white/40 tracking-[0.2em] font-bold border-b border-[#5C1F27]/30 pb-2 mb-6 w-full text-center">
-                Mr. Maharashtra
-              </h4>
-              <div className="flex gap-6 justify-center w-full min-h-[350px] flex-wrap">
-                {medalsList.filter(m => m.category === "state").map((medal) => (
-                  <MedalItem 
-                    key={medal.id} 
-                    medal={medal} 
-                    activeMedalId={activeMedalId} 
-                    onMedalClick={handleMedalClick}
-                    prefersReducedMotion={prefersReducedMotion}
-                  />
-                ))}
-              </div>
-            </div>
-
-            {/* Mr. Mumbai Cluster */}
-            <div className="flex flex-col items-center">
-              <h4 className="font-sans text-[10px] uppercase text-gym-white/40 tracking-[0.2em] font-bold border-b border-[#5C1F27]/30 pb-2 mb-6 w-full text-center">
-                Mr. Mumbai
-              </h4>
-              <div className="flex gap-4 justify-center w-full min-h-[350px] flex-wrap">
-                {medalsList.filter(m => m.category === "city").map((medal) => (
-                  <MedalItem 
-                    key={medal.id} 
-                    medal={medal} 
-                    activeMedalId={activeMedalId} 
-                    onMedalClick={handleMedalClick}
-                    prefersReducedMotion={prefersReducedMotion}
-                  />
-                ))}
-              </div>
+            {/* Row 2 Medals (Centered Mr. Mumbai and Khel Ratna Hero) */}
+            <div className="w-full flex justify-center gap-16">
+              {categoryMedals.slice(3, 5).map((medal) => (
+                <MedalItem 
+                  key={medal.id}
+                  medal={medal}
+                  activeMedalId={activeMedalId}
+                  onMedalClick={handleMedalClick}
+                  prefersReducedMotion={prefersReducedMotion}
+                />
+              ))}
             </div>
 
           </div>
 
-          {/* MOBILE SCROLLABLE RACK (2 MAX PER ROW) */}
-          <div className="lg:hidden grid grid-cols-2 gap-y-16 gap-x-6 relative z-20 px-2 justify-items-center">
-            {medalsList.map((medal) => (
+          {/* MOBILE SCROLLABLE RACK: Vertical layout, max 2 per row */}
+          <div className="lg:hidden grid grid-cols-2 gap-y-16 gap-x-6 justify-items-center relative">
+            {categoryMedals.map((medal) => (
               <MedalItem 
-                key={medal.id} 
-                medal={medal} 
-                activeMedalId={activeMedalId} 
+                key={medal.id}
+                medal={medal}
+                activeMedalId={activeMedalId}
                 onMedalClick={handleMedalClick}
                 prefersReducedMotion={prefersReducedMotion}
               />
             ))}
           </div>
 
-          {/* 🏅 MAHARASHTRA KHEL RATNA HERO SPOTLIGHT MEDAL (Centered / Larger / Separate) */}
-          <div className="mt-20 border-t border-[#5C1F27]/30 pt-16 flex flex-col items-center relative z-20">
-            <span className="font-sans text-[10px] uppercase text-[#EF9F27] tracking-[0.25em] font-bold mb-4">
-              State Honor Recognition
-            </span>
-            
-            <div className="relative">
-              <motion.div
-                whileHover={prefersReducedMotion ? {} : { scale: 1.05, y: -4 }}
-                onClick={(e) => handleMedalClick("khel-ratna", e)}
-                className={`relative cursor-pointer transition-all duration-300 ${
-                  activeMedalId === "khel-ratna" ? "z-40" : "hover:shadow-[0_0_20px_rgba(212,165,55,0.15)]"
-                }`}
-                style={{ perspective: 1000 }}
-              >
-                {/* 3D Inner Wrapper */}
-                <div
-                  className="relative transition-transform duration-600 ease-out"
-                  style={{
-                    transformStyle: "preserve-3d",
-                    transform: activeMedalId === "khel-ratna" ? "rotateY(180deg)" : "rotateY(0deg)",
-                  }}
-                >
-                  {/* FRONT FACE (Hanging Khel Ratna Shield) */}
-                  <div 
-                    className="flex flex-col items-center select-none"
-                    style={{ backfaceVisibility: "hidden" }}
-                  >
-                    {/* Ribbon */}
-                    <div className="w-10 h-24 bg-gradient-to-r from-[#6B1B23] via-[#EF9F27] to-[#6B1B23] relative flex items-center justify-center shadow-lg">
-                      <div className="w-1.5 h-full bg-[#EF9F27]" />
-                    </div>
-                    {/* Medal disc */}
-                    <div 
-                      className="w-24 h-24 rounded-full bg-gradient-to-br from-[#F2D67C] via-[#D4A537] to-[#8A6A1E] flex items-center justify-center border-4 border-[#EF9F27] shadow-[0_10px_20px_rgba(0,0,0,0.5)] -mt-1 relative"
-                      style={{
-                        boxShadow: "inset 0 0 15px rgba(255,255,255,0.4), 0 10px 25px rgba(0,0,0,0.6)"
-                      }}
-                    >
-                      <div className="w-18 h-18 rounded-full border border-dashed border-[#8A6A1E]/40 flex items-center justify-center">
-                        <StarIcon className="text-[#8A6A1E]/80 w-10 h-10 animate-pulse" />
-                      </div>
-                    </div>
-                    <span className="font-sans text-[9px] uppercase text-[#F3EDE4] tracking-widest mt-3 font-semibold">
-                      Khel Ratna Award
-                    </span>
-                  </div>
-
-                  {/* BACK FACE (Details display) */}
-                  <div
-                    className="absolute top-0 left-1/2 -translate-x-1/2 w-64 p-6 bg-[#1A1210] border-2 border-gym-gold rounded shadow-2xl flex flex-col justify-center items-center text-center select-none"
-                    style={{
-                      backfaceVisibility: "hidden",
-                      transform: "rotateY(180deg) translate(50%, 0)",
-                      minHeight: "190px"
-                    }}
-                  >
-                    <StarIcon className="text-[#D4A537] w-8 h-8 mb-3" />
-                    <span className="font-sans text-[9px] uppercase text-gym-white/40 tracking-widest">
-                      State Sports Honor
-                    </span>
-                    <h4 
-                      className="text-2xl text-[#EF9F27] uppercase tracking-wide mt-1.5 mb-1"
-                      style={{ fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 800 }}
-                    >
-                      Khel Ratna Award
-                    </h4>
-                    <p className="font-sans text-[11px] uppercase tracking-widest text-[#F3EDE4] font-medium">
-                      2021 Recognition
-                    </p>
-                    <p className="font-inter text-[10px] text-gym-white/60 leading-normal mt-3 max-w-[200px]">
-                      Highest official athletic recognition award presented by Maharashtra State Govt.
-                    </p>
-                  </div>
-
-                </div>
-              </motion.div>
-            </div>
-
-          </div>
-
         </div>
+      </section>
 
-        {/* ──────── 3. MENTOR / COACH LEGACY SUBSECTION ──────── */}
-        <div className="mt-24 border-t-2 border-[#5C1F27]/30 pt-24">
+      {/* ──────── 4. MENTOR / COACH LEGACY SUBSECTION ──────── */}
+      <section className="relative py-24 bg-[#1A1210] border-t border-[#5C1F27]/30 select-none">
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             
             {/* Left side: Copy */}
@@ -631,7 +335,7 @@ export function FounderBrand() {
               transition={{ duration: 0.8 }}
               className="lg:col-span-7 text-left"
             >
-              <span className="font-sans text-xs uppercase tracking-widest text-[#EF9F27] font-semibold">
+              <span className="font-sans text-xs uppercase tracking-widest text-[#EF9F27] font-bold">
                 The Mentor&apos;s Legacy
               </span>
               <h3 className="font-bebas text-4xl md:text-5xl text-[#F2EFE9] uppercase tracking-wider mt-2 mb-6">
@@ -690,17 +394,16 @@ export function FounderBrand() {
 
           </div>
         </div>
-
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }
 
 // ──────────────────────────────────────────────────────────────────────────
-// SUB-COMPONENT: INDIVIDUAL HANGING MEDAL
+// SUB-COMPONENT: INDIVIDUAL HANGING MEDAL WITH 3D SHADING & EMBOSSING
 // ──────────────────────────────────────────────────────────────────────────
 interface MedalItemProps {
-  medal: MedalData;
+  medal: CategoryMedal;
   activeMedalId: string | null;
   onMedalClick: (id: string, e: React.MouseEvent) => void;
   prefersReducedMotion: boolean;
@@ -711,29 +414,33 @@ function MedalItem({ medal, activeMedalId, onMedalClick, prefersReducedMotion }:
   const isDimmed = activeMedalId !== null && activeMedalId !== medal.id;
 
   const getMedalClass = (type: string, size: string) => {
-    let sizeClass = "w-14 h-14 border-4";
-    if (size === "md") sizeClass = "w-16 h-16 border-4";
-    if (size === "lg") sizeClass = "w-20 h-20 border-[5px]";
+    let sizeClass = "w-14 h-14 border-2";
+    if (size === "md") sizeClass = "w-16 h-16 border-2";
+    if (size === "lg") sizeClass = "w-20 h-20 border-4";
 
     let gradientClass = "from-[#F2D67C] via-[#D4A537] to-[#8A6A1E] border-[#EF9F27]";
     if (type === "silver") {
       gradientClass = "from-[#F5F7F8] via-[#C8CDD2] to-[#7D8489] border-[#C8CDD2]";
     } else if (type === "bronze") {
       gradientClass = "from-[#E0A472] via-[#B87333] to-[#6B4321] border-[#B87333]";
+    } else if (type === "special") {
+      gradientClass = "from-[#F2D67C] via-[#D4A537] to-[#8A6A1E] border-[#EF9F27]";
     }
 
     return `${sizeClass} bg-gradient-to-br ${gradientClass}`;
   };
 
-  const getCategoryTitle = (cat: string) => {
-    switch (cat) {
-      case "intl": return "Int'l Placement";
-      case "india": return "Mr. India";
-      case "state": return "Mr. Maharashtra";
-      case "city": return "Mr. Mumbai";
-      default: return "";
-    }
-  };
+  const PhysiqueEmblem = () => (
+    <svg 
+      xmlns="http://www.w3.org/2000/svg" 
+      viewBox="0 0 24 24" 
+      fill="currentColor" 
+      className="w-7 h-7 text-[#1A1210]/60 filter drop-shadow-[1px_1px_1px_rgba(255,255,255,0.2)]"
+    >
+      <path d="M12 2a4 4 0 0 0-4 4v.27c-1.16.84-2 2.2-2 3.73v1.5a1.5 1.5 0 0 0 1.5 1.5h.5v5c0 1.1.9 2 2 2h4c1.1 0 2-.9 2-2v-5h.5a1.5 1.5 0 0 0 1.5-1.5v-1.5c0-1.53-.84-2.89-2-3.73V6a4 4 0 0 0-4-4z" />
+      <path d="M7 21h10v1H7z" />
+    </svg>
+  );
 
   return (
     <div 
@@ -741,9 +448,9 @@ function MedalItem({ medal, activeMedalId, onMedalClick, prefersReducedMotion }:
         isFlipped ? "z-40" : isDimmed ? "opacity-35 pointer-events-none scale-95" : "hover:scale-105"
       }`}
       style={{ 
-        perspective: 1000, 
-        minHeight: "220px",
-        width: medal.size === "sm" ? "70px" : "90px"
+        perspective: 1200, 
+        minHeight: "240px",
+        width: medal.size === "lg" ? "110px" : "90px"
       }}
     >
       {/* 3D Card Inner container */}
@@ -752,8 +459,14 @@ function MedalItem({ medal, activeMedalId, onMedalClick, prefersReducedMotion }:
         className="w-full relative cursor-pointer"
         style={{
           transformStyle: "preserve-3d",
-          transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)",
-          transition: "transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)"
+          transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)"
+        }}
+        transition={prefersReducedMotion ? { duration: 0.3 } : {
+          type: "spring",
+          stiffness: 140,
+          damping: 18,
+          mass: 1.1,
+          restDelta: 0.001
         }}
       >
         {/* FRONT FACE (Medal hanging from the cord) */}
@@ -768,68 +481,97 @@ function MedalItem({ medal, activeMedalId, onMedalClick, prefersReducedMotion }:
           }}
         >
           {/* Hanging Ribbon Cord (Maroon with central Gold pinstripe) */}
-          <div className={`w-4 ${medal.heightOffset} bg-[#6B1B23] relative flex justify-center shadow-md`}>
-            {/* Gold central stripe */}
+          <div className={`w-4.5 ${medal.ribbonHeight} bg-[#6B1B23] relative flex justify-center shadow-lg`}>
+            {/* Gold central pinstripe */}
             <div className="w-0.5 h-full bg-[#EF9F27]" />
           </div>
 
-          {/* Medal Disc */}
+          {/* Medal Disc with Embossed Depth & Rim Shading */}
           <div 
-            className={`rounded-full flex items-center justify-center shadow-lg -mt-1 relative`}
+            className="rounded-full flex items-center justify-center -mt-1 relative"
             style={{
-              boxShadow: "inset 0 0 10px rgba(255,255,255,0.3), 0 4px 10px rgba(0,0,0,0.5)"
+              boxShadow: "inset 1px 1px 3px rgba(255,255,255,0.45), inset -2px -2px 5px rgba(0,0,0,0.65), 0 12px 24px rgba(0,0,0,0.65)"
             }}
           >
-            <div className={`${getMedalClass(medal.type, medal.size)} rounded-full flex items-center justify-center`}>
-              <div className="w-full h-full rounded-full border border-dashed border-black/20 flex items-center justify-center">
-                <span className="font-bebas text-xs text-black/40 font-bold">{medal.year}</span>
+            <div className={`${getMedalClass(medal.type, medal.size)} rounded-full flex items-center justify-center relative overflow-hidden`}>
+              {/* Highlight Glare Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/15 to-transparent -translate-x-full rotate-45 animate-shimmer" style={{ animationDuration: "5s" }} />
+              
+              {/* Inner Embossed Circle Rim */}
+              <div className="w-[90%] h-[90%] rounded-full border border-black/15 border-dashed flex items-center justify-center shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)]">
+                {medal.type === "special" ? (
+                  <Star className="w-9 h-9 text-[#1A1210]/60 filter drop-shadow-[1px_1px_1px_rgba(255,255,255,0.25)]" />
+                ) : (
+                  <PhysiqueEmblem />
+                )}
               </div>
             </div>
           </div>
           
-          <span className="font-sans text-[8px] uppercase tracking-wider text-[#F3EDE4]/50 mt-2 font-medium text-center truncate w-full">
-            {medal.year} {medal.type === "gold" ? "Gold" : medal.type === "silver" ? "Silver" : "Bronze"}
+          <span className="font-sans text-[8px] uppercase tracking-[0.15em] text-[#F3EDE4]/55 mt-3 font-semibold text-center truncate w-full">
+            {medal.category === "khel-ratna" ? "Khel Ratna" : medal.category === "intl" ? "International" : medal.title.replace(" Placements", "")}
           </span>
         </div>
 
         {/* BACK FACE (Informational Stamped Plaque) */}
         <div
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-48 p-4 bg-[#1A1210] border-2 border-gym-gold rounded shadow-2xl flex flex-col justify-center items-center text-center select-none"
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-64 p-6 bg-[#0D0A0A] border-2 border-gym-gold shadow-2xl flex flex-col justify-center items-center text-center select-none"
           style={{
             backfaceVisibility: "hidden",
             transform: "rotateY(180deg) translate(50%, 0)",
-            minHeight: "150px"
+            minHeight: "190px",
+            boxShadow: "inset 0 0 15px rgba(212,165,55,0.1), 0 15px 30px rgba(0,0,0,0.85)"
           }}
         >
-          {/* Close affords for mobile */}
+          {/* Close affordance for mobile */}
           <button 
-            className="absolute top-2 right-2 text-gym-white/40 hover:text-gym-gold md:hidden"
+            className="absolute top-3 right-3 text-gym-white/40 hover:text-gym-gold md:hidden"
             onClick={(e) => {
               e.stopPropagation();
               onMedalClick(medal.id, e as any);
             }}
           >
-            <X size={12} />
+            <X size={14} />
           </button>
           
-          <span className="font-sans text-[8px] uppercase text-gym-white/45 tracking-widest mb-1.5 font-bold">
-            {getCategoryTitle(medal.category)}
+          <span className="font-sans text-[9px] uppercase text-gym-white/45 tracking-widest mb-3 font-bold">
+            {medal.category === "khel-ratna" ? "State Honor" : "Medal achievements"}
           </span>
+          
           <h4 
-            className="text-xl text-[#EF9F27] uppercase tracking-wide leading-tight"
+            className="text-2xl text-[#EF9F27] uppercase tracking-wide leading-tight mb-4"
             style={{ fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 800 }}
           >
             {medal.title}
           </h4>
-          <p className="font-sans text-[10px] uppercase tracking-wider text-[#F3EDE4] mt-2 font-semibold border border-gym-gold/25 px-2 py-0.5 bg-[#3D141B]/35">
-            {medal.placement}
-          </p>
-          <span className="font-sans text-[9px] text-[#F3EDE4]/50 mt-2 tracking-widest uppercase font-semibold">
-            {medal.year} Champion
-          </span>
+
+          {/* Centered Achievement List with Generous Spacing */}
+          <div className="w-full flex flex-col gap-2.5 items-center justify-center border-t border-[#5C1F27]/30 pt-4">
+            {medal.achievements.map((ach, i) => (
+              <div 
+                key={i} 
+                className="flex items-center justify-center gap-2 font-sans text-[11px] uppercase tracking-wider text-[#F3EDE4]"
+              >
+                <span className="text-[#EF9F27] font-serif font-extrabold">{ach.year}</span>
+                <span className="text-gym-white/50">—</span>
+                <span className="font-medium text-gym-white/80">{ach.result}</span>
+              </div>
+            ))}
+          </div>
         </div>
 
       </motion.div>
+      
+      {/* Shimmer animation support inside global CSS styles */}
+      <style jsx global>{`
+        @keyframes shimmer {
+          0% { transform: translate(-100%, -100%) rotate(45deg); }
+          100% { transform: translate(100%, 100%) rotate(45deg); }
+        }
+        .animate-shimmer {
+          animation: shimmer 6s infinite linear;
+        }
+      `}</style>
 
     </div>
   );
