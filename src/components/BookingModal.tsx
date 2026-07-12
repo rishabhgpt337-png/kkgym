@@ -53,6 +53,7 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.95, opacity: 0, y: 20 }}
             transition={{ type: "spring", duration: 0.4 }}
+            data-lenis-prevent
             className="relative w-full max-w-md border-2 border-gym-gold bg-gym-black p-8 select-none z-10 text-gym-white"
           >
             {/* Close button */}

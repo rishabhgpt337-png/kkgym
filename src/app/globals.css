@@ -70,6 +70,25 @@ body {
   animation: aurora-bg 15s linear infinite;
 }
 
+/* Lenis smooth scrolling overrides */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth html {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-left,
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
 /* Selection colors */
 ::selection {
   background-color: #EF9F27;

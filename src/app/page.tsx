@@ -2,12 +2,14 @@
 
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { useLenis } from "lenis/react";
 import AnimatedRays from "@/components/ui/animated-rays";
 import TwistingRibbon from "@/components/ui/twisting-ribbon";
 import ProgramCard from "@/components/ProgramCard";
-import WhyChooseUsScroll from "@/components/WhyChooseUsScroll";
 import SpotlightNavbar from "@/components/ui/spotlight-navbar";
 import FounderBrand from "@/components/FounderBrand";
+import AboutFeatureCard from "@/components/AboutFeatureCard";
+import Preloader from "@/components/Preloader";
 import { cn } from "@/lib/utils";
 
 // Custom SVG Icons to bypass lucide barrel-optimization SWC bugs
@@ -61,9 +63,86 @@ const X = ({ size = 24, ...props }: React.SVGProps<SVGSVGElement> & { size?: num
   </svg>
 );
 
+const galleryItems = [
+  {
+    id: 1,
+    image: "/gallery/IMG_9986.JPG.jpeg",
+    title: "Biomechanical Leg Press",
+    zone: "STRENGTH ZONE",
+    desc: "Engineered for maximum quad isolation, hamstring loading, and lower body power development.",
+  },
+  {
+    id: 2,
+    image: "/gallery/IMG_9987.JPG.jpeg",
+    title: "Precision Smith Machine",
+    zone: "BARBELL ZONE",
+    desc: "Controlled vertical bar tracking for ultra-safe squats, presses, and athletic lunges.",
+  },
+  {
+    id: 3,
+    image: "/gallery/IMG_9990.JPG.jpeg",
+    title: "Pro Dumbbell Station",
+    zone: "FREE WEIGHT ZONE",
+    desc: "Premium calibrated dumbbells ranging up to elite training loads with a massive custom rack.",
+  },
+  {
+    id: 4,
+    image: "/gallery/IMG_9991.JPG.jpeg",
+    title: "Dual Cable Crossover",
+    zone: "FUNCTIONAL ZONE",
+    desc: "Multi-point pulley station offering variable resistance angles for total-body definition.",
+  },
+  {
+    id: 5,
+    image: "/gallery/IMG_9992.JPG.jpeg",
+    title: "Heavy-Duty Seated Row",
+    zone: "STRENGTH ZONE",
+    desc: "Plate-loaded leverage row featuring independent arm movements to sculpt upper back thickness.",
+  },
+  {
+    id: 6,
+    image: "/gallery/IMG_9994.JPG.jpeg",
+    title: "Commercial Treadmills",
+    zone: "CARDIO ZONE",
+    desc: "High-performance Athlon running decks with advanced shock absorption and real-time pacing.",
+  },
+  {
+    id: 7,
+    image: "/gallery/IMG_9995.JPG.jpeg",
+    title: "Aerial Yoga Studio",
+    zone: "MIND & BODY ZONE",
+    desc: "Suspended anti-gravity hammocks designed to decompress the spine and enhance core stability.",
+  },
+  {
+    id: 8,
+    image: "/gallery/IMG_9996.JPG.jpeg",
+    title: "Cardio & Conditioning Hub",
+    zone: "CARDIO ZONE",
+    desc: "Full conditioning suite with top-tier ellipticals and stepper systems for metabolic conditioning.",
+  },
+  {
+    id: 9,
+    image: "/gallery/IMG_9997.JPG.jpeg",
+    title: "Plate-Loaded Incline Press",
+    zone: "CHEST ZONE",
+    desc: "Converging leverage press designed to target the upper pectorals with optimized natural biomechanics.",
+  },
+];
+
 export default function Home() {
+  const lenis = useLenis();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [preloaderActive, setPreloaderActive] = useState(true);
+
+  // Lock smooth scroll during preloader introduction
+  useEffect(() => {
+    if (preloaderActive) {
+      lenis?.stop();
+    } else {
+      lenis?.start();
+    }
+  }, [preloaderActive, lenis]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -72,6 +151,34 @@ export default function Home() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const [gymOpen, setGymOpen] = useState(true);
+  const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    const checkGymOpen = () => {
+      const now = new Date();
+      const currentHour = now.getHours();
+      const currentMinutes = now.getMinutes();
+      const totalMinutes = currentHour * 60 + currentMinutes;
+
+      // Gym is open daily from 5:30 AM to 10:30 PM (22:30)
+      const openTime = 5 * 60 + 30;   // 330 minutes
+      const closeTime = 22 * 60 + 30; // 1350 minutes
+
+      setGymOpen(totalMinutes >= openTime && totalMinutes <= closeTime);
+    };
+
+    checkGymOpen();
+    const interval = setInterval(checkGymOpen, 30000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText("2nd Floor, B Wing, Bhagyashree Apartment, Dr Ambedkar Road, Mulund West, Mumbai 400080");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   // Gym theme color props for the TwistingRibbon
   const gymRibbonColors = {
@@ -82,42 +189,54 @@ export default function Home() {
   };
 
   const scrollToSection = (id: string, isMobileClick = false) => {
+    const target = `#${id}`;
     if (isMobileClick) {
       setMobileMenuOpen(false);
       setTimeout(() => {
-        const el = document.getElementById(id);
-        if (el) {
-          el.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
+        lenis?.scrollTo(target, { duration: 1.2 });
       }, 150);
     } else {
-      const el = document.getElementById(id);
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
+      lenis?.scrollTo(target, { duration: 1.2 });
     }
   };
 
   return (
     <div className="min-h-screen bg-gym-black font-sans text-gym-white flex flex-col relative select-none">
       
+      {/* Cinematic pre-loader intro overlay with Go Up transition */}
+      {preloaderActive && (
+        <Preloader onComplete={() => setPreloaderActive(false)} />
+      )}
+      
       {/* 1. NAV */}
       <header className={cn(
         "fixed top-0 left-0 w-full z-40 transition-all duration-500",
         scrolled
-          ? "border-b border-gym-gold/15 bg-gym-black/90 backdrop-blur-md py-4 h-20 shadow-[0_4px_30px_rgba(0,0,0,0.3)]"
-          : "border-b border-transparent bg-transparent py-6 h-24"
+          ? "border-b border-gym-gold/15 bg-gym-black/90 backdrop-blur-md py-2 h-20 sm:h-26 lg:h-32 shadow-[0_4px_30px_rgba(0,0,0,0.3)]"
+          : "border-b border-transparent bg-transparent py-4 h-24 sm:h-32 lg:h-36"
       )}>
         <div className="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
-          <a href="#" className="font-bebas text-3xl tracking-widest text-gym-white hover:text-gym-gold transition-colors">
-            KOURAGE FITNESS<span className="text-gym-gold">.</span>
+          <a 
+            href="#" 
+            onClick={(e) => {
+              e.preventDefault();
+              lenis?.scrollTo(0, { duration: 1.2 });
+            }}
+            className="flex items-center justify-start group"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img 
+              src="/logo.png" 
+              alt="Kourage Fitness Logo" 
+              className="h-16 sm:h-22 lg:h-32 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+            />
           </a>
 
           {/* Desktop Nav (Spotlight Navbar component restored) */}
           <SpotlightNavbar
             className="hidden md:flex"
             items={[
-              { label: "About", href: "#about" },
+              { label: "Gallery", href: "#gallery" },
               { label: "Founder", href: "#founder" },
               { label: "Why Us", href: "#why-us" },
               { label: "Contact", href: "#contact" },
@@ -151,7 +270,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             className="absolute top-full left-0 w-full bg-bg-primary border-b border-gym-gold/15 px-6 py-10 flex flex-col gap-6 md:hidden z-30 shadow-[0_10px_20px_rgba(239,159,39,0.03)]"
           >
-            {["About", "Founder", "Why Us", "Contact"].map((item) => {
+            {["Gallery", "Founder", "Why Us", "Contact"].map((item) => {
               const id = item.toLowerCase().replace(" ", "-");
               return (
                 <button
@@ -222,74 +341,76 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 3. ABOUT */}
-      <section id="about" className="scroll-mt-24 md:scroll-mt-28 py-24 md:py-32 border-b border-border-subtle relative bg-bg-primary">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
-          
-          {/* Left Block */}
-          <div className="lg:col-span-5 flex flex-col items-start">
-            <span className="font-sans text-xs uppercase tracking-widest text-gym-gold mb-4">
-              WHO WE ARE
+      {/* 2.5. GYM GALLERY (STATE-OF-THE-ART EQUIPMENT) */}
+      <section id="gallery" className="scroll-mt-24 md:scroll-mt-28 py-24 md:py-32 border-b border-border-subtle relative bg-bg-surface overflow-hidden">
+        {/* Subtle grid background */}
+        <div className="absolute inset-0 grid-bg-overlay opacity-15 pointer-events-none" />
+        
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          {/* Section Header */}
+          <div className="w-full flex flex-col items-start mb-16">
+            <span className="font-sans text-xs uppercase tracking-widest text-gym-gold mb-3 font-semibold">
+              PREMIUM TRAINING ENVIRONMENTS
             </span>
-            <h2 className="font-bebas text-5xl md:text-6xl text-gym-white tracking-wider leading-none uppercase max-w-xl">
-              Premium Fitness Experience
+            <h2 className="font-bebas text-5xl md:text-7xl text-gym-white uppercase tracking-wider leading-none">
+              State-Of-The-Art Equipment
             </h2>
-            <p className="font-inter text-base text-gym-white/70 leading-relaxed mt-8 max-w-lg">
-              Kourage Fitness is Mulund&apos;s premier fitness destination, combining cutting-edge equipment with expert guidance to help you achieve your goals.
+            <p className="font-inter text-sm md:text-base text-gym-white/70 max-w-xl mt-4 leading-relaxed">
+              Explore our world-class training zones equipped with top-tier, biomechanically optimized machinery designed to maximize your performance.
             </p>
-
-            <div className="relative mt-12 w-full aspect-[4/3] border-2 border-gym-white/10 overflow-hidden group">
-              <div className="absolute inset-0 bg-gym-black/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/gym_interior_about.png"
-                alt="Kourage Fitness setups"
-                className="w-full h-full object-cover filter grayscale contrast-125 group-hover:scale-102 transition-transform duration-500"
-              />
-              <div className="absolute bottom-4 left-4 z-20 bg-bg-primary border border-gym-gold px-4 py-2 font-sans text-[10px] uppercase text-gym-gold tracking-widest">
-                Kourage Mulund West
-              </div>
-            </div>
           </div>
 
-          {/* Right Block: Feature Grid (4) */}
-          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-8 lg:pl-12">
-            {[
-              {
-                num: "01",
-                title: "Newly Equipped Gym",
-                text: "Latest fitness equipment for every workout style",
-              },
-              {
-                num: "02",
-                title: "Certified Trainers",
-                text: "Professional guidance every step of the way",
-              },
-              {
-                num: "03",
-                title: "Clean & Hygienic",
-                text: "Sanitized environment for your safety",
-              },
-              {
-                num: "04",
-                title: "Personalized Training",
-                text: "Custom programs designed for you",
-              },
-            ].map((feature) => (
-              <div key={feature.num} className="border-2 border-border-subtle bg-bg-surface p-8 flex flex-col justify-between h-64 hover:border-gym-gold transition-colors duration-300">
-                <span className="font-bebas text-4xl text-gym-gold/40">{feature.num}.</span>
-                <div className="mt-auto">
-                  <h3 className="font-bebas text-2xl md:text-3xl text-gym-white uppercase tracking-wider mb-2">
-                    {feature.title}
-                  </h3>
-                  <p className="font-inter text-sm text-gym-white/70 leading-relaxed">
-                    {feature.text}
-                  </p>
+          {/* Responsive Zig-Zag Layout: Alternating Large Images & Text */}
+          <div className="flex flex-col gap-24 md:gap-32 w-full mt-10">
+            {galleryItems.map((item, index) => {
+              const isEven = index % 2 === 0;
+              return (
+                <div 
+                  key={item.id} 
+                  className={`flex flex-col items-center gap-8 md:gap-16 ${
+                    isEven ? "md:flex-row" : "md:flex-row-reverse"
+                  }`}
+                >
+                  {/* Large Image Block */}
+                  <motion.div
+                    initial={{ opacity: 0, x: isEven ? -100 : 100 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
+                    className="w-full md:w-1/2 select-none"
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full aspect-[4/3] object-cover border-2 border-gym-white/15 hover:border-gym-gold/75 transition-colors duration-500 rounded-none shadow-2xl pointer-events-none"
+                    />
+                  </motion.div>
+
+                  {/* Text Description Block */}
+                  <motion.div
+                    initial={{ opacity: 0, x: isEven ? 100 : -100 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.8, delay: 0.15, ease: [0.25, 1, 0.5, 1] }}
+                    className={`w-full md:w-1/2 flex flex-col ${
+                      isEven ? "items-start text-left" : "items-end text-right"
+                    }`}
+                  >
+                    <span className="font-sans text-xs md:text-sm text-gym-gold uppercase tracking-[0.3em] font-semibold mb-4">
+                      {item.zone}
+                    </span>
+                    <h3 className="font-bebas text-4xl md:text-6xl lg:text-7xl text-gym-white uppercase tracking-wider leading-[0.9] mb-6">
+                      {item.title}
+                    </h3>
+                    <p className="font-inter text-base md:text-lg text-gym-white/70 leading-relaxed max-w-lg">
+                      {item.desc}
+                    </p>
+                  </motion.div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
-
         </div>
       </section>
 
@@ -307,9 +428,6 @@ export default function Home() {
           darkColors={gymRibbonColors}
         />
       </div>
-
-      {/* 4. WHY CHOOSE US (Scroll-locked Pinned Storytelling Section) */}
-      <WhyChooseUsScroll />
 
       {/* 5. MOTIVATION STRIP */}
       <section className="bg-gym-gold text-bg-primary py-8 border-y-2 border-bg-primary overflow-hidden relative z-20 flex items-center select-none">
@@ -445,49 +563,164 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 8. CONTACT / LOCATION */}
-      <section id="contact" className="scroll-mt-24 md:scroll-mt-28 py-24 md:py-32 bg-bg-primary border-b border-border-subtle relative">
-        <div className="absolute inset-0 grid-bg-overlay opacity-20 pointer-events-none" />
-        <div className="max-w-4xl mx-auto px-6 flex flex-col items-center text-center relative z-10">
-          
-          <span className="font-sans text-xs uppercase tracking-widest text-gym-gold mb-4">
-            MULUND WEST HQ
-          </span>
-          <h2 className="font-bebas text-5xl md:text-7xl text-gym-white uppercase tracking-wider leading-none">
-            VISIT THE FACILITY
-          </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-12 w-full max-w-3xl">
-            {/* Address Block */}
-            <div className="flex flex-col items-center text-center">
-              <MapPin size={28} className="text-gym-gold mb-3" />
-              <h4 className="font-sans text-xs uppercase text-gym-white/40 tracking-wider">Address</h4>
-              <p className="font-inter text-sm md:text-base text-gym-white/80 mt-2 leading-relaxed">
-                2nd Floor, B Wing, Bhagyashree Apartment,<br />
-                Dr Ambedkar Road, Mulund West, Mumbai 400080
-              </p>
-            </div>
+      {/* 8. CONTACT / LOCATION (Bento-Grid Dashboard) */}
+      <section id="contact" className="scroll-mt-24 md:scroll-mt-28 py-24 md:py-32 bg-bg-primary border-b border-border-subtle relative overflow-hidden">
+        <div className="absolute inset-0 grid-bg-overlay opacity-15 pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gym-gold/5 rounded-full filter blur-[120px] pointer-events-none" />
 
-            {/* Operating Hours Block */}
-            <div className="flex flex-col items-center text-center">
-              <Clock size={28} className="text-gym-gold mb-3" />
-              <h4 className="font-sans text-xs uppercase text-gym-white/40 tracking-wider">Operating Hours</h4>
-              <p className="font-inter text-sm md:text-base text-gym-white/80 mt-2 leading-relaxed">
-                Opens 5:30 AM Daily<br />
-                Monday to Sunday
-              </p>
-            </div>
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          
+          {/* Header */}
+          <div className="w-full flex flex-col items-start mb-16">
+            <span className="font-sans text-xs uppercase tracking-widest text-gym-gold mb-3 font-bold">
+              MULUND WEST HQ
+            </span>
+            <h2 className="font-bebas text-5xl md:text-7xl text-gym-white uppercase tracking-wider leading-none">
+              VISIT THE FACILITY
+            </h2>
           </div>
 
-          <a
-            href="https://maps.google.com/?q=Kourage+Fitness+Mulund+West+Mumbai"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 border-2 border-border-subtle text-gym-white font-bebas text-sm uppercase tracking-widest px-8 py-4 mt-12 hover:border-gym-gold hover:text-gym-gold transition-colors duration-300 w-full sm:w-auto"
-          >
-            Open in Google Maps
-            <ArrowUpRight size={16} />
-          </a>
+          {/* Bento grid layout */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            
+            {/* Address Bento Card */}
+            <div className="sm:col-span-2 border-2 border-border-subtle bg-bg-surface/85 p-8 relative overflow-hidden flex flex-col justify-between group rounded-sm hover:border-gym-gold transition-all duration-300">
+              <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+                <div className="absolute inset-0 bg-[radial-gradient(#EF9F27_1px,transparent_1px)] [background-size:16px_16px] opacity-5 group-hover:opacity-10 transition-opacity duration-300" />
+                <div className="hover-shine-sweep z-20" />
+              </div>
+              
+              {/* Corner Brackets */}
+              <div className="absolute top-3 left-3 w-3 h-3 border-t-2 border-l-2 border-[#EF9F27]/30 pointer-events-none group-hover:border-[#EF9F27] transition-all duration-300" />
+              <div className="absolute top-3 right-3 w-3 h-3 border-t-2 border-r-2 border-[#EF9F27]/30 pointer-events-none group-hover:border-[#EF9F27] transition-all duration-300" />
+              <div className="absolute bottom-3 left-3 w-3 h-3 border-b-2 border-l-2 border-[#EF9F27]/30 pointer-events-none group-hover:border-[#EF9F27] transition-all duration-300" />
+              <div className="absolute bottom-3 right-3 w-3 h-3 border-b-2 border-r-2 border-[#EF9F27]/30 pointer-events-none group-hover:border-[#EF9F27] transition-all duration-300" />
+
+              <div className="relative z-10 flex justify-between items-start w-full mb-6">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 border border-gym-gold/20 flex items-center justify-center text-gym-gold bg-gym-gold/5 group-hover:scale-105 transition-transform duration-300">
+                    <MapPin size={20} />
+                  </div>
+                  <span className="font-bebas text-lg uppercase tracking-widest text-gym-white/80">
+                    HQ Address
+                  </span>
+                </div>
+                <button 
+                  onClick={handleCopy}
+                  className="font-sans text-[10px] uppercase tracking-widest text-gym-gold/60 border border-gym-gold/20 px-2.5 py-1 hover:border-gym-gold hover:text-gym-gold transition-colors duration-300"
+                >
+                  {copied ? "COPIED" : "COPY INFO"}
+                </button>
+              </div>
+
+              <div className="relative z-10">
+                <p className="font-inter text-base md:text-lg text-gym-white leading-relaxed font-medium">
+                  2nd Floor, B Wing, Bhagyashree Apartment,<br />
+                  Dr Ambedkar Road, Mulund West, Mumbai 400080
+                </p>
+              </div>
+            </div>
+
+            {/* Operating Hours Bento Card */}
+            <div className="border-2 border-border-subtle bg-bg-surface/85 p-8 relative overflow-hidden flex flex-col justify-between group rounded-sm hover:border-gym-gold transition-all duration-300">
+              <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+                <div className="absolute inset-0 bg-[radial-gradient(#EF9F27_1px,transparent_1px)] [background-size:16px_16px] opacity-5 group-hover:opacity-10 transition-opacity duration-300" />
+                <div className="hover-shine-sweep z-20" />
+              </div>
+              
+              {/* Corner Brackets */}
+              <div className="absolute top-3 left-3 w-3 h-3 border-t-2 border-l-2 border-[#EF9F27]/30 pointer-events-none group-hover:border-[#EF9F27] transition-all duration-300" />
+              <div className="absolute top-3 right-3 w-3 h-3 border-t-2 border-r-2 border-[#EF9F27]/30 pointer-events-none group-hover:border-[#EF9F27] transition-all duration-300" />
+              <div className="absolute bottom-3 left-3 w-3 h-3 border-b-2 border-l-2 border-[#EF9F27]/30 pointer-events-none group-hover:border-[#EF9F27] transition-all duration-300" />
+              <div className="absolute bottom-3 right-3 w-3 h-3 border-b-2 border-r-2 border-[#EF9F27]/30 pointer-events-none group-hover:border-[#EF9F27] transition-all duration-300" />
+
+              <div className="relative z-10 flex justify-between items-center w-full mb-6">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 border border-gym-gold/20 flex items-center justify-center text-gym-gold bg-gym-gold/5 group-hover:scale-105 transition-transform duration-300">
+                    <Clock size={20} />
+                  </div>
+                  <span className="font-bebas text-lg uppercase tracking-widest text-gym-white/80">
+                    Gym Hours
+                  </span>
+                </div>
+                
+                {/* Dynamic Status Badge */}
+                <div className="flex items-center gap-2">
+                  <span className={`w-2.5 h-2.5 rounded-full ${
+                    gymOpen ? "bg-emerald-500 animate-ping" : "bg-amber-500 animate-pulse"
+                  }`} />
+                  <span className={`font-sans text-[9px] uppercase tracking-widest font-bold ${
+                    gymOpen ? "text-emerald-400" : "text-amber-400"
+                  }`}>
+                    {gymOpen ? "OPEN NOW" : "CLOSED"}
+                  </span>
+                </div>
+              </div>
+
+              <div className="relative z-10">
+                <p className="font-inter text-base text-gym-white leading-relaxed">
+                  Opens 5:30 AM Daily
+                </p>
+                <p className="font-inter text-xs text-gym-white/60 mt-1 uppercase tracking-widest">
+                  Monday to Sunday
+                </p>
+              </div>
+            </div>
+
+            {/* Direct Channels Bento Card */}
+            <div className="border-2 border-border-subtle bg-bg-surface/85 p-8 relative overflow-hidden flex flex-col justify-between group rounded-sm hover:border-gym-gold transition-all duration-300">
+              <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+                <div className="absolute inset-0 bg-[radial-gradient(#EF9F27_1px,transparent_1px)] [background-size:16px_16px] opacity-5 group-hover:opacity-10 transition-opacity duration-300" />
+                <div className="hover-shine-sweep z-20" />
+              </div>
+              
+              {/* Corner Brackets */}
+              <div className="absolute top-3 left-3 w-3 h-3 border-t-2 border-l-2 border-[#EF9F27]/30 pointer-events-none group-hover:border-[#EF9F27] transition-all duration-300" />
+              <div className="absolute top-3 right-3 w-3 h-3 border-t-2 border-r-2 border-[#EF9F27]/30 pointer-events-none group-hover:border-[#EF9F27] transition-all duration-300" />
+              <div className="absolute bottom-3 left-3 w-3 h-3 border-b-2 border-l-2 border-[#EF9F27]/30 pointer-events-none group-hover:border-[#EF9F27] transition-all duration-300" />
+              <div className="absolute bottom-3 right-3 w-3 h-3 border-b-2 border-r-2 border-[#EF9F27]/30 pointer-events-none group-hover:border-[#EF9F27] transition-all duration-300" />
+
+              <div className="relative z-10 flex items-center gap-3 mb-6">
+                <div className="w-10 h-10 border border-gym-gold/20 flex items-center justify-center text-gym-gold bg-gym-gold/5 group-hover:scale-105 transition-transform duration-300">
+                  <Phone size={20} />
+                </div>
+                <span className="font-bebas text-lg uppercase tracking-widest text-gym-white/80">
+                  Quick Connect
+                </span>
+              </div>
+
+              <div className="relative z-10 flex flex-col gap-3 w-full">
+                <a
+                  href="https://wa.me/918169455350"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex justify-between items-center bg-gym-gold border border-gym-gold text-gym-black font-bebas text-xs uppercase tracking-widest py-3 px-4 hover:bg-transparent hover:text-gym-gold transition-all duration-300"
+                >
+                  WhatsApp Chat <span>&rarr;</span>
+                </a>
+                <a
+                  href="tel:+918169455350"
+                  className="flex justify-between items-center border border-gym-white/20 text-gym-white font-bebas text-xs uppercase tracking-widest py-3 px-4 hover:border-gym-gold hover:text-gym-gold transition-all duration-300"
+                >
+                  Call HQ Direct <span>&rarr;</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Google Maps link button placed below the details cards */}
+            <div className="sm:col-span-2 flex justify-center mt-4">
+              <a
+                href="https://maps.google.com/?q=Kourage+Fitness+Mulund+West+Mumbai"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full flex items-center justify-center gap-2 bg-gym-gold border-2 border-gym-gold text-gym-black font-bebas text-sm uppercase tracking-widest py-4 hover:bg-transparent hover:text-gym-gold transition-all duration-300 group/btn"
+              >
+                Launch Navigation in Google Maps
+                <ArrowUpRight size={16} className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform duration-300" />
+              </a>
+            </div>
+
+          </div>
 
         </div>
       </section>
@@ -497,8 +730,16 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12">
           
           <div className="flex flex-col items-start gap-4">
-            <a href="#" className="font-bebas text-3xl tracking-widest text-gym-white">
-              KOURAGE FITNESS<span className="text-gym-gold">.</span>
+            <a href="#" className="flex items-center gap-3 group">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img 
+                src="/logo.png" 
+                alt="Kourage Fitness Logo" 
+                className="h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+              />
+              <span className="font-bebas text-2xl md:text-3xl tracking-widest text-gym-white group-hover:text-gym-gold transition-colors duration-300">
+                KOURAGE FITNESS<span className="text-gym-gold">.</span>
+              </span>
             </a>
             <p className="font-inter text-xs text-gym-white/40 leading-relaxed max-w-xs">
               Transform Your Body. Elevate Your Mind.

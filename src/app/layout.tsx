@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "lenis/dist/lenis.css";
 import { Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
+import SmoothScroll from "@/components/SmoothScroll";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
@@ -17,13 +19,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn("dark scroll-smooth", "font-sans", geist.variable)}>
+    <html lang="en" className={cn("dark", "font-sans", geist.variable)}>
       <body className="antialiased bg-gym-black text-gym-white relative min-h-screen flex flex-col">
         {/* Stark premium grain overlay */}
         <div className="grain-overlay" aria-hidden="true" />
         
         {/* Content */}
-        {children}
+        <SmoothScroll>
+          {children}
+        </SmoothScroll>
       </body>
     </html>
   );
