@@ -193,7 +193,7 @@ export function FounderBrand() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.25 }}
-            className="font-bebas text-6xl md:text-9xl text-[#F2EFE9] tracking-wider mt-3 uppercase"
+            className="font-bebas text-5xl sm:text-7xl md:text-9xl text-[#F2EFE9] tracking-wider mt-3 uppercase"
           >
             Jagesh Pitaji Dait
           </motion.h2>
@@ -299,7 +299,7 @@ export function FounderBrand() {
           </div>
 
           {/* Active Slide Display Container */}
-          <div className="bg-[#2A0D12]/40 border-2 border-border-subtle p-6 sm:p-12 mb-8 relative min-h-[460px] flex items-center justify-center">
+          <div className="bg-[#2A0D12]/40 border-2 border-border-subtle p-4 sm:p-12 mb-8 relative min-h-[460px] flex items-center justify-center">
             <div className="absolute inset-0 grid-bg-overlay opacity-15 pointer-events-none" />
             
             {/* Left Navigation Arrow */}
@@ -330,7 +330,7 @@ export function FounderBrand() {
                     initial="hidden"
                     animate="visible"
                     exit="hidden"
-                    className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center px-8 sm:px-12"
+                    className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center px-2 sm:px-12"
                   >
                     {/* Left Column: Huge Horizontal Medal with Physics Sway hover */}
                     <motion.div 
@@ -372,7 +372,7 @@ export function FounderBrand() {
 
                         {/* Medal Disc */}
                         <div 
-                          className="w-24 sm:w-32 md:w-38 h-24 sm:h-32 md:h-38 rounded-full flex items-center justify-center relative shrink-0"
+                          className="w-20 sm:w-32 md:w-38 h-20 sm:h-32 md:h-38 rounded-full flex items-center justify-center relative shrink-0"
                           style={{
                             boxShadow: "inset 2px 2px 4px rgba(255,255,255,0.45), inset -3px -3px 6px rgba(0,0,0,0.65), 0 16px 32px rgba(0,0,0,0.55)"
                           }}
@@ -467,7 +467,7 @@ export function FounderBrand() {
                       }}
                       className="lg:col-span-5 flex flex-col justify-center w-full max-w-sm mx-auto lg:max-w-none cursor-pointer"
                     >
-                      <div className="group bg-[#090707] border-2 border-[#EF9F27] p-8 sm:p-10 shadow-[0_10px_30px_rgba(0,0,0,0.85)] hover:shadow-[0_20px_45px_rgba(239,159,39,0.18)] relative overflow-hidden flex flex-col justify-center items-center text-center transition-all duration-500">
+                      <div className="group bg-[#090707] border-2 border-[#EF9F27] p-5 sm:p-10 shadow-[0_10px_30px_rgba(0,0,0,0.85)] hover:shadow-[0_20px_45px_rgba(239,159,39,0.18)] relative overflow-hidden flex flex-col justify-center items-center text-center transition-all duration-500 w-full">
                         {/* Gold dot pattern background texture */}
                         <div className="absolute inset-0 bg-[radial-gradient(#EF9F27_1.2px,transparent_1.2px)] [background-size:14px_14px] opacity-10 pointer-events-none" />
                         {/* Soft radial gold glow */}
@@ -477,16 +477,16 @@ export function FounderBrand() {
                         <div className="hover-shine-sweep pointer-events-none z-20" />
                         
                         {/* Premium Gold Corner Brackets */}
-                        <div className="absolute top-3 left-3 w-3 h-3 border-t-2 border-l-2 border-[#EF9F27]/60 pointer-events-none group-hover:border-[#EF9F27] group-hover:scale-105 transition-all duration-300" />
-                        <div className="absolute top-3 right-3 w-3 h-3 border-t-2 border-r-2 border-[#EF9F27]/60 pointer-events-none group-hover:border-[#EF9F27] group-hover:scale-105 transition-all duration-300" />
-                        <div className="absolute bottom-3 left-3 w-3 h-3 border-b-2 border-l-2 border-[#EF9F27]/60 pointer-events-none group-hover:border-[#EF9F27] group-hover:scale-105 transition-all duration-300" />
-                        <div className="absolute bottom-3 right-3 w-3 h-3 border-b-2 border-r-2 border-[#EF9F27]/60 pointer-events-none group-hover:border-[#EF9F27] group-hover:scale-105 transition-all duration-300" />
+                        <div className="absolute top-2 left-2 sm:top-3 sm:left-3 w-3 h-3 border-t-2 border-l-2 border-[#EF9F27]/60 pointer-events-none group-hover:border-[#EF9F27] group-hover:scale-105 transition-all duration-300" />
+                        <div className="absolute top-2 right-2 sm:top-3 sm:right-3 w-3 h-3 border-t-2 border-r-2 border-[#EF9F27]/60 pointer-events-none group-hover:border-[#EF9F27] group-hover:scale-105 transition-all duration-300" />
+                        <div className="absolute bottom-2 left-2 sm:bottom-3 sm:left-3 w-3 h-3 border-b-2 border-l-2 border-[#EF9F27]/60 pointer-events-none group-hover:border-[#EF9F27] group-hover:scale-105 transition-all duration-300" />
+                        <div className="absolute bottom-2 right-2 sm:bottom-3 sm:right-3 w-3 h-3 border-b-2 border-r-2 border-[#EF9F27]/60 pointer-events-none group-hover:border-[#EF9F27] group-hover:scale-105 transition-all duration-300" />
 
-                        <span className="relative z-10 font-sans text-[10px] uppercase text-[#EF9F27] tracking-[0.25em] mb-2 font-extrabold">
+                        <span className="relative z-10 font-sans text-[9px] sm:text-[10px] uppercase text-[#EF9F27] tracking-[0.25em] mb-2 font-extrabold">
                           {medal.category === "khel-ratna" ? "State Honour" : "Medal Achievements"}
                         </span>
                         
-                        <h4 className="relative z-10 font-bebas text-4xl sm:text-5xl text-[#F2EFE9] uppercase tracking-wider mb-2 leading-tight">
+                        <h4 className="relative z-10 font-bebas text-2xl sm:text-5xl text-[#F2EFE9] uppercase tracking-wider mb-2 leading-tight">
                           {medal.title}
                         </h4>
                         
@@ -505,13 +505,13 @@ export function FounderBrand() {
                               key={i} 
                               variants={listItemVariants}
                               whileHover={{ x: 6 }}
-                              className="group/item flex items-center justify-start w-full max-w-[280px] font-sans text-xs uppercase tracking-[0.12em] transition-all duration-200"
+                              className="group/item flex items-center justify-start w-full font-sans text-[10px] sm:text-xs uppercase tracking-[0.08em] sm:tracking-[0.12em] transition-all duration-200"
                             >
-                              <span className="font-serif text-[#EF9F27] group-hover/item:text-[#FFE380] font-bold text-sm w-12 text-right shrink-0 transition-colors duration-300">
+                              <span className="font-serif text-[#EF9F27] group-hover/item:text-[#FFE380] font-bold text-xs sm:text-sm w-10 sm:w-12 text-right shrink-0 transition-colors duration-300">
                                 {ach.year}
                               </span>
-                              <span className="text-gym-white/30 px-3 shrink-0">—</span>
-                              <span className="font-medium text-gym-white/85 group-hover/item:text-[#FFF2B2] text-left tracking-widest truncate transition-colors duration-300">
+                              <span className="text-gym-white/30 px-2 sm:px-3 shrink-0">—</span>
+                              <span className="font-medium text-gym-white/85 group-hover/item:text-[#FFF2B2] text-left transition-colors duration-300 break-words flex-1">
                                 {ach.result}
                               </span>
                             </motion.div>
@@ -532,7 +532,7 @@ export function FounderBrand() {
               <button
                 key={item.id}
                 onClick={() => setActiveSlide(idx)}
-                className={`relative px-4 sm:px-6 py-2.5 font-bebas text-xs sm:text-sm uppercase tracking-widest transition-all duration-300 border-2 overflow-hidden cursor-pointer ${
+                className={`relative px-3 sm:px-6 py-2 sm:py-2.5 font-bebas text-[10px] sm:text-sm uppercase tracking-widest transition-all duration-300 border-2 overflow-hidden cursor-pointer ${
                   activeSlide === idx
                     ? "border-gym-gold text-gym-black font-bold shadow-[0_0_15px_rgba(239,159,39,0.25)]"
                     : "border-border-subtle text-gym-white/60 hover:text-gym-white hover:border-gym-white/20"

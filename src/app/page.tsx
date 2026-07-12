@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useLenis } from "lenis/react";
 import AnimatedRays from "@/components/ui/animated-rays";
 import TwistingRibbon from "@/components/ui/twisting-ribbon";
@@ -10,6 +10,7 @@ import SpotlightNavbar from "@/components/ui/spotlight-navbar";
 import FounderBrand from "@/components/FounderBrand";
 import AboutFeatureCard from "@/components/AboutFeatureCard";
 import Preloader from "@/components/Preloader";
+import InstagramConnect from "@/components/InstagramConnect";
 import { cn } from "@/lib/utils";
 
 // Custom SVG Icons to bypass lucide barrel-optimization SWC bugs
@@ -72,13 +73,6 @@ const galleryItems = [
     desc: "Engineered for maximum quad isolation, hamstring loading, and lower body power development.",
   },
   {
-    id: 2,
-    image: "/gallery/IMG_9987.JPG.jpeg",
-    title: "Precision Smith Machine",
-    zone: "BARBELL ZONE",
-    desc: "Controlled vertical bar tracking for ultra-safe squats, presses, and athletic lunges.",
-  },
-  {
     id: 3,
     image: "/gallery/IMG_9990.JPG.jpeg",
     title: "Pro Dumbbell Station",
@@ -91,13 +85,6 @@ const galleryItems = [
     title: "Dual Cable Crossover",
     zone: "FUNCTIONAL ZONE",
     desc: "Multi-point pulley station offering variable resistance angles for total-body definition.",
-  },
-  {
-    id: 5,
-    image: "/gallery/IMG_9992.JPG.jpeg",
-    title: "Heavy-Duty Seated Row",
-    zone: "STRENGTH ZONE",
-    desc: "Plate-loaded leverage row featuring independent arm movements to sculpt upper back thickness.",
   },
   {
     id: 6,
@@ -113,20 +100,6 @@ const galleryItems = [
     zone: "MIND & BODY ZONE",
     desc: "Suspended anti-gravity hammocks designed to decompress the spine and enhance core stability.",
   },
-  {
-    id: 8,
-    image: "/gallery/IMG_9996.JPG.jpeg",
-    title: "Cardio & Conditioning Hub",
-    zone: "CARDIO ZONE",
-    desc: "Full conditioning suite with top-tier ellipticals and stepper systems for metabolic conditioning.",
-  },
-  {
-    id: 9,
-    image: "/gallery/IMG_9997.JPG.jpeg",
-    title: "Plate-Loaded Incline Press",
-    zone: "CHEST ZONE",
-    desc: "Converging leverage press designed to target the upper pectorals with optimized natural biomechanics.",
-  },
 ];
 
 export default function Home() {
@@ -134,15 +107,16 @@ export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [preloaderActive, setPreloaderActive] = useState(true);
+  const [selectedImage, setSelectedImage] = useState<typeof galleryItems[0] | null>(null);
 
-  // Lock smooth scroll during preloader introduction
+  // Lock smooth scroll during preloader introduction or lightbox modal
   useEffect(() => {
-    if (preloaderActive) {
+    if (preloaderActive || selectedImage) {
       lenis?.stop();
     } else {
       lenis?.start();
     }
-  }, [preloaderActive, lenis]);
+  }, [preloaderActive, selectedImage, lenis]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -313,7 +287,7 @@ export default function Home() {
             BEST GYM IN MULUND
           </motion.span>
           
-          <h1 className="font-bebas text-7xl sm:text-8xl md:text-9xl text-gym-white tracking-wide uppercase leading-[0.9] max-w-4xl select-none">
+          <h1 className="font-bebas text-6xl sm:text-8xl md:text-9xl text-gym-white tracking-wide uppercase leading-[0.85] max-w-4xl select-none">
             Transform Your Body. <br />
             <span className="text-gym-gold relative">Elevate Your Mind.</span>
           </h1>
@@ -361,7 +335,7 @@ export default function Home() {
           </div>
 
           {/* Responsive Zig-Zag Layout: Alternating Large Images & Text */}
-          <div className="flex flex-col gap-24 md:gap-32 w-full mt-10">
+          <div className="flex flex-col gap-16 md:gap-32 w-full mt-10">
             {galleryItems.map((item, index) => {
               const isEven = index % 2 === 0;
               return (
@@ -371,30 +345,38 @@ export default function Home() {
                     isEven ? "md:flex-row" : "md:flex-row-reverse"
                   }`}
                 >
-                  {/* Large Image Block */}
+                  {/* Large Image Block (Click to Pop Lightbox) */}
                   <motion.div
                     initial={{ opacity: 0, x: isEven ? -100 : 100 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
-                    className="w-full md:w-1/2 select-none"
+                    className="w-full md:w-1/2 select-none group cursor-pointer"
+                    onClick={() => setSelectedImage(item)}
                   >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      className="w-full aspect-[4/3] object-cover border-2 border-gym-white/15 hover:border-gym-gold/75 transition-colors duration-500 rounded-none shadow-2xl pointer-events-none"
-                    />
+                    <div className="relative overflow-hidden border-2 border-gym-white/15 group-hover:border-gym-gold/75 transition-colors duration-500 shadow-2xl">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        className="w-full aspect-[4/3] object-cover transform group-hover:scale-105 transition-transform duration-700"
+                      />
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/40 transition-all duration-500">
+                        <span className="font-bebas tracking-widest text-lg bg-gym-gold text-gym-black px-6 py-2 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
+                          VIEW FULL
+                        </span>
+                      </div>
+                    </div>
                   </motion.div>
 
                   {/* Text Description Block */}
                   <motion.div
                     initial={{ opacity: 0, x: isEven ? 100 : -100 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, margin: "-100px" }}
+                    viewport={{ once: true, margin: "-50px" }}
                     transition={{ duration: 0.8, delay: 0.15, ease: [0.25, 1, 0.5, 1] }}
-                    className={`w-full md:w-1/2 flex flex-col ${
-                      isEven ? "items-start text-left" : "items-end text-right"
+                    className={`w-full md:w-1/2 flex flex-col items-start text-left ${
+                      isEven ? "md:items-start md:text-left" : "md:items-end md:text-right"
                     }`}
                   >
                     <span className="font-sans text-xs md:text-sm text-gym-gold uppercase tracking-[0.3em] font-semibold mb-4">
@@ -433,7 +415,7 @@ export default function Home() {
       <section className="bg-gym-gold text-bg-primary py-8 border-y-2 border-bg-primary overflow-hidden relative z-20 flex items-center select-none">
         <div className="w-full flex items-center whitespace-nowrap overflow-hidden">
           {/* Scrolling Ticker Container */}
-          <div className="animate-marquee flex gap-12 font-bebas text-3xl md:text-4xl font-bold uppercase tracking-wider">
+          <div className="animate-marquee flex gap-8 md:gap-12 font-bebas text-2xl md:text-4xl font-bold uppercase tracking-wider">
             {/* Set 1 */}
             <span className="text-bg-primary">FUEL YOUR FIRE</span>
             <span className="text-bg-primary/45">•</span>
@@ -510,58 +492,8 @@ export default function Home() {
         />
       </div>
 
-      {/* 7. INSTAGRAM — single large card, no grid/feed */}
-      <section className="py-24 md:py-32 bg-bg-primary border-b border-border-subtle relative">
-        <div className="max-w-4xl mx-auto px-6">
-          
-          <div className="border-2 border-gym-gold bg-bg-surface relative overflow-hidden flex flex-col md:flex-row items-stretch select-none">
-            {/* Grid Overlay */}
-            <div className="absolute inset-0 grid-bg-overlay opacity-25 pointer-events-none" />
-
-            {/* Left Column: Visual graphic */}
-            <div className="relative w-full md:w-2/5 min-h-[250px] md:min-h-auto overflow-hidden group shrink-0 border-b-2 md:border-b-0 md:border-r-2 border-gym-gold">
-              <div className="absolute inset-0 bg-bg-primary/35 group-hover:bg-transparent transition-colors duration-300 z-10" />
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/ig_post_1.png"
-                alt="Instagram workout display"
-                className="absolute inset-0 w-full h-full object-cover filter grayscale contrast-125 group-hover:scale-102 transition-transform duration-500"
-              />
-              <div className="absolute top-4 left-4 z-20 bg-bg-primary border border-gym-gold p-2">
-                <InstagramLogo size={24} className="text-gym-gold animate-pulse" />
-              </div>
-            </div>
-
-            {/* Right Column: Copy and CTA */}
-            <div className="p-8 md:p-12 flex flex-col justify-center items-start z-10 relative">
-              <span className="font-sans text-xs uppercase tracking-widest text-gym-gold mb-3">
-                FOLLOW US
-              </span>
-              <h3 className="font-bebas text-4xl md:text-5xl text-gym-white uppercase tracking-wider mb-4">
-                Stay Connected
-              </h3>
-              <p className="font-inter text-sm md:text-base text-gym-white/70 leading-relaxed mb-6">
-                Follow us on Instagram for daily workout tips, transformation stories, and behind-the-scenes action at Kourage Fitness.
-              </p>
-              
-              <div className="font-sans text-sm text-gym-gold uppercase tracking-widest mb-8 font-bold">
-                @kouragefitness_official
-              </div>
-
-              <a
-                href="https://www.instagram.com/kouragefitness_official/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-gym-gold border-2 border-gym-gold text-gym-black font-bebas text-md uppercase tracking-widest px-8 py-3.5 hover:bg-transparent hover:text-gym-gold transition-colors duration-300 text-center w-full sm:w-auto"
-              >
-                Follow us on Instagram &rarr;
-              </a>
-            </div>
-
-          </div>
-
-        </div>
-      </section>
+      {/* 7. INSTAGRAM — INTERACTIVE CONNECT SECTION */}
+      <InstagramConnect />
 
       {/* 8. CONTACT / LOCATION (Bento-Grid Dashboard) */}
       <section id="contact" className="scroll-mt-24 md:scroll-mt-28 py-24 md:py-32 bg-bg-primary border-b border-border-subtle relative overflow-hidden">
@@ -790,6 +722,62 @@ export default function Home() {
           <p className="text-gym-white/20">Excellence in every detail.</p>
         </div>
       </footer>
+
+      {/* FULLSCREEN IMAGE LIGHTBOX MODAL */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 p-4 sm:p-8 backdrop-blur-md"
+            onClick={() => setSelectedImage(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 20 }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              className="relative max-w-6xl w-full max-h-screen flex flex-col items-center justify-center"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close Button */}
+              <button 
+                onClick={() => setSelectedImage(null)}
+                className="absolute -top-10 sm:-top-16 right-0 text-gym-white hover:text-gym-gold transition-colors z-50 flex items-center gap-2 font-bebas tracking-widest text-base sm:text-lg"
+              >
+                <span>CLOSE</span> <X className="w-5 h-5 sm:w-7 sm:h-7" />
+              </button>
+              
+              <div className="relative w-full shadow-[0_0_50px_rgba(239,159,39,0.15)] border border-gym-gold/20 overflow-hidden group/modal">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={selectedImage.image}
+                  alt={selectedImage.title}
+                  className="w-full h-auto max-h-[85vh] object-contain bg-gym-black select-none"
+                />
+                
+                {/* Image Details Overlay */}
+                <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/90 via-black/50 to-transparent p-6 sm:p-10 pointer-events-none">
+                  <motion.div
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.2, duration: 0.5 }}
+                  >
+                    <span className="block font-sans text-xs sm:text-sm uppercase tracking-[0.3em] text-gym-gold mb-2 font-bold">
+                      {selectedImage.zone}
+                    </span>
+                    <h3 className="font-bebas text-3xl sm:text-5xl text-gym-white uppercase tracking-wider leading-none drop-shadow-lg">
+                      {selectedImage.title}
+                    </h3>
+                  </motion.div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
       
     </div>
   );
