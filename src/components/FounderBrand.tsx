@@ -216,7 +216,7 @@ export function FounderBrand() {
       </section>
 
       {/* ──────── 2. CONTINUED SCROLL: STORY & BIOGRAPHY (SOLO PHOTO TRANSITION) ──────── */}
-      <section className="relative py-24 bg-[#1A1210] border-t border-[#5C1F27]/30 select-none">
+      <section id="founder" className="scroll-mt-24 md:scroll-mt-28 relative py-24 bg-[#1A1210] border-t border-[#5C1F27]/30 select-none">
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             
@@ -289,8 +289,7 @@ export function FounderBrand() {
 
       {/* ──────── 3. INTERACTIVE TROPHY WALL SECTION ──────── */}
       <section 
-        id="founder" 
-        className="scroll-mt-24 md:scroll-mt-28 py-24 md:py-32 bg-[#1A1210] border-t border-[#5C1F27]/30 relative overflow-hidden select-none"
+        className="py-24 md:py-32 bg-[#1A1210] border-t border-[#5C1F27]/30 relative overflow-hidden select-none"
       >
         {/* ATMOSPHERIC BACKGROUND LAYER: Heavily darkened & blurred SOLO photo */}
         <div className="hidden md:block absolute inset-0 z-0 overflow-hidden opacity-35 pointer-events-none">
