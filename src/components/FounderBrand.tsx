@@ -259,11 +259,21 @@ export function FounderBrand() {
                 His training philosophy is based on meticulous discipline, custom nutrition modeling, and advanced lifting biomechanics. By eliminating standard gym templates, he focuses strictly on structural transformations.
               </p>
 
-              <div className="border-l-4 border-gym-gold pl-6 py-2 bg-[#3D141B]/40 pr-4">
+              <div className="border-l-4 border-gym-gold pl-6 py-4 bg-[#3D141B]/40 pr-4 mt-2">
                 <p className="font-inter text-sm italic text-[#F2EFE9]/95 leading-relaxed">
                   &ldquo;Every placement on the stage is a byproduct of execution. At Kourage, we do not ask for motivation — we build structural discipline.&rdquo;
                 </p>
-                <span className="block font-sans text-[10px] text-[#EF9F27] uppercase tracking-wider mt-2 font-bold">— Jagesh Pitaji Dait</span>
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mt-4 border-t border-[#5C1F27]/40 pt-4">
+                  <span className="block font-sans text-[10px] text-[#EF9F27] uppercase tracking-wider font-bold">— Jagesh Pitaji Dait</span>
+                  <a 
+                    href="https://www.instagram.com/jageshdait?igsh=MTEyaDJzOWhjcWE3Mg==" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 font-sans text-[10px] uppercase tracking-widest text-gym-white/60 hover:text-gym-gold transition-colors duration-300"
+                  >
+                    Follow on Instagram <span className="text-sm font-bold leading-none mb-0.5">↗</span>
+                  </a>
+                </div>
               </div>
             </motion.div>
 

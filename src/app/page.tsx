@@ -8,6 +8,7 @@ import TwistingRibbon from "@/components/ui/twisting-ribbon";
 import ProgramCard from "@/components/ProgramCard";
 import SpotlightNavbar from "@/components/ui/spotlight-navbar";
 import FounderBrand from "@/components/FounderBrand";
+import CoachManish from "@/components/CoachManish";
 import AboutFeatureCard from "@/components/AboutFeatureCard";
 import Preloader from "@/components/Preloader";
 import InstagramConnect from "@/components/InstagramConnect";
@@ -88,10 +89,10 @@ const galleryItems = [
   },
   {
     id: 6,
-    image: "/gallery/IMG_9994.JPG.jpeg",
-    title: "Commercial Treadmills",
-    zone: "CARDIO ZONE",
-    desc: "High-performance Athlon running decks with advanced shock absorption and real-time pacing.",
+    image: "/gallery/IMG_9992.JPG.jpeg",
+    title: "Elite Strength Floor",
+    zone: "STRENGTH & MACHINE ZONE",
+    desc: "A comprehensive training environment equipped with heavy-duty cable systems, plate-loaded machinery, and robust free weights for total body transformation.",
   },
   {
     id: 7,
@@ -398,6 +399,9 @@ export default function Home() {
 
       {/* 3.5. FOUNDER & HEAD COACH (JAGESH PITAJI DAIT & MENTOR) */}
       <FounderBrand />
+      
+      {/* 3.6. ELITE TRAINING PARTNER (MANISH ADVILKAR) */}
+      <CoachManish />
 
       {/* TWISTING RIBBON DIVIDER #1 (Transition About -> Why Us) */}
       <div className="w-full h-32 md:h-40 bg-bg-primary relative z-20 flex items-center justify-center">
