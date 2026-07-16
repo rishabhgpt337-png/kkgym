@@ -23,7 +23,7 @@ export default function RegisterPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  const upiId = "kouragefitness@upi";
+  const upiId = "vyapar.175693140571@hdfcbank";
   const entryFee = "₹5000/-";
   const whatsappLink = "https://wa.me/918169455350?text=Hello%20Kourage%20Fitness%2C%20I%20have%20completed%20the%20UPI%20payment%20for%20the%20Kourage%20Master%20Physique%20competition.%20Attached%20is%20my%20transaction%20screenshot%20for%20verification.";
 
