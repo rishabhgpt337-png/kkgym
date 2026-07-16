@@ -504,6 +504,46 @@ export default function Home() {
       {/* 7. INSTAGRAM — INTERACTIVE CONNECT SECTION */}
       <InstagramConnect />
 
+      {/* 7.5. BHANDUP TRAINING FACILITY */}
+      <section className="py-16 md:py-20 bg-bg-surface border-b border-border-subtle relative overflow-hidden select-none">
+        <div className="absolute inset-0 grid-bg-overlay opacity-15 pointer-events-none" />
+        <div className="max-w-6xl mx-auto px-6 relative z-10 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+          
+          {/* Left side: Premium Image */}
+          <div className="relative w-full h-[250px] md:h-[320px] overflow-hidden border-2 border-border-subtle hover:border-gym-gold transition-colors duration-300 rounded-sm">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/gallery/jd_fitness.jpg"
+              alt="JD Fitness Bhandup Facility"
+              className="w-full h-full object-cover filter contrast-110 brightness-95"
+            />
+            <div className="absolute inset-0 bg-[#2A0D12]/25" />
+          </div>
+
+          {/* Right side: Information block */}
+          <div className="flex flex-col items-start justify-center">
+            <span className="font-sans text-xs uppercase tracking-widest text-gym-gold font-bold mb-2 block">
+              Powered by JD Fitness
+            </span>
+            <h2 className="font-bebas text-4xl sm:text-5xl text-gym-white uppercase tracking-wider leading-none mb-4">
+              Our Bhandup Training Facility
+            </h2>
+            <p className="font-inter text-sm text-gym-white/70 leading-relaxed mb-6">
+              Kourage Fitness is also available at our Bhandup training facility in collaboration with JD Fitness. Members can experience the same commitment to quality coaching, professional guidance, and performance-focused training in a well-equipped environment.
+            </p>
+            <a
+              href="https://www.google.com/maps/place/JD+Fitness+(+Jagesh+Dait)/@19.1503787,72.9270402,17z/data=!3m1!4b1!4m6!3m5!1s0x3be7b98a3226dd4b:0x372a7eedb4ae38d5!8m2!3d19.1503787!4d72.9296151!16s%2Fg%2F11tx2xygx0"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center border-2 border-gym-white/20 text-gym-white font-bebas text-sm uppercase tracking-widest px-8 py-3.5 hover:border-gym-gold hover:text-gym-gold transition-colors duration-300 text-center"
+            >
+              View on Google Maps
+            </a>
+          </div>
+
+        </div>
+      </section>
+
       {/* 8. CONTACT / LOCATION (Bento-Grid Dashboard) */}
       <section id="contact" className="scroll-mt-24 md:scroll-mt-28 py-24 md:py-32 bg-bg-primary border-b border-border-subtle relative overflow-hidden">
         <div className="absolute inset-0 grid-bg-overlay opacity-15 pointer-events-none" />
