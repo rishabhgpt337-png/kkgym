@@ -19,7 +19,6 @@ export interface SpotlightNavbarProps {
 export function SpotlightNavbar({
     items = [
         { label: "About", href: "#about" },
-        { label: "Why Us", href: "#why-us" },
         { label: "Contact", href: "#contact" },
     ],
     className,

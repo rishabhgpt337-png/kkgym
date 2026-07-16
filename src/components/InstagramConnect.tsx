@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const InstagramLogo = ({ size = 24, className = "", ...props }: React.SVGProps<SVGSVGElement> & { size?: number }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} {...props}>
@@ -36,34 +37,36 @@ export default function InstagramConnect() {
       <div className={`absolute inset-0 z-0 transition-opacity duration-1000 ${isHovered ? 'opacity-30' : 'opacity-10'}`}>
         {/* Row 1: Left to Right */}
         <div className="absolute top-4 left-0 flex whitespace-nowrap overflow-hidden w-full">
-          <motion.div
-            animate={{ x: [0, "-50%"] }}
-            transition={{ repeat: Infinity, ease: "linear", duration: 35 }}
-            className="flex gap-4 w-max"
-          >
+          <div className="flex gap-4 w-max animate-marquee">
              {[...instaImages, ...instaImages].map((img, i) => (
-                <div key={`row1-${i}`} className="w-48 sm:w-64 aspect-square shrink-0 overflow-hidden border border-gym-gold/20 shadow-lg">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={img} alt="Gym Activity" className="w-full h-full object-cover filter grayscale contrast-125 opacity-80" />
+                <div key={`row1-${i}`} className="relative w-48 sm:w-64 aspect-square shrink-0 overflow-hidden border border-gym-gold/20 shadow-lg">
+                  <Image 
+                    src={img} 
+                    alt="Gym Activity" 
+                    fill
+                    sizes="(max-width: 768px) 192px, 256px"
+                    className="object-cover filter grayscale contrast-125 opacity-80" 
+                  />
                 </div>
              ))}
-          </motion.div>
+          </div>
         </div>
         
         {/* Row 2: Right to Left */}
         <div className="absolute bottom-4 left-0 flex whitespace-nowrap overflow-hidden w-full">
-          <motion.div
-            animate={{ x: ["-50%", 0] }}
-            transition={{ repeat: Infinity, ease: "linear", duration: 40 }}
-            className="flex gap-4 w-max"
-          >
+          <div className="flex gap-4 w-max animate-marquee" style={{ animationDirection: 'reverse', animationDuration: '40s' }}>
              {[...instaImages, ...instaImages].reverse().map((img, i) => (
-                <div key={`row2-${i}`} className="w-48 sm:w-64 aspect-square shrink-0 overflow-hidden border border-gym-gold/20 shadow-lg">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={img} alt="Gym Activity" className="w-full h-full object-cover filter grayscale contrast-125 opacity-80" />
+                <div key={`row2-${i}`} className="relative w-48 sm:w-64 aspect-square shrink-0 overflow-hidden border border-gym-gold/20 shadow-lg">
+                  <Image 
+                    src={img} 
+                    alt="Gym Activity" 
+                    fill
+                    sizes="(max-width: 768px) 192px, 256px"
+                    className="object-cover filter grayscale contrast-125 opacity-80" 
+                  />
                 </div>
              ))}
-          </motion.div>
+          </div>
         </div>
       </div>
 

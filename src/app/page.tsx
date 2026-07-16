@@ -217,7 +217,6 @@ export default function Home() {
             items={[
               { label: "Gallery", href: "#gallery" },
               { label: "Founder", href: "#founder" },
-              { label: "Why Us", href: "#why-us" },
               { label: "Competition", href: "#competition" },
               { label: "Contact", href: "#contact" },
             ]}
@@ -250,7 +249,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             className="absolute top-full left-0 w-full bg-bg-primary border-b border-gym-gold/15 px-6 py-10 flex flex-col gap-6 md:hidden z-30 shadow-[0_10px_20px_rgba(239,159,39,0.03)]"
           >
-            {["Gallery", "Founder", "Why Us", "Competition", "Contact"].map((item) => {
+            {["Gallery", "Founder", "Competition", "Contact"].map((item) => {
               const id = item.toLowerCase().replace(" ", "-");
               return (
                 <button
