@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import AnimatedRays from "@/components/ui/animated-rays";
 
 const InstagramLogo = ({ size = 24, ...props }: React.SVGProps<SVGSVGElement> & { size?: number }) => (
@@ -23,7 +24,7 @@ export default function RegisterPage() {
   const [copied, setCopied] = useState(false);
 
   const upiId = "kouragefitness@upi";
-  const entryFee = "₹999/-";
+  const entryFee = "₹5000/-";
   const whatsappLink = "https://wa.me/918169455350?text=Hello%20Kourage%20Fitness%2C%20I%20have%20completed%20the%20UPI%20payment%20for%20the%20Kourage%20Master%20Physique%20competition.%20Attached%20is%20my%20transaction%20screenshot%20for%20verification.";
 
   const handleCopyUpi = () => {
@@ -150,53 +151,14 @@ export default function RegisterPage() {
                 <div className="absolute top-3 right-3 w-4 h-4 border-2 border-gym-gold" />
                 <div className="absolute bottom-3 left-3 w-4 h-4 border-2 border-gym-gold" />
                 
-                {/* Stylized QR dots representation */}
-                <svg className="w-48 h-48 text-gym-gold/85" viewBox="0 0 100 100" fill="currentColor">
-                  {/* Grid of stylized square dots representing QR contents */}
-                  <rect x="10" y="10" width="15" height="15" fill="currentColor" />
-                  <rect x="13" y="13" width="9" height="9" fill="black" />
-                  <rect x="15" y="15" width="5" height="5" fill="currentColor" />
-
-                  <rect x="75" y="10" width="15" height="15" fill="currentColor" />
-                  <rect x="78" y="13" width="9" height="9" fill="black" />
-                  <rect x="80" y="15" width="5" height="5" fill="currentColor" />
-
-                  <rect x="10" y="75" width="15" height="15" fill="currentColor" />
-                  <rect x="13" y="78" width="9" height="9" fill="black" />
-                  <rect x="15" y="80" width="5" height="5" fill="currentColor" />
-
-                  {/* Random simulated code blocks */}
-                  <rect x="35" y="10" width="5" height="10" />
-                  <rect x="45" y="15" width="10" height="5" />
-                  <rect x="60" y="10" width="5" height="5" />
-                  <rect x="35" y="25" width="15" height="5" />
-                  <rect x="55" y="20" width="5" height="15" />
-                  <rect x="65" y="25" width="10" height="5" />
-
-                  <rect x="10" y="35" width="5" height="15" />
-                  <rect x="20" y="45" width="10" height="5" />
-                  <rect x="15" y="55" width="5" height="10" />
-                  <rect x="30" y="45" width="15" height="15" />
-                  <rect x="50" y="45" width="5" height="5" />
-                  <rect x="60" y="40" width="15" height="5" />
-
-                  <rect x="75" y="35" width="5" height="10" />
-                  <rect x="85" y="45" width="10" height="5" />
-                  <rect x="80" y="55" width="5" height="15" />
-
-                  <rect x="35" y="65" width="10" height="5" />
-                  <rect x="30" y="75" width="5" height="10" />
-                  <rect x="45" y="80" width="15" height="5" />
-                  <rect x="40" y="88" width="10" height="5" />
-                  <rect x="60" y="70" width="5" height="15" />
-                  <rect x="70" y="75" width="15" height="5" />
-                  <rect x="65" y="85" width="5" height="10" />
-                  <rect x="75" y="85" width="15" height="5" />
-                  
-                  {/* Central Shield Icon */}
-                  <rect x="40" y="40" width="20" height="20" fill="black" />
-                  <path d="M50,42 L57,45 L57,51 C57,55.5 54,58 50,59 C46,58 43,55.5 43,51 L43,45 L50,42 Z" fill="#EF9F27" />
-                </svg>
+                <Image 
+                  src="/payment_qr.png" 
+                  alt="Kourage Fitness UPI Payment QR Code" 
+                  width={200} 
+                  height={200} 
+                  className="rounded-md shadow-[0_0_15px_rgba(239,159,39,0.3)] z-10" 
+                  priority
+                />
                 
                 {/* Glowing Scanning line animation */}
                 <div className="absolute left-6 right-6 h-[2px] bg-gym-gold/60 shadow-[0_0_10px_#EF9F27] animate-[pulse_2s_infinite] pointer-events-none" style={{ top: "50%" }} />
