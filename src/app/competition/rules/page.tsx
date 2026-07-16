@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import AnimatedRays from "@/components/ui/animated-rays";
 
 const InstagramLogo = ({ size = 24, ...props }: React.SVGProps<SVGSVGElement> & { size?: number }) => (
@@ -153,7 +154,12 @@ export default function RulesPage() {
         {/* Overlay grid details */}
         <div className="absolute inset-0 z-0 grid-bg-overlay opacity-30 pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-6 relative z-10 w-full py-16 md:py-20 flex flex-col items-center text-center">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="max-w-7xl mx-auto px-6 relative z-10 w-full py-16 md:py-20 flex flex-col items-center text-center"
+        >
           <span className="font-sans text-xs md:text-sm uppercase tracking-[0.3em] text-gym-gold mb-6 font-semibold">
             Kourage Master Physique
           </span>
@@ -163,7 +169,7 @@ export default function RulesPage() {
           <p className="font-inter text-base sm:text-lg md:text-xl text-gym-white/70 max-w-2xl mt-6 leading-relaxed">
             Understand the complete participation process and rules before submitting your entry.
           </p>
-        </div>
+        </motion.div>
       </section>
 
       {/* 3. HOW PARTICIPATION WORKS TIMELINE */}
@@ -171,7 +177,13 @@ export default function RulesPage() {
         <div className="absolute inset-0 grid-bg-overlay opacity-15 pointer-events-none" />
         <div className="max-w-5xl mx-auto px-6 relative z-10">
           
-          <div className="w-full flex flex-col items-center text-center mb-20">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6 }}
+            className="w-full flex flex-col items-center text-center mb-20"
+          >
             <span className="font-sans text-xs uppercase tracking-[0.2em] text-gym-gold mb-3 font-semibold">
               STEP-BY-STEP PROCESS
             </span>
@@ -181,7 +193,7 @@ export default function RulesPage() {
             <p className="font-inter text-xs sm:text-sm text-gym-white/60 max-w-xl mt-4 leading-relaxed">
               Below is the step-by-step timeline of how you participate, complete payment verification, and submit your entry.
             </p>
-          </div>
+          </motion.div>
 
           {/* Premium Vertical Timeline / Stepper */}
           <div className="relative w-full">
@@ -192,7 +204,11 @@ export default function RulesPage() {
               {steps.map((step, idx) => {
                 const isEven = idx % 2 === 0;
                 return (
-                  <div 
+                  <motion.div 
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.5 }}
                     key={idx} 
                     className="relative w-full flex flex-col md:flex-row items-start md:items-center justify-start md:justify-between z-10"
                   >
@@ -223,7 +239,7 @@ export default function RulesPage() {
                         </p>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 );
               })}
             </div>
@@ -238,7 +254,13 @@ export default function RulesPage() {
         
         <div className="max-w-3xl mx-auto px-6 relative z-10">
           
-          <div className="w-full flex flex-col items-center text-center mb-16">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6 }}
+            className="w-full flex flex-col items-center text-center mb-16"
+          >
             <span className="font-sans text-xs uppercase tracking-[0.2em] text-gym-gold mb-3 font-semibold">
               COMPREHENSIVE GUIDELINES
             </span>
@@ -248,14 +270,18 @@ export default function RulesPage() {
             <p className="font-inter text-xs sm:text-sm text-gym-white/60 max-w-xl mt-4 leading-relaxed">
               Read the complete Terms &amp; Conditions below before checking the agreement at the bottom.
             </p>
-          </div>
+          </motion.div>
 
           {/* Accordion Component - Accordion ONLY, No cards, no summaries */}
           <div className="flex flex-col gap-4">
             {accordionItems.map((item, idx) => {
               const isOpen = openAccordion === idx;
               return (
-                <div 
+                <motion.div 
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-20px" }}
+                  transition={{ duration: 0.4 }}
                   key={idx}
                   className="border border-border-subtle bg-bg-surface/50 rounded-none transition-all duration-300 hover:border-gym-gold/40"
                 >
@@ -278,13 +304,19 @@ export default function RulesPage() {
                       </p>
                     </div>
                   )}
-                </div>
+                </motion.div>
               );
             })}
           </div>
 
           {/* Checkbox agreement & proceed block (Bottom Section) */}
-          <div className="border-2 border-border-subtle bg-bg-surface/90 p-8 sm:p-12 mt-16 relative rounded-sm text-center">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.5 }}
+            className="border-2 border-border-subtle bg-bg-surface/90 p-8 sm:p-12 mt-16 relative rounded-sm text-center"
+          >
             {/* Corner brackets */}
             <div className="absolute top-3 left-3 w-3 h-3 border-t-2 border-l-2 border-gym-gold/30" />
             <div className="absolute top-3 right-3 w-3 h-3 border-t-2 border-r-2 border-gym-gold/30" />
@@ -320,7 +352,7 @@ export default function RulesPage() {
                 </button>
               )}
             </div>
-          </div>
+            </motion.div>
 
         </div>
       </section>
