@@ -9,6 +9,7 @@ import ProgramCard from "@/components/ProgramCard";
 import SpotlightNavbar from "@/components/ui/spotlight-navbar";
 import FounderBrand from "@/components/FounderBrand";
 import CoachManish from "@/components/CoachManish";
+import Link from "next/link";
 import AboutFeatureCard from "@/components/AboutFeatureCard";
 import Preloader from "@/components/Preloader";
 import InstagramConnect from "@/components/InstagramConnect";
@@ -217,6 +218,7 @@ export default function Home() {
               { label: "Gallery", href: "#gallery" },
               { label: "Founder", href: "#founder" },
               { label: "Why Us", href: "#why-us" },
+              { label: "Competition", href: "#competition" },
               { label: "Contact", href: "#contact" },
             ]}
             onItemClick={(item) => scrollToSection(item.href.replace("#", ""))}
@@ -248,7 +250,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             className="absolute top-full left-0 w-full bg-bg-primary border-b border-gym-gold/15 px-6 py-10 flex flex-col gap-6 md:hidden z-30 shadow-[0_10px_20px_rgba(239,159,39,0.03)]"
           >
-            {["Gallery", "Founder", "Why Us", "Contact"].map((item) => {
+            {["Gallery", "Founder", "Why Us", "Competition", "Contact"].map((item) => {
               const id = item.toLowerCase().replace(" ", "-");
               return (
                 <button
@@ -662,6 +664,105 @@ export default function Home() {
 
           </div>
 
+        </div>
+      </section>
+
+      {/* 8.5. COMPETITION PREVIEW SECTION */}
+      <section id="competition" className="scroll-mt-24 md:scroll-mt-28 py-24 md:py-32 border-b border-border-subtle bg-bg-surface relative overflow-hidden select-none">
+        {/* Subtle grid background */}
+        <div className="absolute inset-0 grid-bg-overlay opacity-15 pointer-events-none" />
+        
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          {/* Section Header */}
+          <div className="w-full flex flex-col items-center text-center mb-16">
+            <span className="font-sans text-xs md:text-sm uppercase tracking-[0.3em] text-gym-gold mb-3 font-semibold">
+              India's Digital Physique Competition
+            </span>
+            <h2 className="font-bebas text-5xl md:text-7xl lg:text-8xl text-gym-white uppercase tracking-wider leading-none">
+              KOURAGE MASTER PHYSIQUE
+            </h2>
+            <p className="font-inter text-sm md:text-base text-gym-white/70 max-w-2xl mt-6 leading-relaxed">
+              Compete from anywhere in India by submitting your official physique posing video. Showcase your hard work, get judged by professionals, and earn national recognition.
+            </p>
+          </div>
+
+          {/* Feature Cards Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 w-full mt-10">
+            {[
+              {
+                num: "01",
+                title: "Participate From Anywhere",
+                text: "No travel required. Submit your official posing video digitally from any city or state across India.",
+                icon: (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="2" y1="12" x2="22" y2="12" />
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                  </svg>
+                )
+              },
+              {
+                num: "02",
+                title: "60 Second Video",
+                text: "Submit a high-quality, continuous 60-second video demonstrating your symmetry and conditioning.",
+                icon: (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M23 7a2 2 0 0 0-2.45-1.45L16 7V5a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2l4.55 1.45A2 2 0 0 0 23 17V7z" />
+                  </svg>
+                )
+              },
+              {
+                num: "03",
+                title: "Professional Judging",
+                text: "Your entry is scored by certified national and international physique judges for authentic results.",
+                icon: (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  </svg>
+                )
+              },
+              {
+                num: "04",
+                title: "Official Kourage Competition",
+                text: "Earn official titles, elite custom medals, and high-performance sponsorship consideration.",
+                icon: (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+                    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+                    <path d="M4 22h16" />
+                    <path d="M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34" />
+                    <path d="M12 2a4 4 0 0 1 4 4v6a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z" />
+                  </svg>
+                )
+              }
+            ].map((card, idx) => (
+              <AboutFeatureCard
+                key={idx}
+                num={card.num}
+                title={card.title}
+                text={card.text}
+                icon={card.icon}
+                className="w-full h-full"
+              />
+            ))}
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mt-16 w-full">
+            <Link
+              href="/competition/rules"
+              className="bg-gym-gold border-2 border-gym-gold text-gym-black font-bebas text-lg uppercase tracking-widest px-10 py-4 hover:bg-transparent hover:text-gym-gold transition-colors duration-300 text-center w-full sm:w-auto inline-flex items-center justify-center gap-2 group/btn"
+            >
+              View Official Rules 
+              <span className="group-hover/btn:translate-x-1 transition-transform duration-300">&rarr;</span>
+            </Link>
+            <Link
+              href="/competition/register"
+              className="border-2 border-gym-white/20 text-gym-white font-bebas text-lg uppercase tracking-widest px-10 py-4 hover:border-gym-gold hover:text-gym-gold transition-colors duration-300 text-center w-full sm:w-auto inline-flex items-center justify-center gap-2"
+            >
+              Register / Submit Entry
+            </Link>
+          </div>
         </div>
       </section>
 
