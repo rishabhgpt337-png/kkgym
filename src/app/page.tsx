@@ -13,6 +13,7 @@ import AboutFeatureCard from "@/components/AboutFeatureCard";
 import Preloader from "@/components/Preloader";
 import InstagramConnect from "@/components/InstagramConnect";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 // Custom SVG Icons to bypass lucide barrel-optimization SWC bugs
 const InstagramLogo = ({ size = 24, ...props }: React.SVGProps<SVGSVGElement> & { size?: number }) => (
@@ -197,13 +198,15 @@ export default function Home() {
               e.preventDefault();
               lenis?.scrollTo(0, { duration: 1.2 });
             }}
-            className="flex items-center justify-start group"
+            className="flex items-center justify-start group relative h-16 sm:h-22 lg:h-32 w-32 sm:w-48 lg:w-64"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img 
+            <Image 
               src="/logo.png" 
-              alt="Kourage Fitness Logo" 
-              className="h-16 sm:h-22 lg:h-32 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+              alt="Kourage Fitness Logo"
+              fill
+              sizes="(max-width: 768px) 128px, (max-width: 1024px) 192px, 256px"
+              className="object-contain transition-transform duration-300 group-hover:scale-105"
+              priority
             />
           </a>
 
@@ -355,14 +358,15 @@ export default function Home() {
                     className="w-full md:w-1/2 select-none group cursor-pointer"
                     onClick={() => setSelectedImage(item)}
                   >
-                    <div className="relative overflow-hidden border-2 border-gym-white/15 group-hover:border-gym-gold/75 transition-colors duration-500 shadow-2xl">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
+                    <div className="relative overflow-hidden border-2 border-gym-white/15 group-hover:border-gym-gold/75 transition-colors duration-500 shadow-xl md:shadow-2xl aspect-[4/3] w-full bg-gym-black/40">
+                      <Image
                         src={item.image}
                         alt={item.title}
-                        className="w-full aspect-[4/3] object-cover transform group-hover:scale-105 transition-transform duration-700"
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        className="object-cover transform group-hover:scale-105 transition-transform duration-700"
                       />
-                      <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/40 transition-all duration-500">
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/40 transition-all duration-500 z-10">
                         <span className="font-bebas tracking-widest text-lg bg-gym-gold text-gym-black px-6 py-2 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
                           VIEW FULL
                         </span>
@@ -502,7 +506,7 @@ export default function Home() {
       {/* 8. CONTACT / LOCATION (Bento-Grid Dashboard) */}
       <section id="contact" className="scroll-mt-24 md:scroll-mt-28 py-24 md:py-32 bg-bg-primary border-b border-border-subtle relative overflow-hidden">
         <div className="absolute inset-0 grid-bg-overlay opacity-15 pointer-events-none" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gym-gold/5 rounded-full filter blur-[120px] pointer-events-none" />
+        <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gym-gold/5 rounded-full filter blur-[120px] pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           
@@ -667,12 +671,15 @@ export default function Home() {
           
           <div className="flex flex-col items-start gap-4">
             <a href="#" className="flex items-center gap-3 group">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img 
-                src="/logo.png" 
-                alt="Kourage Fitness Logo" 
-                className="h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
-              />
+              <div className="relative h-10 w-10 sm:w-16">
+                <Image 
+                  src="/logo.png" 
+                  alt="Kourage Fitness Logo"
+                  fill
+                  sizes="64px"
+                  className="object-contain transition-transform duration-300 group-hover:scale-105"
+                />
+              </div>
               <span className="font-bebas text-2xl md:text-3xl tracking-widest text-gym-white group-hover:text-gym-gold transition-colors duration-300">
                 KOURAGE FITNESS<span className="text-gym-gold">.</span>
               </span>
@@ -754,12 +761,13 @@ export default function Home() {
                 <span>CLOSE</span> <X className="w-5 h-5 sm:w-7 sm:h-7" />
               </button>
               
-              <div className="relative w-full shadow-[0_0_50px_rgba(239,159,39,0.15)] border border-gym-gold/20 overflow-hidden group/modal">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+              <div className="relative w-full h-[60vh] sm:h-[85vh] shadow-[0_0_50px_rgba(239,159,39,0.15)] border border-gym-gold/20 overflow-hidden group/modal bg-gym-black">
+                <Image
                   src={selectedImage.image}
                   alt={selectedImage.title}
-                  className="w-full h-auto max-h-[85vh] object-contain bg-gym-black select-none"
+                  fill
+                  sizes="(max-width: 1200px) 100vw, 1200px"
+                  className="object-contain select-none"
                 />
                 
                 {/* Image Details Overlay */}

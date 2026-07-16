@@ -109,9 +109,14 @@ export function TwistingRibbon({
       if (!container || !canvas) return;
       width = container.clientWidth;
       height = container.clientHeight;
-      canvas.width = width * window.devicePixelRatio;
-      canvas.height = height * window.devicePixelRatio;
-      ctx!.scale(window.devicePixelRatio, window.devicePixelRatio);
+      
+      // Throttle pixel density on mobile to save GPU (cap to 1 on phones, max 2 on desktop)
+      const isMobile = width < 768;
+      const dpr = Math.min(window.devicePixelRatio, isMobile ? 1 : 2);
+      
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx!.scale(dpr, dpr);
     }
 
     window.addEventListener("resize", resize);
@@ -126,10 +131,10 @@ export function TwistingRibbon({
       ];
     }
 
-    function buildSpine(time: number) {
+    function buildSpine(time: number, segs: number) {
       const pts = [];
-      for (let i = 0; i <= segments; i++) {
-        const progress = i / segments;
+      for (let i = 0; i <= segs; i++) {
+        const progress = i / segs;
         pts.push({
           x: progress * width * RIBBON_X_SCALE - width * RIBBON_X_OFFSET,
           y:
@@ -164,14 +169,15 @@ export function TwistingRibbon({
     function buildEdges(
       pts: { x: number; y: number }[],
       normals: { nx: number; ny: number }[],
-      time: number
+      time: number,
+      segs: number
     ) {
       const tops = [];
       const bots = [];
       const twists = [];
-      for (let i = 0; i <= segments; i++) {
+      for (let i = 0; i <= segs; i++) {
         const twist = Math.cos(
-          (i / segments) * Math.PI * twistCycles + time * TWIST_TIME_SPEED
+          (i / segs) * Math.PI * twistCycles + time * TWIST_TIME_SPEED
         );
         const w = RIBBON_HALF_W * Math.abs(twist);
         const sign = twist >= 0 ? 1 : -1;
@@ -231,13 +237,14 @@ export function TwistingRibbon({
     function drawShadow(
       tops: { x: number; y: number }[],
       bots: { x: number; y: number }[],
-      isDark: boolean
+      isDark: boolean,
+      segs: number
     ) {
       if (!ctx) return;
       const color = isDark ? D_SHADOW_COLOR : L_SHADOW_COLOR;
       const alpha = isDark ? D_SHADOW_ALPHA : L_SHADOW_ALPHA;
       ctx.fillStyle = `rgba(${color[0]}, ${color[1]}, ${color[2]}, ${alpha})`;
-      for (let i = 0; i < segments; i++) {
+      for (let i = 0; i < segs; i++) {
         drawQuad(
           tops[i].x + SHADOW_OFFSET_X,
           tops[i].y + SHADOW_OFFSET_Y,
@@ -256,14 +263,15 @@ export function TwistingRibbon({
       bots: { x: number; y: number }[],
       twists: number[],
       time: number,
-      isDark: boolean
+      isDark: boolean,
+      segs: number
     ) {
       if (!ctx) return;
       const edgeColor = isDark ? D_EDGE_COLOR : L_EDGE_COLOR;
       const edgeAlpha = isDark ? D_EDGE_ALPHA : L_EDGE_ALPHA;
 
-      for (let i = 0; i < segments; i++) {
-        const [r, g, b] = getRibbonColor(i / segments, twists[i], time, isDark);
+      for (let i = 0; i < segs; i++) {
+        const [r, g, b] = getRibbonColor(i / segs, twists[i], time, isDark);
         ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
         drawQuad(
           tops[i].x,
@@ -299,13 +307,16 @@ export function TwistingRibbon({
 
       // Always render in gym-dark mode or check document class
       const isDark = true; // For Kourage Fitness, it is a near-black site
+      
+      // Dynamically lower segment detail on mobile
+      const dynamicSegments = width < 768 ? Math.floor(segments * 0.4) : segments;
 
-      const pts = buildSpine(t);
+      const pts = buildSpine(t, dynamicSegments);
       const normals = buildNormals(pts);
-      const { tops, bots, twists } = buildEdges(pts, normals, t);
+      const { tops, bots, twists } = buildEdges(pts, normals, t, dynamicSegments);
 
-      drawShadow(tops, bots, isDark);
-      drawRibbon(tops, bots, twists, t, isDark);
+      drawShadow(tops, bots, isDark, dynamicSegments);
+      drawRibbon(tops, bots, twists, t, isDark, dynamicSegments);
 
       animationFrameId = requestAnimationFrame(render);
     }

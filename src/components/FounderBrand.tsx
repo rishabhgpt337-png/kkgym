@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import Image from "next/image";
 
 interface AchievementDetail {
   year: string;
@@ -168,13 +169,17 @@ export function FounderBrand() {
       <section className="relative min-h-[90vh] flex flex-col justify-center items-center overflow-hidden bg-[#1A1210] select-none">
         
         {/* BEAT 1 BACKGROUND: Group Podium Stage Photo */}
-        <div 
-          className="absolute inset-0 z-0 bg-cover bg-center transition-opacity duration-1000"
-          style={{
-            backgroundImage: "linear-gradient(to bottom, rgba(26, 18, 16, 0.85) 0%, rgba(26, 18, 16, 0.7) 50%, rgba(26, 18, 16, 0.95) 100%), url('/jagesh_stage.jpg')",
-            backgroundPosition: "center 30%",
-          }}
-        />
+        <div className="absolute inset-0 z-0">
+          <Image 
+            src="/jagesh_stage.jpg" 
+            alt="Stage Background"
+            fill
+            sizes="100vw"
+            priority
+            className="object-cover object-[center_30%]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#1A1210]/85 via-[#1A1210]/70 to-[#1A1210]/95" />
+        </div>
         
         {/* Intro Tagline & Name Fades */}
         <div className="relative z-10 text-center max-w-4xl px-6">
@@ -224,11 +229,12 @@ export function FounderBrand() {
               className="lg:col-span-5 flex justify-center"
             >
               <div className="relative aspect-[3/4] w-full max-w-[380px] border-2 border-gym-gold bg-[#3D141B] overflow-hidden group shadow-2xl">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src="/jagesh_flag.jpg"
                   alt="Jagesh Dait competitive journey"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-103"
+                  fill
+                  sizes="(max-width: 768px) 380px, 380px"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute bottom-4 left-4 z-20 bg-[#1A1210] border border-gym-gold px-4 py-1.5 font-sans text-[10px] uppercase text-[#EF9F27] tracking-widest font-bold">
                   International Athlete
@@ -287,12 +293,15 @@ export function FounderBrand() {
         className="scroll-mt-24 md:scroll-mt-28 py-24 md:py-32 bg-[#1A1210] border-t border-[#5C1F27]/30 relative overflow-hidden select-none"
       >
         {/* ATMOSPHERIC BACKGROUND LAYER: Heavily darkened & blurred SOLO photo */}
-        <div 
-          className="absolute inset-0 z-0 bg-no-repeat bg-cover bg-center filter blur-3xl brightness-[15%] opacity-35"
-          style={{
-            backgroundImage: "url('/jagesh_flag.jpg')",
-          }}
-        />
+        <div className="hidden md:block absolute inset-0 z-0 overflow-hidden opacity-35 pointer-events-none">
+          <Image 
+            src="/jagesh_flag.jpg" 
+            alt="Atmospheric background"
+            fill
+            sizes="100vw"
+            className="object-cover object-center filter blur-3xl brightness-[15%]"
+          />
+        </div>
 
         <div className="max-w-6xl mx-auto px-6 relative z-20">
           
