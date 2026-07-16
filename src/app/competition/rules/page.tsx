@@ -325,69 +325,24 @@ export default function RulesPage() {
         </div>
       </section>
 
-      {/* 5. FOOTER */}
-      <footer className="bg-bg-primary border-t border-border-subtle py-16 text-gym-white/50 text-sm">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12">
+      {/* FOOTER */}
+      <footer className="bg-bg-primary border-t border-border-subtle py-12 text-gym-white/50 text-xs font-sans relative z-10 select-none">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+          <p>© 2026 Kourage Fitness. All Rights Reserved.</p>
           
-          <div className="flex flex-col items-start gap-4">
-            <Link href="/" className="flex items-center gap-3 group">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img 
-                src="/logo.png" 
-                alt="Kourage Fitness Logo" 
-                className="h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
-              />
-              <span className="font-bebas text-2xl md:text-3xl tracking-widest text-gym-white group-hover:text-gym-gold transition-colors duration-300">
-                KOURAGE FITNESS<span className="text-gym-gold">.</span>
-              </span>
+          <div className="flex items-center gap-6 text-gym-white/40">
+            <Link href="/privacy-policy" className="hover:text-gym-gold transition-colors">
+              Privacy Policy
             </Link>
-            <p className="font-inter text-xs text-gym-white/40 leading-relaxed max-w-xs">
-              Transform Your Body. Elevate Your Mind.
-            </p>
-            <div className="flex items-center gap-2 mt-2">
-              <span className="text-gym-gold text-lg">★★★★★</span>
-              <span className="font-sans text-xs text-gym-white/40">4.9 (40 Reviews)</span>
-            </div>
+            <span>•</span>
+            <Link href="/terms-of-use" className="hover:text-gym-gold transition-colors">
+              Terms of Use
+            </Link>
+            <span>•</span>
+            <Link href="/disclaimer" className="hover:text-gym-gold transition-colors">
+              Disclaimer
+            </Link>
           </div>
-
-          <div>
-            <h4 className="font-sans text-xs uppercase tracking-widest text-gym-white/80 mb-4">Contact Channels</h4>
-            <ul className="space-y-3 font-sans text-xs">
-              <li>
-                <a href="tel:+918169455350" className="hover:text-gym-gold transition-colors flex items-center gap-2">
-                  <Phone size={14} className="text-gym-gold" />
-                  +91 81694 55350
-                </a>
-              </li>
-              <li>
-                <a href="https://wa.me/918169455350" target="_blank" rel="noopener noreferrer" className="hover:text-gym-gold transition-colors flex items-center gap-2">
-                  <span className="text-gym-gold font-bold">WA</span>
-                  WhatsApp Us
-                </a>
-              </li>
-              <li>
-                <a href="https://www.instagram.com/kouragefitness_official/" target="_blank" rel="noopener noreferrer" className="hover:text-gym-gold transition-colors flex items-center gap-2">
-                  <InstagramLogo size={14} className="text-gym-gold" />
-                  @kouragefitness_official
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-sans text-xs uppercase tracking-widest text-gym-white/80 mb-4">Address &amp; Operating Hours</h4>
-            <p className="font-inter text-xs text-gym-white/40 leading-relaxed">
-              2nd Floor, B Wing, Bhagyashree Apartment,<br />
-              Dr Ambedkar Road, Mulund West, Mumbai 400080<br />
-              Opens 5:30 AM Daily
-            </p>
-          </div>
-
-        </div>
-
-        <div className="max-w-7xl mx-auto px-6 border-t border-border-subtle mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-sans">
-          <p>© 2026 Kourage Fitness. All rights reserved.</p>
-          <p className="text-gym-white/20">Excellence in every detail.</p>
         </div>
       </footer>
     </div>
