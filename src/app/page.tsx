@@ -795,12 +795,6 @@ export default function Home() {
               View Official Rules 
               <span className="group-hover/btn:translate-x-1 transition-transform duration-300">&rarr;</span>
             </Link>
-            <Link
-              href="/competition/register"
-              className="border-2 border-gym-white/20 text-gym-white font-bebas text-lg uppercase tracking-widest px-10 py-4 hover:border-gym-gold hover:text-gym-gold transition-colors duration-300 text-center w-full sm:w-auto inline-flex items-center justify-center gap-2"
-            >
-              Register / Submit Entry
-            </Link>
           </div>
         </div>
       </section>
