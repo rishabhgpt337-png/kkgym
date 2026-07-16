@@ -25,39 +25,39 @@ export default function RulesPage() {
 
   const steps = [
     {
-      num: "01",
-      title: "Read Official Rules",
-      desc: "Understand eligibility, mandatory poses, video guidelines, and terms."
+      num: "Step 1",
+      title: "Read the Official Rules",
+      desc: "Before participating, every participant must carefully read all the Terms & Conditions."
     },
     {
-      num: "02",
-      title: "Complete Payment",
-      desc: "Scan the official UPI QR code on the next page and transfer the registration fee."
+      num: "Step 2",
+      title: "Accept the Rules",
+      desc: "At the end of the Rules page, show a checkbox: 'I have read and agree to the Official Terms & Conditions.' The Proceed to Participate button must remain disabled until this checkbox is selected. Once checked, enable the button."
     },
     {
-      num: "03",
-      title: "Send Screenshot",
-      desc: "Click the WhatsApp button to send your successful payment receipt screenshot for verification."
+      num: "Step 3",
+      title: "Registration Payment",
+      desc: "Redirect the participant to the Registration page. Display the QR Code and payment instructions."
     },
     {
-      num: "04",
-      title: "Verification Check",
-      desc: "Our admin team verifies the transaction and registers your spot on our official roster."
+      num: "Step 4",
+      title: "Payment Verification",
+      desc: "After payment, participants must send their payment screenshot on WhatsApp. This is NOT the competition submission. It is only used to verify payment."
     },
     {
-      num: "05",
-      title: "Upload & Submit Reel",
-      desc: "Post your 60-second posing video on Instagram as a Reel and DM/message us the direct link."
+      num: "Step 5",
+      title: "Reel Submission",
+      desc: "After payment verification, our team will contact the participant on WhatsApp and ask them to upload their Instagram Reel and send the Reel link. Only verified participants can submit their Reel."
     },
     {
-      num: "06",
-      title: "Professional Judging",
-      desc: "Our panel scores your entry based on symmetry, muscularity, condition, and presentation."
+      num: "Step 6",
+      title: "Selection",
+      desc: "The judging panel will review all verified entries. Submitting a Reel does not guarantee selection."
     },
     {
-      num: "07",
-      title: "Result & Refund",
-      desc: "Status updates are sent via WhatsApp. Non-selected participants receive a 100% registration refund."
+      num: "Step 7",
+      title: "Refund Policy",
+      desc: "If a participant is not selected, the registration amount will be refunded. Participants will be informed about their selection status and refund process through WhatsApp."
     }
   ];
 
@@ -166,49 +166,67 @@ export default function RulesPage() {
         </div>
       </section>
 
-      {/* 3. HOW IT WORKS TIMELINE */}
+      {/* 3. HOW PARTICIPATION WORKS TIMELINE */}
       <section className="py-24 bg-bg-surface relative border-b border-border-subtle overflow-hidden">
         <div className="absolute inset-0 grid-bg-overlay opacity-15 pointer-events-none" />
-        <div className="max-w-6xl mx-auto px-6 relative z-10">
+        <div className="max-w-5xl mx-auto px-6 relative z-10">
           
-          <div className="w-full flex flex-col items-center text-center mb-16">
+          <div className="w-full flex flex-col items-center text-center mb-20">
             <span className="font-sans text-xs uppercase tracking-[0.2em] text-gym-gold mb-3 font-semibold">
               STEP-BY-STEP PROCESS
             </span>
             <h2 className="font-bebas text-4xl md:text-6xl text-gym-white uppercase tracking-wider">
-              How It Works
+              How Participation Works
             </h2>
             <p className="font-inter text-xs sm:text-sm text-gym-white/60 max-w-xl mt-4 leading-relaxed">
-              We have designed a secure, transparent digital flow. Read the process below to know how your entry moves from payment to professional selection.
+              Below is the step-by-step timeline of how you participate, complete payment verification, and submit your entry.
             </p>
           </div>
 
-          {/* Steps Timeline Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-7 gap-6">
-            {steps.map((step, idx) => (
-              <div 
-                key={idx} 
-                className="border border-border-subtle bg-bg-primary/45 p-6 relative rounded-sm flex flex-col justify-between group hover:border-gym-gold transition-all duration-300 shadow-md lg:col-span-1"
-              >
-                {/* Corner Brackets */}
-                <div className="absolute top-2 left-2 w-2 h-2 border-t border-l border-gym-gold/25 group-hover:border-gym-gold transition-colors" />
-                <div className="absolute top-2 right-2 w-2 h-2 border-t border-r border-gym-gold/25 group-hover:border-gym-gold transition-colors" />
-                <div className="absolute bottom-2 left-2 w-2 h-2 border-b border-l border-gym-gold/25 group-hover:border-gym-gold transition-colors" />
-                <div className="absolute bottom-2 right-2 w-2 h-2 border-b border-r border-gym-gold/25 group-hover:border-gym-gold transition-colors" />
+          {/* Premium Vertical Timeline / Stepper */}
+          <div className="relative w-full">
+            {/* Central line connector */}
+            <div className="absolute left-4 md:left-1/2 top-4 bottom-4 w-0.5 bg-gradient-to-b from-gym-gold via-gym-gold/40 to-gym-gold/5 -translate-x-1/2 z-0" />
 
-                <div>
-                  <span className="font-bebas text-4xl text-gym-gold/30 group-hover:text-gym-gold transition-colors block mb-4">
-                    {step.num}
-                  </span>
-                  <h4 className="font-bebas text-lg uppercase tracking-wider text-gym-white mb-2 leading-tight group-hover:text-gym-gold/90 transition-colors">
-                    {step.title}
-                  </h4>
-                </div>
-                <p className="font-inter text-[11px] text-gym-white/60 leading-relaxed mt-2">
-                  {step.desc}
-                </p>
-              </div>
-            ))}
+            <div className="flex flex-col gap-16 w-full">
+              {steps.map((step, idx) => {
+                const isEven = idx % 2 === 0;
+                return (
+                  <div 
+                    key={idx} 
+                    className="relative w-full flex flex-col md:flex-row items-start md:items-center justify-start md:justify-between z-10"
+                  >
+                    {/* Centered Circle Stepper Number */}
+                    <div className="absolute left-4 md:left-1/2 -translate-x-1/2 w-10 h-10 rounded-full border-2 border-gym-gold bg-bg-surface text-gym-gold flex items-center justify-center font-bebas text-lg font-bold shadow-[0_0_15px_rgba(239,159,39,0.2)] z-20">
+                      {idx + 1}
+                    </div>
+
+                    {/* Timeline Card */}
+                    <div className={`w-full md:w-[calc(50%-2.5rem)] ml-12 md:ml-0 ${
+                      isEven ? "md:mr-auto text-left" : "md:ml-auto text-left"
+                    }`}>
+                      <div className="border border-border-subtle bg-bg-primary/80 p-6 sm:p-8 relative rounded-sm group hover:border-gym-gold transition-all duration-300 shadow-xl">
+                        {/* Corner Brackets */}
+                        <div className="absolute top-3 left-3 w-3 h-3 border-t-2 border-l-2 border-gym-gold/20 group-hover:border-gym-gold transition-all duration-300" />
+                        <div className="absolute top-3 right-3 w-3 h-3 border-t-2 border-r-2 border-gym-gold/20 group-hover:border-gym-gold transition-all duration-300" />
+                        <div className="absolute bottom-3 left-3 w-3 h-3 border-b-2 border-l-2 border-gym-gold/20 group-hover:border-gym-gold transition-all duration-300" />
+                        <div className="absolute bottom-3 right-3 w-3 h-3 border-b-2 border-r-2 border-gym-gold/20 group-hover:border-gym-gold transition-all duration-300" />
+
+                        <span className="font-bebas text-sm text-gym-gold tracking-widest block mb-1">
+                          {step.num}
+                        </span>
+                        <h4 className="font-bebas text-xl sm:text-2xl uppercase tracking-wider text-gym-white mb-3 group-hover:text-gym-gold transition-colors">
+                          {step.title}
+                        </h4>
+                        <p className="font-inter text-xs sm:text-sm text-gym-white/70 leading-relaxed">
+                          {step.desc}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
 
         </div>
@@ -222,14 +240,17 @@ export default function RulesPage() {
           
           <div className="w-full flex flex-col items-center text-center mb-16">
             <span className="font-sans text-xs uppercase tracking-[0.2em] text-gym-gold mb-3 font-semibold">
-              COMPREHENSIVE TERMS
+              COMPREHENSIVE GUIDELINES
             </span>
             <h2 className="font-bebas text-4xl md:text-6xl text-gym-white uppercase tracking-wider">
-              Terms &amp; Conditions
+              Official Rules
             </h2>
+            <p className="font-inter text-xs sm:text-sm text-gym-white/60 max-w-xl mt-4 leading-relaxed">
+              Read the complete Terms &amp; Conditions below before checking the agreement at the bottom.
+            </p>
           </div>
 
-          {/* Accordion Component */}
+          {/* Accordion Component - Accordion ONLY, No cards, no summaries */}
           <div className="flex flex-col gap-4">
             {accordionItems.map((item, idx) => {
               const isOpen = openAccordion === idx;
@@ -252,7 +273,7 @@ export default function RulesPage() {
                   
                   {isOpen && (
                     <div className="px-6 pb-6 pt-1 border-t border-border-subtle/50 animate-fade-in">
-                      <p className="font-inter text-xs sm:text-sm text-gym-white/70 leading-relaxed">
+                      <p className="font-inter text-xs sm:text-sm text-gym-white/70 leading-relaxed whitespace-pre-wrap">
                         {item.content}
                       </p>
                     </div>
@@ -262,7 +283,7 @@ export default function RulesPage() {
             })}
           </div>
 
-          {/* Checkbox agreement & proceed block */}
+          {/* Checkbox agreement & proceed block (Bottom Section) */}
           <div className="border-2 border-border-subtle bg-bg-surface/90 p-8 sm:p-12 mt-16 relative rounded-sm text-center">
             {/* Corner brackets */}
             <div className="absolute top-3 left-3 w-3 h-3 border-t-2 border-l-2 border-gym-gold/30" />

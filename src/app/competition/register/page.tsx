@@ -242,42 +242,14 @@ export default function RegisterPage() {
                 <div className="flex flex-col gap-4 mt-2">
                   <div className="flex gap-4">
                     <span className="w-6 h-6 rounded-full border border-gym-gold/45 text-gym-gold font-bebas text-xs flex items-center justify-center shrink-0">
-                      1
-                    </span>
-                    <div>
-                      <h4 className="font-bebas text-sm uppercase tracking-wider text-gym-white leading-none mb-1">
-                        Scan &amp; Pay {entryFee}
-                      </h4>
-                      <p className="font-inter text-xs text-gym-white/50 leading-normal">
-                        Verify the merchant name as **Kourage Fitness** when paying.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-4">
-                    <span className="w-6 h-6 rounded-full border border-gym-gold/45 text-gym-gold font-bebas text-xs flex items-center justify-center shrink-0">
-                      2
-                    </span>
-                    <div>
-                      <h4 className="font-bebas text-sm uppercase tracking-wider text-gym-white leading-none mb-1">
-                        Send Screenshot
-                      </h4>
-                      <p className="font-inter text-xs text-gym-white/50 leading-normal">
-                        Take a clear screenshot showing the transaction details &amp; UTR number. Click the WhatsApp button to submit.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-4">
-                    <span className="w-6 h-6 rounded-full border border-gym-gold/45 text-gym-gold font-bebas text-xs flex items-center justify-center shrink-0">
                       3
                     </span>
                     <div>
                       <h4 className="font-bebas text-sm uppercase tracking-wider text-gym-white leading-none mb-1">
-                        Reel Request
+                        Registration Payment
                       </h4>
                       <p className="font-inter text-xs text-gym-white/50 leading-normal">
-                        After verification, Kourage team will invite you on WhatsApp to submit your posing Reel link.
+                        Scan the QR Code to complete the registration fee payment.
                       </p>
                     </div>
                   </div>
@@ -288,10 +260,52 @@ export default function RegisterPage() {
                     </span>
                     <div>
                       <h4 className="font-bebas text-sm uppercase tracking-wider text-gym-white leading-none mb-1">
-                        Judging &amp; Refund
+                        Payment Verification
                       </h4>
                       <p className="font-inter text-xs text-gym-white/50 leading-normal">
-                        Your entry goes to the judges. If you are not selected into the official bracket, receive a full refund.
+                        Send payment screenshot on WhatsApp. This is only used to verify payment, NOT for entry submission.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-4">
+                    <span className="w-6 h-6 rounded-full border border-gym-gold/45 text-gym-gold font-bebas text-xs flex items-center justify-center shrink-0">
+                      5
+                    </span>
+                    <div>
+                      <h4 className="font-bebas text-sm uppercase tracking-wider text-gym-white leading-none mb-1">
+                        Reel Submission
+                      </h4>
+                      <p className="font-inter text-xs text-gym-white/50 leading-normal">
+                        After verification, Kourage team will contact you on WhatsApp to request your Instagram Reel upload and link.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-4">
+                    <span className="w-6 h-6 rounded-full border border-gym-gold/45 text-gym-gold font-bebas text-xs flex items-center justify-center shrink-0">
+                      6
+                    </span>
+                    <div>
+                      <h4 className="font-bebas text-sm uppercase tracking-wider text-gym-white leading-none mb-1">
+                        Selection
+                      </h4>
+                      <p className="font-inter text-xs text-gym-white/50 leading-normal">
+                        The judging panel reviews all verified entries. Reel submission does not guarantee selection.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-4">
+                    <span className="w-6 h-6 rounded-full border border-gym-gold/45 text-gym-gold font-bebas text-xs flex items-center justify-center shrink-0">
+                      7
+                    </span>
+                    <div>
+                      <h4 className="font-bebas text-sm uppercase tracking-wider text-gym-white leading-none mb-1">
+                        Refund Policy
+                      </h4>
+                      <p className="font-inter text-xs text-gym-white/50 leading-normal">
+                        If a participant is not selected, the registration amount is fully refunded on WhatsApp.
                       </p>
                     </div>
                   </div>
