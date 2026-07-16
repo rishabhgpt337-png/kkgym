@@ -20,71 +20,16 @@ const Phone = ({ size = 24, ...props }: React.SVGProps<SVGSVGElement> & { size?:
 
 export default function RegisterPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    phone: "",
-    location: "",
-    category: "Mens Physique",
-    videoLink: "",
-    agreeToRules: false,
-  });
+  const [copied, setCopied] = useState(false);
 
-  const [errors, setErrors] = useState<Record<string, string>>({});
-  const [submitted, setSubmitted] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
+  const upiId = "kouragefitness@upi";
+  const entryFee = "₹999/-";
+  const whatsappLink = "https://wa.me/918169455350?text=Hello%20Kourage%20Fitness%2C%20I%20have%20completed%20the%20UPI%20payment%20for%20the%20Kourage%20Master%20Physique%20competition.%20Attached%20is%20my%20transaction%20screenshot%20for%20verification.";
 
-  const validate = () => {
-    const newErrors: Record<string, string> = {};
-    if (!formData.fullName.trim()) newErrors.fullName = "Full name is required";
-    if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "Please enter a valid email address";
-    }
-    if (!formData.phone.trim()) newErrors.phone = "Phone number is required";
-    if (!formData.location.trim()) newErrors.location = "City and State are required";
-    
-    if (!formData.videoLink.trim()) {
-      newErrors.videoLink = "Posing video link is required";
-    } else if (!/^(https?:\/\/)?(www\.)?(drive\.google\.com|youtube\.com|youtu\.be)\/.+$/i.test(formData.videoLink)) {
-      newErrors.videoLink = "Link must be a Google Drive or YouTube URL";
-    }
-
-    if (!formData.agreeToRules) {
-      newErrors.agreeToRules = "You must agree to the official rules";
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value, type } = e.target;
-    if (type === "checkbox") {
-      const checked = (e.target as HTMLInputElement).checked;
-      setFormData((prev) => ({ ...prev, [name]: checked }));
-      if (errors[name]) {
-        setErrors((prev) => ({ ...prev, [name]: "" }));
-      }
-    } else {
-      setFormData((prev) => ({ ...prev, [name]: value }));
-      if (errors[name]) {
-        setErrors((prev) => ({ ...prev, [name]: "" }));
-      }
-    }
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!validate()) return;
-
-    setSubmitting(true);
-    // Simulate API request delay
-    setTimeout(() => {
-      setSubmitting(false);
-      setSubmitted(true);
-    }, 1500);
+  const handleCopyUpi = () => {
+    navigator.clipboard.writeText(upiId);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   return (
@@ -154,7 +99,7 @@ export default function RegisterPage() {
       </header>
 
       {/* 2. HERO */}
-      <section className="relative w-full min-h-[35vh] md:min-h-[40vh] flex items-center overflow-hidden border-b-2 border-gym-white/10 bg-gym-black pt-32 sm:pt-40">
+      <section className="relative w-full min-h-[30vh] md:min-h-[35vh] flex items-center overflow-hidden border-b-2 border-gym-white/10 bg-gym-black pt-32 sm:pt-40">
         <div className="absolute inset-0 z-0">
           <AnimatedRays className="w-full h-full" />
         </div>
@@ -167,231 +112,208 @@ export default function RegisterPage() {
             Kourage Master Physique
           </span>
           <h1 className="font-bebas text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-gym-white tracking-wide uppercase leading-none max-w-4xl select-none">
-            Official <span className="text-gym-gold">Registration</span>
+            Scan <span className="text-gym-gold">&amp; Participate</span>
           </h1>
         </div>
       </section>
 
-      {/* 3. REGISTRATION FORM */}
+      {/* 3. PAYMENT PORTAL */}
       <section className="py-24 bg-bg-surface relative overflow-hidden flex-grow flex items-center justify-center">
         {/* Subtle grid background */}
         <div className="absolute inset-0 grid-bg-overlay opacity-15 pointer-events-none" />
         
-        <div className="max-w-xl w-full mx-auto px-6 relative z-10">
+        <div className="max-w-4xl w-full mx-auto px-6 relative z-10">
           
-          <div className="border-2 border-border-subtle bg-bg-primary/75 p-8 sm:p-12 relative rounded-sm shadow-2xl hover:border-gym-gold/50 transition-colors duration-500">
-            {/* Corner Brackets */}
-            <div className="absolute top-3 left-3 w-3 h-3 border-t-2 border-l-2 border-gym-gold/25" />
-            <div className="absolute top-3 right-3 w-3 h-3 border-t-2 border-r-2 border-gym-gold/25" />
-            <div className="absolute bottom-3 left-3 w-3 h-3 border-b-2 border-l-2 border-gym-gold/25" />
-            <div className="absolute bottom-3 right-3 w-3 h-3 border-b-2 border-r-2 border-gym-gold/25" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-stretch">
+            
+            {/* Left side: QR Code & UPI details */}
+            <div className="border-2 border-border-subtle bg-bg-primary/75 p-8 relative rounded-sm shadow-2xl hover:border-gym-gold/30 transition-colors duration-500 flex flex-col items-center justify-between text-center">
+              {/* Corner Brackets */}
+              <div className="absolute top-3 left-3 w-3 h-3 border-t-2 border-l-2 border-gym-gold/25" />
+              <div className="absolute top-3 right-3 w-3 h-3 border-t-2 border-r-2 border-gym-gold/25" />
+              <div className="absolute bottom-3 left-3 w-3 h-3 border-b-2 border-l-2 border-gym-gold/25" />
+              <div className="absolute bottom-3 right-3 w-3 h-3 border-b-2 border-r-2 border-gym-gold/25" />
 
-            {submitted ? (
-              /* Success State */
-              <div className="text-center py-8 flex flex-col items-center justify-center animate-fade-in">
-                <div className="w-20 h-20 bg-gym-gold/10 border-2 border-gym-gold flex items-center justify-center rounded-full mb-6 text-gym-gold animate-bounce">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
+              <div>
+                <span className="font-sans text-[10px] uppercase tracking-[0.2em] text-gym-gold font-bold mb-2 block">
+                  REGISTRATION FEE
+                </span>
+                <div className="font-bebas text-5xl sm:text-6xl text-gym-white tracking-wider mb-6">
+                  {entryFee}
                 </div>
-                <h3 className="font-bebas text-4xl uppercase tracking-wider text-gym-gold mb-4">
-                  Entry Received!
-                </h3>
-                <p className="font-inter text-sm text-gym-white/70 leading-relaxed mb-8">
-                  Thank you for registering for the **Kourage Master Physique Competition**. Your video submission has been queued. Our professional judging panel will review your physique and notify you of the scores and rankings via email.
-                </p>
-                <Link
-                  href="/"
-                  className="bg-gym-gold border-2 border-gym-gold text-gym-black font-bebas text-lg uppercase tracking-widest px-10 py-3 hover:bg-transparent hover:text-gym-gold transition-colors duration-300 w-full text-center block"
-                >
-                  Back to Homepage
-                </Link>
               </div>
-            ) : (
-              /* Registration Form */
-              <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+
+              {/* Vector SVG Mock QR Code */}
+              <div className="relative p-6 border-2 border-gym-gold/25 bg-gym-black/80 rounded-none w-64 h-64 flex items-center justify-center group-hover:border-gym-gold transition-colors duration-300">
+                {/* QR Finder patterns in corners */}
+                <div className="absolute top-3 left-3 w-4 h-4 border-2 border-gym-gold" />
+                <div className="absolute top-3 right-3 w-4 h-4 border-2 border-gym-gold" />
+                <div className="absolute bottom-3 left-3 w-4 h-4 border-2 border-gym-gold" />
+                
+                {/* Stylized QR dots representation */}
+                <svg className="w-48 h-48 text-gym-gold/85" viewBox="0 0 100 100" fill="currentColor">
+                  {/* Grid of stylized square dots representing QR contents */}
+                  <rect x="10" y="10" width="15" height="15" fill="currentColor" />
+                  <rect x="13" y="13" width="9" height="9" fill="black" />
+                  <rect x="15" y="15" width="5" height="5" fill="currentColor" />
+
+                  <rect x="75" y="10" width="15" height="15" fill="currentColor" />
+                  <rect x="78" y="13" width="9" height="9" fill="black" />
+                  <rect x="80" y="15" width="5" height="5" fill="currentColor" />
+
+                  <rect x="10" y="75" width="15" height="15" fill="currentColor" />
+                  <rect x="13" y="78" width="9" height="9" fill="black" />
+                  <rect x="15" y="80" width="5" height="5" fill="currentColor" />
+
+                  {/* Random simulated code blocks */}
+                  <rect x="35" y="10" width="5" height="10" />
+                  <rect x="45" y="15" width="10" height="5" />
+                  <rect x="60" y="10" width="5" height="5" />
+                  <rect x="35" y="25" width="15" height="5" />
+                  <rect x="55" y="20" width="5" height="15" />
+                  <rect x="65" y="25" width="10" height="5" />
+
+                  <rect x="10" y="35" width="5" height="15" />
+                  <rect x="20" y="45" width="10" height="5" />
+                  <rect x="15" y="55" width="5" height="10" />
+                  <rect x="30" y="45" width="15" height="15" />
+                  <rect x="50" y="45" width="5" height="5" />
+                  <rect x="60" y="40" width="15" height="5" />
+
+                  <rect x="75" y="35" width="5" height="10" />
+                  <rect x="85" y="45" width="10" height="5" />
+                  <rect x="80" y="55" width="5" height="15" />
+
+                  <rect x="35" y="65" width="10" height="5" />
+                  <rect x="30" y="75" width="5" height="10" />
+                  <rect x="45" y="80" width="15" height="5" />
+                  <rect x="40" y="88" width="10" height="5" />
+                  <rect x="60" y="70" width="5" height="15" />
+                  <rect x="70" y="75" width="15" height="5" />
+                  <rect x="65" y="85" width="5" height="10" />
+                  <rect x="75" y="85" width="15" height="5" />
+                  
+                  {/* Central Shield Icon */}
+                  <rect x="40" y="40" width="20" height="20" fill="black" />
+                  <path d="M50,42 L57,45 L57,51 C57,55.5 54,58 50,59 C46,58 43,55.5 43,51 L43,45 L50,42 Z" fill="#EF9F27" />
+                </svg>
+                
+                {/* Glowing Scanning line animation */}
+                <div className="absolute left-6 right-6 h-[2px] bg-gym-gold/60 shadow-[0_0_10px_#EF9F27] animate-[pulse_2s_infinite] pointer-events-none" style={{ top: "50%" }} />
+              </div>
+
+              {/* UPI ID block */}
+              <div className="mt-6 w-full">
+                <p className="font-sans text-[10px] text-gym-white/40 uppercase tracking-widest mb-2">
+                  OR USE OFFICIAL UPI ID
+                </p>
+                <div className="flex items-center justify-center gap-3 bg-bg-surface border border-border-subtle px-4 py-3 rounded-none">
+                  <span className="font-sans text-sm font-semibold select-all text-gym-white">
+                    {upiId}
+                  </span>
+                  <button
+                    onClick={handleCopyUpi}
+                    className="text-gym-gold hover:text-gym-white transition-colors text-xs font-sans uppercase font-bold tracking-widest"
+                  >
+                    {copied ? "COPIED!" : "COPY"}
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
+            {/* Right side: Instructions & WhatsApp CTA */}
+            <div className="flex flex-col justify-between p-2">
+              <div className="flex flex-col gap-6">
                 <div>
-                  <h3 className="font-bebas text-3xl uppercase tracking-wider text-gym-white mb-2">
-                    Submit Your Entry
+                  <span className="font-sans text-xs uppercase tracking-widest text-gym-gold font-semibold mb-2 block">
+                    PAYMENT &amp; VERIFICATION
+                  </span>
+                  <h3 className="font-bebas text-4xl uppercase tracking-wider text-gym-white">
+                    Finalize Your Registration
                   </h3>
-                  <p className="font-inter text-xs text-gym-white/50">
-                    All fields are required. Ensure your video link is accessible before submitting.
-                  </p>
                 </div>
 
-                <hr className="border-border-subtle" />
+                <p className="font-inter text-sm text-gym-white/70 leading-relaxed">
+                  Scan the UPI QR Code using GPay, PhonePe, Paytm, BHIM, or any banking app. Once paid, send us the transaction screenshot to complete verification.
+                </p>
 
-                {/* Full Name */}
-                <div className="flex flex-col gap-2">
-                  <label htmlFor="fullName" className="font-sans text-xs uppercase tracking-widest text-gym-white/70 font-semibold">
-                    Full Name
-                  </label>
-                  <input
-                    type="text"
-                    id="fullName"
-                    name="fullName"
-                    value={formData.fullName}
-                    onChange={handleChange}
-                    className={`bg-bg-surface border ${
-                      errors.fullName ? "border-red-500" : "border-border-subtle"
-                    } text-gym-white rounded-none px-4 py-3 text-sm focus:outline-none focus:border-gym-gold transition-colors duration-200 w-full`}
-                    placeholder="Enter your full name"
-                  />
-                  {errors.fullName && (
-                    <span className="font-sans text-[10px] text-red-400 uppercase tracking-widest mt-1">
-                      {errors.fullName}
+                {/* Vertical Step Guide */}
+                <div className="flex flex-col gap-4 mt-2">
+                  <div className="flex gap-4">
+                    <span className="w-6 h-6 rounded-full border border-gym-gold/45 text-gym-gold font-bebas text-xs flex items-center justify-center shrink-0">
+                      1
                     </span>
-                  )}
-                </div>
+                    <div>
+                      <h4 className="font-bebas text-sm uppercase tracking-wider text-gym-white leading-none mb-1">
+                        Scan &amp; Pay {entryFee}
+                      </h4>
+                      <p className="font-inter text-xs text-gym-white/50 leading-normal">
+                        Verify the merchant name as **Kourage Fitness** when paying.
+                      </p>
+                    </div>
+                  </div>
 
-                {/* Email */}
-                <div className="flex flex-col gap-2">
-                  <label htmlFor="email" className="font-sans text-xs uppercase tracking-widest text-gym-white/70 font-semibold">
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    className={`bg-bg-surface border ${
-                      errors.email ? "border-red-500" : "border-border-subtle"
-                    } text-gym-white rounded-none px-4 py-3 text-sm focus:outline-none focus:border-gym-gold transition-colors duration-200 w-full`}
-                    placeholder="you@example.com"
-                  />
-                  {errors.email && (
-                    <span className="font-sans text-[10px] text-red-400 uppercase tracking-widest mt-1">
-                      {errors.email}
+                  <div className="flex gap-4">
+                    <span className="w-6 h-6 rounded-full border border-gym-gold/45 text-gym-gold font-bebas text-xs flex items-center justify-center shrink-0">
+                      2
                     </span>
-                  )}
-                </div>
+                    <div>
+                      <h4 className="font-bebas text-sm uppercase tracking-wider text-gym-white leading-none mb-1">
+                        Send Screenshot
+                      </h4>
+                      <p className="font-inter text-xs text-gym-white/50 leading-normal">
+                        Take a clear screenshot showing the transaction details &amp; UTR number. Click the WhatsApp button to submit.
+                      </p>
+                    </div>
+                  </div>
 
-                {/* Phone */}
-                <div className="flex flex-col gap-2">
-                  <label htmlFor="phone" className="font-sans text-xs uppercase tracking-widest text-gym-white/70 font-semibold">
-                    Phone Number
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    className={`bg-bg-surface border ${
-                      errors.phone ? "border-red-500" : "border-border-subtle"
-                    } text-gym-white rounded-none px-4 py-3 text-sm focus:outline-none focus:border-gym-gold transition-colors duration-200 w-full`}
-                    placeholder="e.g. +91 9876543210"
-                  />
-                  {errors.phone && (
-                    <span className="font-sans text-[10px] text-red-400 uppercase tracking-widest mt-1">
-                      {errors.phone}
+                  <div className="flex gap-4">
+                    <span className="w-6 h-6 rounded-full border border-gym-gold/45 text-gym-gold font-bebas text-xs flex items-center justify-center shrink-0">
+                      3
                     </span>
-                  )}
-                </div>
+                    <div>
+                      <h4 className="font-bebas text-sm uppercase tracking-wider text-gym-white leading-none mb-1">
+                        Reel Request
+                      </h4>
+                      <p className="font-inter text-xs text-gym-white/50 leading-normal">
+                        After verification, Kourage team will invite you on WhatsApp to submit your posing Reel link.
+                      </p>
+                    </div>
+                  </div>
 
-                {/* Location */}
-                <div className="flex flex-col gap-2">
-                  <label htmlFor="location" className="font-sans text-xs uppercase tracking-widest text-gym-white/70 font-semibold">
-                    City &amp; State
-                  </label>
-                  <input
-                    type="text"
-                    id="location"
-                    name="location"
-                    value={formData.location}
-                    onChange={handleChange}
-                    className={`bg-bg-surface border ${
-                      errors.location ? "border-red-500" : "border-border-subtle"
-                    } text-gym-white rounded-none px-4 py-3 text-sm focus:outline-none focus:border-gym-gold transition-colors duration-200 w-full`}
-                    placeholder="e.g. Mumbai, Maharashtra"
-                  />
-                  {errors.location && (
-                    <span className="font-sans text-[10px] text-red-400 uppercase tracking-widest mt-1">
-                      {errors.location}
+                  <div className="flex gap-4">
+                    <span className="w-6 h-6 rounded-full border border-gym-gold/45 text-gym-gold font-bebas text-xs flex items-center justify-center shrink-0">
+                      4
                     </span>
-                  )}
-                </div>
-
-                {/* Category Selection */}
-                <div className="flex flex-col gap-2">
-                  <label htmlFor="category" className="font-sans text-xs uppercase tracking-widest text-gym-white/70 font-semibold">
-                    Competition Category
-                  </label>
-                  <div className="relative">
-                    <select
-                      id="category"
-                      name="category"
-                      value={formData.category}
-                      onChange={handleChange}
-                      className="bg-bg-surface border border-border-subtle text-gym-white rounded-none px-4 py-3 text-sm focus:outline-none focus:border-gym-gold transition-colors duration-200 w-full appearance-none cursor-pointer"
-                    >
-                      <option value="Mens Physique">Men&apos;s Physique</option>
-                      <option value="Classic Physique">Classic Physique</option>
-                    </select>
-                    <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-gym-gold">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    <div>
+                      <h4 className="font-bebas text-sm uppercase tracking-wider text-gym-white leading-none mb-1">
+                        Judging &amp; Refund
+                      </h4>
+                      <p className="font-inter text-xs text-gym-white/50 leading-normal">
+                        Your entry goes to the judges. If you are not selected into the official bracket, receive a full refund.
+                      </p>
                     </div>
                   </div>
                 </div>
+              </div>
 
-                {/* Video Link */}
-                <div className="flex flex-col gap-2">
-                  <label htmlFor="videoLink" className="font-sans text-xs uppercase tracking-widest text-gym-white/70 font-semibold">
-                    Posing Video Link (Google Drive / YouTube)
-                  </label>
-                  <input
-                    type="url"
-                    id="videoLink"
-                    name="videoLink"
-                    value={formData.videoLink}
-                    onChange={handleChange}
-                    className={`bg-bg-surface border ${
-                      errors.videoLink ? "border-red-500" : "border-border-subtle"
-                    } text-gym-white rounded-none px-4 py-3 text-sm focus:outline-none focus:border-gym-gold transition-colors duration-200 w-full`}
-                    placeholder="https://drive.google.com/... or https://youtube.com/..."
-                  />
-                  <span className="font-sans text-[9px] text-gym-white/40 uppercase tracking-wider">
-                    Make sure share settings are set to public/unlisted.
-                  </span>
-                  {errors.videoLink && (
-                    <span className="font-sans text-[10px] text-red-400 uppercase tracking-widest mt-1">
-                      {errors.videoLink}
-                    </span>
-                  )}
-                </div>
-
-                {/* Agree to Rules */}
-                <div className="flex flex-col gap-1">
-                  <label className="flex items-start gap-3 cursor-pointer select-none">
-                    <input
-                      type="checkbox"
-                      name="agreeToRules"
-                      checked={formData.agreeToRules}
-                      onChange={handleChange}
-                      className="mt-1 accent-gym-gold cursor-pointer"
-                    />
-                    <span className="font-sans text-xs text-gym-white/70 leading-relaxed">
-                      I agree to the official competition rules and understand that any unedited video length edits, visual modifications, or filter additions will result in automatic disqualification.
-                    </span>
-                  </label>
-                  {errors.agreeToRules && (
-                    <span className="font-sans text-[10px] text-red-400 uppercase tracking-widest mt-1">
-                      {errors.agreeToRules}
-                    </span>
-                  )}
-                </div>
-
-                {/* Submit Button */}
-                <button
-                  type="submit"
-                  disabled={submitting}
-                  className="bg-gym-gold border-2 border-gym-gold text-gym-black font-bebas text-lg uppercase tracking-widest py-4 hover:bg-transparent hover:text-gym-gold transition-all duration-300 w-full text-center flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+              {/* WhatsApp CTA Button */}
+              <div className="mt-10">
+                <a
+                  href={whatsappLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-gym-gold border-2 border-gym-gold text-gym-black font-bebas text-lg uppercase tracking-widest py-4 px-8 hover:bg-transparent hover:text-gym-gold transition-all duration-300 w-full text-center flex items-center justify-center gap-3 cursor-pointer shadow-[0_0_15px_rgba(239,159,39,0.25)] hover:shadow-none"
                 >
-                  {submitting ? "Processing Submission..." : "Submit Registration Entry &rarr;"}
-                </button>
-              </form>
-            )}
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.455 5.703 1.456h.008c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                  </svg>
+                  Send Screenshot on WhatsApp &rarr;
+                </a>
+              </div>
+            </div>
+
           </div>
 
         </div>

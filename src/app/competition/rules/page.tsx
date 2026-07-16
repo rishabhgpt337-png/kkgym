@@ -20,6 +20,77 @@ const Phone = ({ size = 24, ...props }: React.SVGProps<SVGSVGElement> & { size?:
 
 export default function RulesPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [agreed, setAgreed] = useState(false);
+  const [openAccordion, setOpenAccordion] = useState<number | null>(null);
+
+  const steps = [
+    {
+      num: "01",
+      title: "Read Official Rules",
+      desc: "Understand eligibility, mandatory poses, video guidelines, and terms."
+    },
+    {
+      num: "02",
+      title: "Complete Payment",
+      desc: "Scan the official UPI QR code on the next page and transfer the registration fee."
+    },
+    {
+      num: "03",
+      title: "Send Screenshot",
+      desc: "Click the WhatsApp button to send your successful payment receipt screenshot for verification."
+    },
+    {
+      num: "04",
+      title: "Verification Check",
+      desc: "Our admin team verifies the transaction and registers your spot on our official roster."
+    },
+    {
+      num: "05",
+      title: "Upload & Submit Reel",
+      desc: "Post your 60-second posing video on Instagram as a Reel and DM/message us the direct link."
+    },
+    {
+      num: "06",
+      title: "Professional Judging",
+      desc: "Our panel scores your entry based on symmetry, muscularity, condition, and presentation."
+    },
+    {
+      num: "07",
+      title: "Result & Refund",
+      desc: "Status updates are sent via WhatsApp. Non-selected participants receive a 100% registration refund."
+    }
+  ];
+
+  const accordionItems = [
+    {
+      title: "Eligibility Criteria",
+      content: "Open to all amateur, natural bodybuilding, and classic physique athletes across India. Competitors must be at least 18 years old at the time of registration. Certified professional athletes currently signed to international federations are excluded."
+    },
+    {
+      title: "Posing Video Requirements",
+      content: "Entries must be a single, continuous 60-second video. No edits, cuts, filters, speed adjustments, zoom-ins, or background effects are permitted. Video must be uploaded in raw form. Poses must be performed in one continuous, unedited shot."
+    },
+    {
+      title: "Mandatory Physique Poses",
+      content: "Your 60-second video sequence must showcase the following classic poses in order: 1. Front Double Biceps, 2. Side Chest (any side), 3. Back Double Biceps, 4. Abdominals & Thighs, and 5. Favorite Classic Pose. Transition between poses smoothly."
+    },
+    {
+      title: "Lighting & Attire Guidelines",
+      content: "Videos must be recorded in clean, bright lighting (natural daylight or strong indoor gym lighting) against a plain, clutter-free background. Athletes must wear proper posing trunks or athletic board shorts. Wearing loose shirts, pants, or oversized attire will result in automatic disqualification."
+    },
+    {
+      title: "Official Judging Standards",
+      content: "Entries are scored out of 100 points by certified national and international physique judges. The score breakdown is: Symmetry & Proportion (25%), Muscularity & Balance (25%), Conditioning & Hardness (25%), and Stage Presence/Posing execution (25%). Judging panel decisions are absolute and final."
+    },
+    {
+      title: "Selection Status & Refund Policy",
+      content: "Our team will update you on selection results via WhatsApp. Submitting an entry does not guarantee selection into the final bracket. If you are not selected by the judging panel, Kourage Fitness will refund 100% of your registration fee. Refund processing details will be shared on WhatsApp."
+    }
+  ];
+
+  const toggleAccordion = (idx: number) => {
+    setOpenAccordion(openAccordion === idx ? null : idx);
+  };
 
   return (
     <div className="min-h-screen bg-gym-black font-sans text-gym-white flex flex-col relative select-none">
@@ -42,12 +113,6 @@ export default function RulesPage() {
               className="font-bebas text-lg uppercase tracking-widest text-gym-white/70 hover:text-gym-gold transition-colors duration-300"
             >
               &larr; Back to Home
-            </Link>
-            <Link
-              href="/competition/register"
-              className="bg-gym-gold border-2 border-gym-gold text-gym-black font-bebas text-sm uppercase tracking-widest px-6 py-2.5 hover:bg-transparent hover:text-gym-gold transition-colors duration-300 hover:shadow-[0_0_15px_rgba(239,159,39,0.25)]"
-            >
-              Register Now
             </Link>
           </div>
 
@@ -75,20 +140,12 @@ export default function RulesPage() {
             >
               &larr; Back to Home
             </Link>
-            <hr className="border-border-subtle my-2" />
-            <Link
-              href="/competition/register"
-              onClick={() => setMobileMenuOpen(false)}
-              className="bg-gym-gold text-gym-black font-bebas text-lg uppercase tracking-widest w-full py-4 text-center block"
-            >
-              Register / Submit Entry
-            </Link>
           </div>
         )}
       </header>
 
       {/* 2. HERO */}
-      <section className="relative w-full min-h-[40vh] md:min-h-[50vh] flex items-center overflow-hidden border-b-2 border-gym-white/10 bg-gym-black pt-32 sm:pt-40">
+      <section className="relative w-full min-h-[35vh] md:min-h-[45vh] flex items-center overflow-hidden border-b-2 border-gym-white/10 bg-gym-black pt-32 sm:pt-40">
         <div className="absolute inset-0 z-0">
           <AnimatedRays className="w-full h-full" />
         </div>
@@ -96,143 +153,158 @@ export default function RulesPage() {
         {/* Overlay grid details */}
         <div className="absolute inset-0 z-0 grid-bg-overlay opacity-30 pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-6 relative z-10 w-full py-16 md:py-24 flex flex-col items-center text-center">
+        <div className="max-w-7xl mx-auto px-6 relative z-10 w-full py-16 md:py-20 flex flex-col items-center text-center">
           <span className="font-sans text-xs md:text-sm uppercase tracking-[0.3em] text-gym-gold mb-6 font-semibold">
             Kourage Master Physique
           </span>
           <h1 className="font-bebas text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-gym-white tracking-wide uppercase leading-none max-w-4xl select-none">
-            Official Rules <span className="text-gym-gold">&amp; Guidelines</span>
+            Official Rules <span className="text-gym-gold">&amp; Flow</span>
           </h1>
           <p className="font-inter text-base sm:text-lg md:text-xl text-gym-white/70 max-w-2xl mt-6 leading-relaxed">
-            Please read the official requirements carefully before submitting your entry. Adhering to these rules is mandatory for professional judging.
+            Understand the complete participation process and rules before submitting your entry.
           </p>
         </div>
       </section>
 
-      {/* 3. RULES DETAILS */}
-      <section className="py-24 bg-bg-surface relative overflow-hidden">
-        {/* Subtle grid background */}
+      {/* 3. HOW IT WORKS TIMELINE */}
+      <section className="py-24 bg-bg-surface relative border-b border-border-subtle overflow-hidden">
         <div className="absolute inset-0 grid-bg-overlay opacity-15 pointer-events-none" />
-        
-        <div className="max-w-5xl mx-auto px-6 relative z-10">
+        <div className="max-w-6xl mx-auto px-6 relative z-10">
           
-          <div className="flex flex-col gap-16">
-            
-            {/* Rules Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-              
-              {/* Card 1 */}
-              <div className="border border-border-subtle bg-bg-primary/50 p-8 relative rounded-sm group hover:border-gym-gold transition-colors duration-300">
-                <div className="absolute top-3 left-3 w-2 h-2 border-t border-l border-gym-gold/30 group-hover:border-gym-gold transition-colors" />
-                <div className="absolute top-3 right-3 w-2 h-2 border-t border-r border-gym-gold/30 group-hover:border-gym-gold transition-colors" />
-                <div className="absolute bottom-3 left-3 w-2 h-2 border-b border-l border-gym-gold/30 group-hover:border-gym-gold transition-colors" />
-                <div className="absolute bottom-3 right-3 w-2 h-2 border-b border-r border-gym-gold/30 group-hover:border-gym-gold transition-colors" />
-                
-                <span className="font-bebas text-5xl text-gym-gold/35 block mb-4">01</span>
-                <h3 className="font-bebas text-2xl uppercase tracking-wider text-gym-white mb-3">Eligibility</h3>
-                <p className="font-inter text-sm text-gym-white/70 leading-relaxed">
-                  Open to all amateur, semi-professional, and natural bodybuilding athletes residing in India. Competitors must be at least 18 years of age at the time of entry.
+          <div className="w-full flex flex-col items-center text-center mb-16">
+            <span className="font-sans text-xs uppercase tracking-[0.2em] text-gym-gold mb-3 font-semibold">
+              STEP-BY-STEP PROCESS
+            </span>
+            <h2 className="font-bebas text-4xl md:text-6xl text-gym-white uppercase tracking-wider">
+              How It Works
+            </h2>
+            <p className="font-inter text-xs sm:text-sm text-gym-white/60 max-w-xl mt-4 leading-relaxed">
+              We have designed a secure, transparent digital flow. Read the process below to know how your entry moves from payment to professional selection.
+            </p>
+          </div>
+
+          {/* Steps Timeline Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-7 gap-6">
+            {steps.map((step, idx) => (
+              <div 
+                key={idx} 
+                className="border border-border-subtle bg-bg-primary/45 p-6 relative rounded-sm flex flex-col justify-between group hover:border-gym-gold transition-all duration-300 shadow-md lg:col-span-1"
+              >
+                {/* Corner Brackets */}
+                <div className="absolute top-2 left-2 w-2 h-2 border-t border-l border-gym-gold/25 group-hover:border-gym-gold transition-colors" />
+                <div className="absolute top-2 right-2 w-2 h-2 border-t border-r border-gym-gold/25 group-hover:border-gym-gold transition-colors" />
+                <div className="absolute bottom-2 left-2 w-2 h-2 border-b border-l border-gym-gold/25 group-hover:border-gym-gold transition-colors" />
+                <div className="absolute bottom-2 right-2 w-2 h-2 border-b border-r border-gym-gold/25 group-hover:border-gym-gold transition-colors" />
+
+                <div>
+                  <span className="font-bebas text-4xl text-gym-gold/30 group-hover:text-gym-gold transition-colors block mb-4">
+                    {step.num}
+                  </span>
+                  <h4 className="font-bebas text-lg uppercase tracking-wider text-gym-white mb-2 leading-tight group-hover:text-gym-gold/90 transition-colors">
+                    {step.title}
+                  </h4>
+                </div>
+                <p className="font-inter text-[11px] text-gym-white/60 leading-relaxed mt-2">
+                  {step.desc}
                 </p>
               </div>
-
-              {/* Card 2 */}
-              <div className="border border-border-subtle bg-bg-primary/50 p-8 relative rounded-sm group hover:border-gym-gold transition-colors duration-300">
-                <div className="absolute top-3 left-3 w-2 h-2 border-t border-l border-gym-gold/30 group-hover:border-gym-gold transition-colors" />
-                <div className="absolute top-3 right-3 w-2 h-2 border-t border-r border-gym-gold/30 group-hover:border-gym-gold transition-colors" />
-                <div className="absolute bottom-3 left-3 w-2 h-2 border-b border-l border-gym-gold/30 group-hover:border-gym-gold transition-colors" />
-                <div className="absolute bottom-3 right-3 w-2 h-2 border-b border-r border-gym-gold/30 group-hover:border-gym-gold transition-colors" />
-
-                <span className="font-bebas text-5xl text-gym-gold/35 block mb-4">02</span>
-                <h3 className="font-bebas text-2xl uppercase tracking-wider text-gym-white mb-3">Video Format</h3>
-                <p className="font-inter text-sm text-gym-white/70 leading-relaxed">
-                  Entries must be a single, continuous 60-second video. No edits, cuts, filters, speed adjustments, or background effects are permitted. Submit a raw, unedited recording.
-                </p>
-              </div>
-
-              {/* Card 3 */}
-              <div className="border border-border-subtle bg-bg-primary/50 p-8 relative rounded-sm group hover:border-gym-gold transition-colors duration-300">
-                <div className="absolute top-3 left-3 w-2 h-2 border-t border-l border-gym-gold/30 group-hover:border-gym-gold transition-colors" />
-                <div className="absolute top-3 right-3 w-2 h-2 border-t border-r border-gym-gold/30 group-hover:border-gym-gold transition-colors" />
-                <div className="absolute bottom-3 left-3 w-2 h-2 border-b border-l border-gym-gold/30 group-hover:border-gym-gold transition-colors" />
-                <div className="absolute bottom-3 right-3 w-2 h-2 border-b border-r border-gym-gold/30 group-hover:border-gym-gold transition-colors" />
-
-                <span className="font-bebas text-5xl text-gym-gold/35 block mb-4">03</span>
-                <h3 className="font-bebas text-2xl uppercase tracking-wider text-gym-white mb-3">Mandatory Poses</h3>
-                <p className="font-inter text-sm text-gym-white/70 leading-relaxed">
-                  Your video sequence must showcase the following poses in order: Front Double Biceps, Side Chest (either side), Back Double Biceps, Abdominals &amp; Thighs, and your Favorite Classic Pose.
-                </p>
-              </div>
-
-              {/* Card 4 */}
-              <div className="border border-border-subtle bg-bg-primary/50 p-8 relative rounded-sm group hover:border-gym-gold transition-colors duration-300">
-                <div className="absolute top-3 left-3 w-2 h-2 border-t border-l border-gym-gold/30 group-hover:border-gym-gold transition-colors" />
-                <div className="absolute top-3 right-3 w-2 h-2 border-t border-r border-gym-gold/30 group-hover:border-gym-gold transition-colors" />
-                <div className="absolute bottom-3 left-3 w-2 h-2 border-b border-l border-gym-gold/30 group-hover:border-gym-gold transition-colors" />
-                <div className="absolute bottom-3 right-3 w-2 h-2 border-b border-r border-gym-gold/30 group-hover:border-gym-gold transition-colors" />
-
-                <span className="font-bebas text-5xl text-gym-gold/35 block mb-4">04</span>
-                <h3 className="font-bebas text-2xl uppercase tracking-wider text-gym-white mb-3">Lighting &amp; Attire</h3>
-                <p className="font-inter text-sm text-gym-white/70 leading-relaxed">
-                  Video must be shot in bright, clear lighting against a neutral background. Athletes must wear proper athletic posing trunks/shorts. Loose clothing will result in disqualification.
-                </p>
-              </div>
-
-              {/* Card 5 */}
-              <div className="border border-border-subtle bg-bg-primary/50 p-8 relative rounded-sm group hover:border-gym-gold transition-colors duration-300">
-                <div className="absolute top-3 left-3 w-2 h-2 border-t border-l border-gym-gold/30 group-hover:border-gym-gold transition-colors" />
-                <div className="absolute top-3 right-3 w-2 h-2 border-t border-r border-gym-gold/30 group-hover:border-gym-gold transition-colors" />
-                <div className="absolute bottom-3 left-3 w-2 h-2 border-b border-l border-gym-gold/30 group-hover:border-gym-gold transition-colors" />
-                <div className="absolute bottom-3 right-3 w-2 h-2 border-b border-r border-gym-gold/30 group-hover:border-gym-gold transition-colors" />
-
-                <span className="font-bebas text-5xl text-gym-gold/35 block mb-4">05</span>
-                <h3 className="font-bebas text-2xl uppercase tracking-wider text-gym-white mb-3">Judging Criteria</h3>
-                <p className="font-inter text-sm text-gym-white/70 leading-relaxed">
-                  Judges will score based on an objective 100-point breakdown: Symmetry (25%), Muscularity (25%), Conditioning (25%), and Presentation/Posing transitions (25%). Decisions are final.
-                </p>
-              </div>
-
-              {/* Card 6 */}
-              <div className="border border-border-subtle bg-bg-primary/50 p-8 relative rounded-sm group hover:border-gym-gold transition-colors duration-300">
-                <div className="absolute top-3 left-3 w-2 h-2 border-t border-l border-gym-gold/30 group-hover:border-gym-gold transition-colors" />
-                <div className="absolute top-3 right-3 w-2 h-2 border-t border-r border-gym-gold/30 group-hover:border-gym-gold transition-colors" />
-                <div className="absolute bottom-3 left-3 w-2 h-2 border-b border-l border-gym-gold/30 group-hover:border-gym-gold transition-colors" />
-                <div className="absolute bottom-3 right-3 w-2 h-2 border-b border-r border-gym-gold/30 group-hover:border-gym-gold transition-colors" />
-
-                <span className="font-bebas text-5xl text-gym-gold/35 block mb-4">06</span>
-                <h3 className="font-bebas text-2xl uppercase tracking-wider text-gym-white mb-3">Submission Details</h3>
-                <p className="font-inter text-sm text-gym-white/70 leading-relaxed">
-                  Upload your video to Google Drive (with access set to &quot;Anyone with the link can view&quot;) or YouTube (Public/Unlisted) and paste the URL into the official registration form.
-                </p>
-              </div>
-
-            </div>
-
-            {/* CTA SECTION */}
-            <div className="border-2 border-gym-gold bg-bg-primary relative p-12 text-center overflow-hidden group mt-8">
-              <div className="absolute inset-0 grid-bg-overlay opacity-20 pointer-events-none" />
-              
-              <div className="relative z-10 max-w-2xl mx-auto">
-                <h3 className="font-bebas text-4xl sm:text-5xl uppercase tracking-wider text-gym-gold mb-4">
-                  READY TO TEST YOUR LIMITS?
-                </h3>
-                <p className="font-inter text-sm md:text-base text-gym-white/80 mb-8 leading-relaxed">
-                  Submit your entry and put your hard work to the test against the best physique athletes in the country. Show the judges what Kourage is all about.
-                </p>
-                <Link
-                  href="/competition/register"
-                  className="bg-gym-gold border-2 border-gym-gold text-gym-black font-bebas text-lg uppercase tracking-widest px-10 py-4 hover:bg-transparent hover:text-gym-gold transition-colors duration-300 inline-block w-full sm:w-auto"
-                >
-                  Proceed to Register &rarr;
-                </Link>
-              </div>
-            </div>
-
+            ))}
           </div>
 
         </div>
       </section>
 
-      {/* 4. FOOTER */}
+      {/* 4. DETAILED ACCORDION RULES */}
+      <section className="py-24 bg-bg-primary relative overflow-hidden">
+        <div className="absolute inset-0 grid-bg-overlay opacity-15 pointer-events-none" />
+        
+        <div className="max-w-3xl mx-auto px-6 relative z-10">
+          
+          <div className="w-full flex flex-col items-center text-center mb-16">
+            <span className="font-sans text-xs uppercase tracking-[0.2em] text-gym-gold mb-3 font-semibold">
+              COMPREHENSIVE TERMS
+            </span>
+            <h2 className="font-bebas text-4xl md:text-6xl text-gym-white uppercase tracking-wider">
+              Terms &amp; Conditions
+            </h2>
+          </div>
+
+          {/* Accordion Component */}
+          <div className="flex flex-col gap-4">
+            {accordionItems.map((item, idx) => {
+              const isOpen = openAccordion === idx;
+              return (
+                <div 
+                  key={idx}
+                  className="border border-border-subtle bg-bg-surface/50 rounded-none transition-all duration-300 hover:border-gym-gold/40"
+                >
+                  <button
+                    onClick={() => toggleAccordion(idx)}
+                    className="w-full flex justify-between items-center p-6 text-left cursor-pointer focus:outline-none"
+                  >
+                    <span className="font-bebas text-xl sm:text-2xl uppercase tracking-wider text-gym-white hover:text-gym-gold transition-colors">
+                      {item.title}
+                    </span>
+                    <span className="text-gym-gold text-2xl font-bebas ml-4 transition-transform duration-300 select-none">
+                      {isOpen ? "−" : "+"}
+                    </span>
+                  </button>
+                  
+                  {isOpen && (
+                    <div className="px-6 pb-6 pt-1 border-t border-border-subtle/50 animate-fade-in">
+                      <p className="font-inter text-xs sm:text-sm text-gym-white/70 leading-relaxed">
+                        {item.content}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Checkbox agreement & proceed block */}
+          <div className="border-2 border-border-subtle bg-bg-surface/90 p-8 sm:p-12 mt-16 relative rounded-sm text-center">
+            {/* Corner brackets */}
+            <div className="absolute top-3 left-3 w-3 h-3 border-t-2 border-l-2 border-gym-gold/30" />
+            <div className="absolute top-3 right-3 w-3 h-3 border-t-2 border-r-2 border-gym-gold/30" />
+            <div className="absolute bottom-3 left-3 w-3 h-3 border-b-2 border-l-2 border-gym-gold/30" />
+            <div className="absolute bottom-3 right-3 w-3 h-3 border-b-2 border-r-2 border-gym-gold/30" />
+
+            <div className="flex flex-col items-center gap-6">
+              <label className="flex items-start justify-center gap-3 cursor-pointer max-w-lg select-none">
+                <input
+                  type="checkbox"
+                  checked={agreed}
+                  onChange={(e) => setAgreed(e.target.checked)}
+                  className="mt-1 accent-gym-gold cursor-pointer w-4 h-4 rounded-none"
+                />
+                <span className="font-sans text-xs sm:text-sm text-gym-white/80 text-left leading-relaxed">
+                  I have read and agree to the Official Terms &amp; Conditions.
+                </span>
+              </label>
+
+              {agreed ? (
+                <Link
+                  href="/competition/register"
+                  className="bg-gym-gold border-2 border-gym-gold text-gym-black font-bebas text-lg uppercase tracking-widest px-12 py-4 hover:bg-transparent hover:text-gym-gold hover:shadow-[0_0_15px_rgba(239,159,39,0.25)] transition-all duration-300 w-full sm:w-auto"
+                >
+                  Proceed to Participate &rarr;
+                </Link>
+              ) : (
+                <button
+                  disabled
+                  className="border-2 border-gym-white/10 text-gym-white/20 bg-gym-white/5 font-bebas text-lg uppercase tracking-widest px-12 py-4 cursor-not-allowed w-full sm:w-auto transition-all duration-300"
+                >
+                  Proceed to Participate
+                </button>
+              )}
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* 5. FOOTER */}
       <footer className="bg-bg-primary border-t border-border-subtle py-16 text-gym-white/50 text-sm">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12">
           
