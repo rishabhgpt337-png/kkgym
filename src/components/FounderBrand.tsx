@@ -230,7 +230,7 @@ export function FounderBrand() {
             >
               <div className="relative aspect-[3/4] w-full max-w-[380px] border-2 border-gym-gold bg-[#3D141B] overflow-hidden group shadow-2xl">
                 <Image
-                  src="/jagesh_flag.jpg"
+                  src="/jagesh_flag.png"
                   alt="Jagesh Dait competitive journey"
                   fill
                   sizes="(max-width: 768px) 380px, 380px"
@@ -294,7 +294,7 @@ export function FounderBrand() {
         {/* ATMOSPHERIC BACKGROUND LAYER: Heavily darkened & blurred SOLO photo */}
         <div className="hidden md:block absolute inset-0 z-0 overflow-hidden opacity-35 pointer-events-none">
           <Image 
-            src="/jagesh_flag.jpg" 
+            src="/jagesh_flag.png" 
             alt="Atmospheric background"
             fill
             sizes="100vw"

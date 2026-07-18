@@ -715,13 +715,13 @@ export default function Home() {
           {/* Section Header */}
           <div className="w-full flex flex-col items-center text-center mb-16">
             <span className="font-sans text-xs md:text-sm uppercase tracking-[0.3em] text-gym-gold mb-3 font-semibold">
-              India's Digital Physique Competition
+              INDIA&apos;S FIRST FULLY DIGITAL PHYSIQUE COMPETITION
             </span>
             <h2 className="font-bebas text-5xl md:text-7xl lg:text-8xl text-gym-white uppercase tracking-wider leading-none">
-              KOURAGE MASTER PHYSIQUE
+              KOURAGE DIGITAL PHYSIQUE
             </h2>
             <p className="font-inter text-sm md:text-base text-gym-white/70 max-w-2xl mt-6 leading-relaxed">
-              Compete from anywhere in India by submitting your official physique posing video. Showcase your hard work, get judged by professionals, and earn national recognition.
+              Compete from anywhere in India by submitting your official physique posing video online. Experience India&apos;s fully digital physique competition, where every entry is professionally judged and every athlete gets the opportunity to earn national recognition—without the need to travel or step on stage.
             </p>
           </div>
 

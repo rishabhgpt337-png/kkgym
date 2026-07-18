@@ -161,7 +161,7 @@ export default function RulesPage() {
           className="max-w-7xl mx-auto px-6 relative z-10 w-full py-16 md:py-20 flex flex-col items-center text-center"
         >
           <span className="font-sans text-xs md:text-sm uppercase tracking-[0.3em] text-gym-gold mb-6 font-semibold">
-            Kourage Master Physique
+            Kourage Digital Physique
           </span>
           <h1 className="font-bebas text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-gym-white tracking-wide uppercase leading-none max-w-4xl select-none">
             Official Rules <span className="text-gym-gold">&amp; Flow</span>
