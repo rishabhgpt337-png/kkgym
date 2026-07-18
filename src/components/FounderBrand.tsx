@@ -309,7 +309,7 @@ export function FounderBrand() {
               Interactive Trophy Wall
             </span>
             <h3 className="font-bebas text-4xl md:text-6xl text-[#F2EFE9] uppercase tracking-wider mt-2">
-              Career Placements
+              Awards
             </h3>
             <p className="font-sans text-[10px] text-gym-white/40 uppercase tracking-widest mt-2">
               Explore the championship achievements and honors of our mentor
