@@ -309,6 +309,57 @@ export default function RulesPage() {
             })}
           </div>
 
+          {/* Detailed Informational Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16 w-full text-left">
+            {/* Refund Policy Card */}
+            <div className="border border-border-subtle bg-bg-surface/50 p-6 sm:p-8 relative rounded-sm group hover:border-gym-gold hover:-translate-y-1 transition-all duration-300 shadow-xl">
+              <div className="absolute top-3 left-3 w-3 h-3 border-t-2 border-l-2 border-gym-gold/20 group-hover:border-gym-gold transition-all duration-300" />
+              <div className="absolute top-3 right-3 w-3 h-3 border-t-2 border-r-2 border-gym-gold/20 group-hover:border-gym-gold transition-all duration-300" />
+              <div className="absolute bottom-3 left-3 w-3 h-3 border-b-2 border-l-2 border-gym-gold/20 group-hover:border-gym-gold transition-all duration-300" />
+              <div className="absolute bottom-3 right-3 w-3 h-3 border-b-2 border-r-2 border-gym-gold/20 group-hover:border-gym-gold transition-all duration-300" />
+              
+              <div className="flex gap-4 items-start">
+                <span className="text-3xl shrink-0 filter drop-shadow-[0_0_8px_rgba(239,159,39,0.3)] select-none">
+                  💳
+                </span>
+                <div>
+                  <h4 className="font-bebas text-xl sm:text-2xl uppercase tracking-wider text-gym-white mb-2 group-hover:text-gym-gold transition-colors">
+                    Refund Policy
+                  </h4>
+                  <p className="font-inter text-xs sm:text-sm text-gym-white/60 leading-relaxed">
+                    All registration fees are strictly non-refundable.<br /><br />
+                    Once a participant successfully completes the registration and payment process, the entry is considered confirmed and reserved exclusively for that participant. Therefore, no cancellations, refunds, transfers, or chargebacks will be accepted under any circumstances.<br /><br />
+                    By proceeding with the payment, you acknowledge and agree to these terms and confirm that you have carefully reviewed all competition details before registering.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Privacy & Content Protection Card */}
+            <div className="border border-border-subtle bg-bg-surface/50 p-6 sm:p-8 relative rounded-sm group hover:border-gym-gold hover:-translate-y-1 transition-all duration-300 shadow-xl">
+              <div className="absolute top-3 left-3 w-3 h-3 border-t-2 border-l-2 border-gym-gold/20 group-hover:border-gym-gold transition-all duration-300" />
+              <div className="absolute top-3 right-3 w-3 h-3 border-t-2 border-r-2 border-gym-gold/20 group-hover:border-gym-gold transition-all duration-300" />
+              <div className="absolute bottom-3 left-3 w-3 h-3 border-b-2 border-l-2 border-gym-gold/20 group-hover:border-gym-gold transition-all duration-300" />
+              <div className="absolute bottom-3 right-3 w-3 h-3 border-b-2 border-r-2 border-gym-gold/20 group-hover:border-gym-gold transition-all duration-300" />
+              
+              <div className="flex gap-4 items-start">
+                <span className="text-3xl shrink-0 filter drop-shadow-[0_0_8px_rgba(239,159,39,0.3)] select-none">
+                  🛡️
+                </span>
+                <div>
+                  <h4 className="font-bebas text-xl sm:text-2xl uppercase tracking-wider text-gym-white mb-2 group-hover:text-gym-gold transition-colors">
+                    Privacy &amp; Content Protection
+                  </h4>
+                  <p className="font-inter text-xs sm:text-sm text-gym-white/60 leading-relaxed">
+                    Your submitted photos, videos, and personal information are handled with strict confidentiality.<br /><br />
+                    Kourage Fitness takes full responsibility for protecting all participant submissions. Your content will only be used for competition evaluation and official promotional activities related to the event. It will never be sold, shared, misused, or distributed to unauthorized third parties.<br /><br />
+                    By registering, you grant Kourage Fitness permission to use your submitted content for judging, winner announcements, and official Kourage Fitness social media and marketing materials related to this competition.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* Checkbox agreement & proceed block (Bottom Section) */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
