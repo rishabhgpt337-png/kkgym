@@ -54,11 +54,6 @@ export default function RulesPage() {
       num: "Step 6",
       title: "Selection",
       desc: "The judging panel will review all verified entries. Submitting a Reel does not guarantee selection."
-    },
-    {
-      num: "Step 7",
-      title: "Refund Policy",
-      desc: "If a participant is not selected, the registration amount will be refunded. Participants will be informed about their selection status and refund process through WhatsApp."
     }
   ];
 
@@ -82,10 +77,6 @@ export default function RulesPage() {
     {
       title: "Official Judging Standards",
       content: "Entries are scored out of 100 points by certified national and international physique judges. The score breakdown is: Symmetry & Proportion (25%), Muscularity & Balance (25%), Conditioning & Hardness (25%), and Stage Presence/Posing execution (25%). Judging panel decisions are absolute and final."
-    },
-    {
-      title: "Selection Status & Refund Policy",
-      content: "Our team will update you on selection results via WhatsApp. Submitting an entry does not guarantee selection into the final bracket. If you are not selected by the judging panel, Kourage Fitness will refund 100% of your registration fee. Refund processing details will be shared on WhatsApp."
     }
   ];
 

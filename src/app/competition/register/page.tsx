@@ -257,20 +257,6 @@ export default function RegisterPage() {
                       </p>
                     </div>
                   </div>
-
-                  <div className="flex gap-4">
-                    <span className="w-6 h-6 rounded-full border border-gym-gold/45 text-gym-gold font-bebas text-xs flex items-center justify-center shrink-0">
-                      7
-                    </span>
-                    <div>
-                      <h4 className="font-bebas text-sm uppercase tracking-wider text-gym-white leading-none mb-1">
-                        Refund Policy
-                      </h4>
-                      <p className="font-inter text-xs text-gym-white/50 leading-normal">
-                        If a participant is not selected, the registration amount is fully refunded on WhatsApp.
-                      </p>
-                    </div>
-                  </div>
                 </div>
               </div>
 
