@@ -139,11 +139,20 @@ export default function Home() {
       const currentMinutes = now.getMinutes();
       const totalMinutes = currentHour * 60 + currentMinutes;
 
-      // Gym is open daily from 5:30 AM to 10:30 PM (22:30)
-      const openTime = 5 * 60 + 30;   // 330 minutes
-      const closeTime = 22 * 60 + 30; // 1350 minutes
-
-      setGymOpen(totalMinutes >= openTime && totalMinutes <= closeTime);
+      // Mon-Sat: 5:00 AM - 11:00 PM (23:00)
+      // Sunday: 5:00 AM - 12:30 PM (12:30)
+      const currentDay = now.getDay();
+      const openTime = 5 * 60; // 5:00 AM
+      
+      if (currentDay === 0) {
+        // Sunday
+        const closeTime = 12 * 60 + 30; // 12:30 PM
+        setGymOpen(totalMinutes >= openTime && totalMinutes <= closeTime);
+      } else {
+        // Monday - Saturday
+        const closeTime = 23 * 60; // 11:00 PM
+        setGymOpen(totalMinutes >= openTime && totalMinutes <= closeTime);
+      }
     };
 
     checkGymOpen();
@@ -640,10 +649,13 @@ export default function Home() {
 
               <div className="relative z-10">
                 <p className="font-inter text-base text-gym-white leading-relaxed">
-                  Opens 5:30 AM Daily
+                  Mon - Sat: 5:00 AM - 11:00 PM
                 </p>
-                <p className="font-inter text-xs text-gym-white/60 mt-1 uppercase tracking-widest">
-                  Monday to Sunday
+                <p className="font-inter text-base text-gym-white leading-relaxed mt-1">
+                  Sunday: 5:00 AM - 12:30 PM
+                </p>
+                <p className="font-inter text-xs text-gym-white/60 mt-2 uppercase tracking-widest">
+                  Operating Hours
                 </p>
               </div>
             </div>
