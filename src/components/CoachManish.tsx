@@ -63,7 +63,7 @@ export default function CoachManish() {
           </h3>
           
           <p className="font-inter text-base md:text-lg text-gym-white/80 leading-relaxed mb-6">
-            A celebrated name in the fitness industry, Manish Advilkar is renowned for his expertise as a celebrity fitness coach. With a prestigious background in professional bodybuilding, including Mr. Maharashtra and Mr. Mumbai titles, his deep understanding of muscle hypertrophy and body recomposition is unmatched.
+            Manish Advilkar is one of Maharashtra&apos;s most respected fitness professionals, recognized for his excellence as a celebrity fitness coach, Western Railway Bodybuilding Coach, Maharashtra Shree, Fitness Icon, QNT India Brand Athlete, and the founder of Mass Supplements Store. His extensive experience in professional bodybuilding and evidence-based coaching has helped countless individuals achieve exceptional physical transformations. Combining years of competitive success with advanced knowledge of muscle hypertrophy, strength development, and body recomposition, he continues to set new benchmarks in the Indian fitness industry.
           </p>
 
           <p className="font-inter text-sm md:text-base text-gym-white/60 leading-relaxed mb-8 border-l-2 border-gym-gold/50 pl-4 ml-0 md:ml-2">
