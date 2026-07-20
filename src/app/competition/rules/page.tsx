@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import AnimatedRays from "@/components/ui/animated-rays";
 
@@ -78,6 +79,33 @@ export default function RulesPage() {
       title: "Official Judging Standards",
       content: "Entries are scored out of 100 points by certified national and international physique judges. The score breakdown is: Symmetry & Proportion (25%), Muscularity & Balance (25%), Conditioning & Hardness (25%), and Stage Presence/Posing execution (25%). Judging panel decisions are absolute and final."
     }
+  ];
+
+  const mandatoryPoses = [
+    {
+      num: "01",
+      name: "Front Double Biceps",
+      image: "/poses/front_double_biceps.png",
+      tag: "MANDATORY POSE 1",
+    },
+    {
+      num: "02",
+      name: "Front Lat Spread",
+      image: "/poses/front_lat_spread.png",
+      tag: "MANDATORY POSE 2",
+    },
+    {
+      num: "03",
+      name: "Side Chest",
+      image: "/poses/side_chest.png",
+      tag: "MANDATORY POSE 3",
+    },
+    {
+      num: "05",
+      name: "Back Double Biceps",
+      image: "/poses/back_double_biceps.png",
+      tag: "MANDATORY POSE 5",
+    },
   ];
 
   const toggleAccordion = (idx: number) => {
@@ -236,6 +264,77 @@ export default function RulesPage() {
             </div>
           </div>
 
+        </div>
+      </section>
+
+      {/* 3.5. MANDATORY POSES VISUAL GUIDE */}
+      <section className="py-24 bg-bg-surface border-b border-border-subtle relative overflow-hidden select-none">
+        <div className="absolute inset-0 grid-bg-overlay opacity-15 pointer-events-none" />
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6 }}
+            className="w-full flex flex-col items-center text-center mb-16"
+          >
+            <span className="font-sans text-xs uppercase tracking-[0.3em] text-gym-gold mb-3 font-semibold">
+              MANDATORY POSES REFERENCE
+            </span>
+            <h2 className="font-bebas text-4xl md:text-6xl text-gym-white uppercase tracking-wider">
+              Visual Posing Guide
+            </h2>
+            <p className="font-inter text-xs sm:text-sm text-gym-white/60 max-w-xl mt-4 leading-relaxed">
+              Official classic physique pose references for your 60-second competition video submission.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 w-full">
+            {mandatoryPoses.map((pose, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-30px" }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                className="border-2 border-border-subtle bg-bg-primary/80 p-5 sm:p-6 relative rounded-sm group hover:border-gym-gold transition-all duration-300 shadow-2xl flex flex-col items-center justify-between text-center"
+              >
+                {/* Corner Brackets */}
+                <div className="absolute top-2.5 left-2.5 w-3 h-3 border-t-2 border-l-2 border-gym-gold/30 group-hover:border-gym-gold transition-all duration-300" />
+                <div className="absolute top-2.5 right-2.5 w-3 h-3 border-t-2 border-r-2 border-gym-gold/30 group-hover:border-gym-gold transition-all duration-300" />
+                <div className="absolute bottom-2.5 left-2.5 w-3 h-3 border-b-2 border-l-2 border-gym-gold/30 group-hover:border-gym-gold transition-all duration-300" />
+                <div className="absolute bottom-2.5 right-2.5 w-3 h-3 border-b-2 border-r-2 border-gym-gold/30 group-hover:border-gym-gold transition-all duration-300" />
+
+                <div className="w-full flex justify-between items-center mb-3">
+                  <span className="font-sans text-[10px] uppercase tracking-widest text-gym-gold font-bold">
+                    {pose.tag}
+                  </span>
+                  <span className="font-bebas text-sm text-gym-white/40 tracking-wider">
+                    {pose.num}
+                  </span>
+                </div>
+
+                {/* Pose Cutout Image Container */}
+                <div className="relative w-full h-72 sm:h-80 md:h-96 my-2 flex items-center justify-center overflow-hidden">
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(239,159,39,0.18)_0%,transparent_70%)] group-hover:bg-[radial-gradient(circle_at_center,rgba(239,159,39,0.28)_0%,transparent_70%)] transition-all duration-500 rounded-full scale-90 group-hover:scale-105 pointer-events-none" />
+                  <Image
+                    src={pose.image}
+                    alt={pose.name}
+                    fill
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                    className="object-contain filter drop-shadow-[0_10px_25px_rgba(0,0,0,0.8)] group-hover:scale-105 transition-transform duration-500 z-10"
+                    priority
+                  />
+                </div>
+
+                <div className="mt-4 pt-4 border-t border-border-subtle/60 w-full">
+                  <h3 className="font-bebas text-xl sm:text-2xl text-gym-white uppercase tracking-wider group-hover:text-gym-gold transition-colors leading-none">
+                    {pose.name}
+                  </h3>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
