@@ -826,60 +826,6 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Visual Mandatory Poses Showcase */}
-          <div className="mt-16 pt-12 border-t border-border-subtle/60 w-full">
-            <div className="w-full text-center mb-10">
-              <span className="font-sans text-xs uppercase tracking-[0.25em] text-gym-gold font-semibold mb-2 block">
-                OFFICIAL COMPETITION POSES
-              </span>
-              <h3 className="font-bebas text-3xl sm:text-4xl text-gym-white uppercase tracking-wider">
-                Mandatory Poses Visual Reference
-              </h3>
-            </div>
-
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 w-full">
-              {[
-                { name: "Front Double Biceps", image: "/poses/front_double_biceps.png", num: "POSE 01" },
-                { name: "Front Lat Spread", image: "/poses/front_lat_spread.png", num: "POSE 02" },
-                { name: "Side Chest", image: "/poses/side_chest.png", num: "POSE 03" },
-                { name: "Side Triceps", image: "/poses/side_triceps.png", num: "POSE 04" },
-                { name: "Back Double Biceps", image: "/poses/back_double_biceps.png", num: "POSE 05" },
-                { name: "Abdominals & Thighs", image: "/poses/abdominals_and_thighs.png", num: "POSE 07" },
-              ].map((pose, idx) => (
-                <div 
-                  key={idx}
-                  className="border border-border-subtle bg-bg-primary/90 p-4 sm:p-5 relative rounded-sm group hover:border-gym-gold transition-all duration-300 shadow-xl flex flex-col items-center justify-between text-center"
-                >
-                  <div className="w-full flex justify-between items-center mb-2">
-                    <span className="font-sans text-[9px] uppercase tracking-widest text-gym-gold font-bold">
-                      OFFICIAL POSE
-                    </span>
-                    <span className="font-bebas text-xs text-gym-white/40 tracking-wider">
-                      {pose.num}
-                    </span>
-                  </div>
-
-                  <div className="relative w-full h-64 sm:h-72 my-2 flex items-center justify-center overflow-hidden">
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(239,159,39,0.15)_0%,transparent_70%)] group-hover:bg-[radial-gradient(circle_at_center,rgba(239,159,39,0.25)_0%,transparent_70%)] transition-all duration-500 rounded-full scale-90 group-hover:scale-105 pointer-events-none" />
-                    <Image
-                      src={pose.image}
-                      alt={pose.name}
-                      fill
-                      sizes="(max-width: 768px) 50vw, 25vw"
-                      className="object-contain filter drop-shadow-[0_8px_20px_rgba(0,0,0,0.8)] group-hover:scale-105 transition-transform duration-500 z-10"
-                    />
-                  </div>
-
-                  <div className="mt-3 pt-3 border-t border-border-subtle/50 w-full">
-                    <h4 className="font-bebas text-lg sm:text-xl text-gym-white uppercase tracking-wider group-hover:text-gym-gold transition-colors leading-none">
-                      {pose.name}
-                    </h4>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mt-16 w-full">
             <Link
