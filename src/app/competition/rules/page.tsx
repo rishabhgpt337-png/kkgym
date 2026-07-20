@@ -113,6 +113,12 @@ export default function RulesPage() {
       tag: "MANDATORY POSE 5",
     },
     {
+      num: "06",
+      name: "Back Lat Spread",
+      image: "/poses/back_lat_spread.png",
+      tag: "MANDATORY POSE 6",
+    },
+    {
       num: "07",
       name: "Abdominals & Thighs",
       image: "/poses/abdominals_and_thighs.png",
@@ -301,7 +307,7 @@ export default function RulesPage() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 w-full">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8 w-full">
             {mandatoryPoses.map((pose, idx) => (
               <motion.div
                 key={idx}
