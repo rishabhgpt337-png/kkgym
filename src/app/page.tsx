@@ -837,12 +837,14 @@ export default function Home() {
               </h3>
             </div>
 
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 w-full">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 w-full">
               {[
                 { name: "Front Double Biceps", image: "/poses/front_double_biceps.png", num: "POSE 01" },
                 { name: "Front Lat Spread", image: "/poses/front_lat_spread.png", num: "POSE 02" },
                 { name: "Side Chest", image: "/poses/side_chest.png", num: "POSE 03" },
+                { name: "Side Triceps", image: "/poses/side_triceps.png", num: "POSE 04" },
                 { name: "Back Double Biceps", image: "/poses/back_double_biceps.png", num: "POSE 05" },
+                { name: "Abdominals & Thighs", image: "/poses/abdominals_and_thighs.png", num: "POSE 07" },
               ].map((pose, idx) => (
                 <div 
                   key={idx}

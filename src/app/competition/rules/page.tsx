@@ -101,10 +101,22 @@ export default function RulesPage() {
       tag: "MANDATORY POSE 3",
     },
     {
+      num: "04",
+      name: "Side Triceps",
+      image: "/poses/side_triceps.png",
+      tag: "MANDATORY POSE 4",
+    },
+    {
       num: "05",
       name: "Back Double Biceps",
       image: "/poses/back_double_biceps.png",
       tag: "MANDATORY POSE 5",
+    },
+    {
+      num: "07",
+      name: "Abdominals & Thighs",
+      image: "/poses/abdominals_and_thighs.png",
+      tag: "MANDATORY POSE 7",
     },
   ];
 
@@ -289,7 +301,7 @@ export default function RulesPage() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 w-full">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 w-full">
             {mandatoryPoses.map((pose, idx) => (
               <motion.div
                 key={idx}
