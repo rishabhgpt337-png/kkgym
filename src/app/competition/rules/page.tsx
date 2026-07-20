@@ -68,7 +68,7 @@ export default function RulesPage() {
     },
     {
       title: "Mandatory Physique Poses",
-      content: "Your 60-second video sequence must showcase the following classic poses in order: 1. Front Double Biceps, 2. Side Chest (any side), 3. Back Double Biceps, 4. Abdominals & Thighs, and 5. Favorite Classic Pose. Transition between poses smoothly."
+      content: "Your 60-second video sequence must showcase the 7 mandatory poses in order:\n\n1. Front Double Biceps\n2. Front Lat Spread\n3. Side Chest\n4. Side Triceps\n5. Back Double Biceps\n6. Back Lat Spread (or Rear Lat Spread)\n7. Abdominals and Thighs\n\nTransition between poses smoothly."
     },
     {
       title: "Lighting & Attire Guidelines",
