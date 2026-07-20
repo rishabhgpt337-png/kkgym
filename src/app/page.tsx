@@ -76,6 +76,13 @@ const galleryItems = [
     desc: "Engineered for maximum quad isolation, hamstring loading, and lower body power development.",
   },
   {
+    id: 2,
+    image: "/gallery/cardio_suite.jpg",
+    title: "Cardio & Endurance Suite",
+    zone: "CARDIO & ENDURANCE ZONE",
+    desc: "High-performance treadmills, spin bikes, and elliptical stations designed for supreme cardiovascular conditioning.",
+  },
+  {
     id: 3,
     image: "/gallery/IMG_9990.JPG.jpeg",
     title: "Pro Dumbbell Station",
@@ -90,6 +97,13 @@ const galleryItems = [
     desc: "Multi-point pulley station offering variable resistance angles for total-body definition.",
   },
   {
+    id: 5,
+    image: "/gallery/isolation_strength.jpg",
+    title: "Plate-Loaded Hypertrophy Suite",
+    zone: "ISOLATION & HYPERTROPHY ZONE",
+    desc: "Custom plate-loaded machines engineered for biomechanically precise chest, leg, and back isolation.",
+  },
+  {
     id: 6,
     image: "/gallery/IMG_9992.JPG.jpeg",
     title: "Elite Strength Floor",
@@ -98,6 +112,20 @@ const galleryItems = [
   },
   {
     id: 7,
+    image: "/gallery/lat_pulldown_station.jpg",
+    title: "Heavy-Duty Lat Pulldown Station",
+    zone: "UPPER BODY STRENGTH ZONE",
+    desc: "Precision cable pulldown system featuring versatile grip options for targeted lats and upper back growth.",
+  },
+  {
+    id: 8,
+    image: "/gallery/hack_squat_station.jpg",
+    title: "Linear Hack Squat & Leg Press",
+    zone: "LOWER BODY POWER ZONE",
+    desc: "Heavy-duty plate-loaded hack squat machine built for deep quad stimulation and maximum power development.",
+  },
+  {
+    id: 9,
     image: "/gallery/IMG_9995.JPG.jpeg",
     title: "Aerial Yoga Studio",
     zone: "MIND & BODY ZONE",
